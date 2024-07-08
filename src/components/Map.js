@@ -1,9 +1,10 @@
 import React from 'react'
+import Logo from '../layout/Logo'
 
 function Map() {
     return (
         <div>
-            Map
+            <Logo />
         </div>
     )
 }
