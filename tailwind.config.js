@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         colorMapHeaderBG: '#dde8f0',
+        colorSearchButton: '#028abd',
       },
     },
   },
