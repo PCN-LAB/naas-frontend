@@ -4,7 +4,7 @@ import Map from './components/Map';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App min-h-screen">
       <BrowserRouter>
         <Routes>
           <Route path='/map' element={<Map />} />
