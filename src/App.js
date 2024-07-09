@@ -14,6 +14,7 @@ function App() {
           <Routes>
             <Route path='/map-input' element={<MapInput />} />
             <Route path="/" element={<LandingPage />} />
+            <Route path='/news-analytics' element={<NewsAnalytics />} />
         </Routes>
         </BrowserRouter>
       </Provider>
