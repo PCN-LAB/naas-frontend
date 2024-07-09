@@ -7,7 +7,7 @@ import twitter from '../assets/twitter.png'
 
 const Card = ({ title, description, imageUrl, social }) => {
   return (
-    <div className="border p-4 rounded-lg shadow-lg w-60 h-85 text-center">
+    <div className="border p-4 rounded-lg shadow-lg w-70 h-90 text-center">
       <div className="w-full h-24 flex items-center justify-center">
         <img src={profile} alt={title} className="w-20 h-20 rounded-full" />
       </div>

@@ -56,33 +56,36 @@ function LandingPage() {
       <NavbarLandingPage />
       
       <img src={Bluebg} className="absolute w-full z-0 h-800" style={{ marginTop: "4.5%" }} />
-      <div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
-      <div className="text-white w-700 h-200 flex-shrink-0 flex flex-col justify-left items-left ">
-        <h1>
-            <h1 className=" font-bold leading-tight font-Poppins">
-                News   Analytics 
-                <div style={{marginTop:"-15%"}}><h4> As A Service</h4></div>
-            </h1>
+<div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
+    <div className="text-white w-700 h-200 flex-shrink-0 flex flex-col justify-left items-left">
+        <h1 className="text-6xl font-bold leading-tight font-Poppins">
+            News Analytics
+            <div style={{ marginTop: "0%" }}>
+                <h4 className="text-6xl">As A Service</h4>
+            </div>
         </h1>
-        <h1 className='font-medium leading-tight font-Poppins'  style={{marginTop:"-20%"}}>What You’re Looking For!</h1>
+        <h1 className='text-3xl font-medium leading-tight font-Poppins' style={{ marginTop: "2%" }}>
+            What You’re Looking For!
+        </h1>
         <div className='flex flex-col justify-left items-left'>
-           
-            <button style={{marginTop:"5%"}} class="w-[220px] h-[60px] px-5 py-3 bg-zinc-800 rounded-[50px]  justify-center items-center gap-2 inline-flex">
-                <div class="text-neutral-50 text-[30px] font-bold font-['Poppins'] leading-normal">Get Started</div>
+            <button style={{ marginTop: "5%" }} className="w-[220px] h-[60px] px-5 py-3 bg-zinc-800 rounded-[50px] justify-center items-center gap-2 inline-flex">
+                <div className="text-neutral-50 text-[30px] font-bold font-Poppins leading-normal">Get Started</div>
             </button>
         </div>
-       
-      </div>
-        <div><img src={portfolio} className='w-full h-full' style={{marginLeft:"0%",marginTop:"10%"}}></img></div>
-      </div>
+    </div>
+    <div>
+        <img src={portfolio} className='w-full h-full' style={{ marginLeft: "0%", marginTop: "10%" }} />
+    </div>
+</div>
+
 
       {/* second portion */}
       <div className='flex flex-row justify-center items-center gap-78' style={{marginTop:"65%"}}>
         <div className="flex flex-col items-start">
             <img className="w-25 h-1.5" src={line}></img>
             <h1 className="w-[583.18px] h-[146.39px] text-sky-950 text-[52px] font-bold font-Poppins">NAaaS Explained :</h1>
-            <h1 className="w-[583.18px] h-[146.39px] text-sky-950 text-[52px] font-bold font-Poppins" style={{ marginTop: "-18%" }}>How does it work?</h1>
-            <h2 className='w-[587.87px] h-[134.03px] text-zinc-500 text-4xl font-normal font-Ubuntu '  style={{ marginTop: "-18%" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed  do</h2>
+            <h1 className="w-[583.18px] h-[146.39px] text-sky-950 text-[52px] font-bold font-Poppins" style={{ marginTop: "-15%" }}>How does it work?</h1>
+            <h2 className='w-[587.87px] h-[134.03px] text-zinc-500 text-4xl font-normal font-Ubuntu '  style={{ marginTop: "-6%" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed  do</h2>
             <div className='flex flex-row justify-center gap-4'>
             <h2 className='font-Poppins text-[#4cc0eb]'  style={{ marginTop: "-15%" }}>Watch as Guest</h2>
             <img className='w-[55px] h-[30px]' src={arrows} style={{ marginTop: "-15.5%" }}></img>
@@ -116,13 +119,13 @@ function LandingPage() {
             <img
                 src={backArrow}
                 onClick={handlePrevious}
-                className="w-10 h-10 absolute left-[-150px] top-1/2 transform -translate-y-1/2 p-2 rounded-full  cursor-pointer"
+                className="w-15 h-15 absolute left-[-150px] top-1/2 transform -translate-y-1/2 p-2 rounded-full  cursor-pointer"
             />
             <Card {...cardData[currentIndex]} />
             <img
                 src={nextArrow}
                 onClick={handleNext}
-                className="w-13 h-10 absolute right-[-150px] top-1/2 transform -translate-y-1/2 p-2 rounded-full  cursor-pointer"
+                className="w-15 h-15 absolute right-[-150px] top-1/2 transform -translate-y-1/2 p-2 rounded-full  cursor-pointer"
             />
             </div>
         </div>
@@ -130,7 +133,7 @@ function LandingPage() {
 
         {/* footer */}
 
-        <div className="relative w-[1440px] h-[500px] px-[111px] pt-12 pb-[80px] bg-blue-300 border justify-center items-center inline-flex" style={{ marginTop: "10%" }}>
+        <div className="relative w-full h-[580px] px-[111px] pt-12 pb-[80px] bg-blue-300 border justify-center items-center inline-flex" style={{ marginTop: "10%" }}>
         <div className="absolute top-10" style={{ left: "15%" }}>
             <img src={PCN} alt="PCN Logo" />
         </div>
