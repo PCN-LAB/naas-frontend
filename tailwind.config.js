@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -9,7 +11,9 @@ module.exports = {
         "variable-collection-color-3": "var(--variable-collection-color-3)",
         "variable-collection-light-blue": "var(--variable-collection-light-blue)",
         'custom-blue': 'rgba(0, 27, 72, 1)',
-        'custom-gray':'rgba(251, 251, 251, 1)'
+        'custom-gray': 'rgba(251, 251, 251, 1)',
+        colorMapHeaderBG: '#dde8f0',
+        colorSearchButton: '#028abd',
         
       },
       height: {
