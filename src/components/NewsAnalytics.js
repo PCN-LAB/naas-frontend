@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import Logo from '../layout/Logo'
 import HeaderMapPage from '../layout/HeaderMapPage'
 import Sidebar from './Vertical-nav/vertical-nav'
+import CurrentSearch from '../layout/CurrentSearch'
 
 function NewsAnalytics() {
     const newsSource = useSelector(state => state.map.newsSource);
@@ -12,12 +13,12 @@ function NewsAnalytics() {
         <div className='h-full'>
             <Sidebar />
             <Logo />
-            <div className='flex ml-20'>
+            <div className='flex w-11/12 mx-auto'>
                 <div className='w-3/5'>
-                    
+
                 </div>
                 <div className='w-2/5'>
-
+                    {/* <CurrentSearch /> */}
                 </div>
             </div>
         </div>
