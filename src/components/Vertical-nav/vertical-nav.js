@@ -4,14 +4,14 @@ import { GoChevronLeft } from "react-icons/go";
 import { RxCounterClockwiseClock } from "react-icons/rx";
 import { NavLink } from 'react-router-dom';
 import './vertical-nav.css';
+
 import { CarbonHome } from "./icons/CarbonHome.tsx";
 import { CilChartLine } from "./icons/CilChartLine.tsx";
 import { FluentPersonSupport16Regular } from "./icons/FluentPersonSupport16Regular.tsx";
 import { IconoirProfileCircle } from "./icons/IconoirProfileCircle.tsx";
 import { LineMdLogOut } from "./icons/LineMdLogOut.tsx";
-import { UilArrowLeft } from "./icons/UilArrowLeft.tsx";
 import { FluentPersonFeedback20Regular } from "./icons/FluentPersonFeedback20Regular.tsx";
-import  Chatbot  from "./icons/chatbot.png";
+import  ChatbotIcon  from "./icons/chatbot.png";
 import  link  from "./icons/link.png";
 
 const Sidebar = ({ children }) => {
@@ -46,7 +46,7 @@ const Sidebar = ({ children }) => {
         {
             path: "/productList",
             name: "Chatbot",
-            icon: <img src={Chatbot} alt="Chatbot"  className="icon-bold text-x3"/>
+            icon: <img src={ChatbotIcon} alt="Chatbot" className="icon-bold text-x3" /> 
         },
         {
             path: "/productList",
@@ -59,7 +59,7 @@ const Sidebar = ({ children }) => {
             icon: <FluentPersonFeedback20Regular className="icon-bold text-x2"/>
         }
     ];
-
+   
   const logoutItem = {
     path: "/logout", // Example logout path
     name: "Logout",
@@ -68,7 +68,7 @@ const Sidebar = ({ children }) => {
   return (
     <div className="container">
         
-        <div style={{ width: isOpen ? '200px' : '60px' }} className="sidebar">
+        <div style={{ width: isOpen ? '250px' : '65px' }} className="sidebar">
             <div className="top_section">
                 <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo"></h1>
                 <div style={{ marginLeft: isOpen ? '50px' : '0px' }} className="bars">
@@ -78,7 +78,7 @@ const Sidebar = ({ children }) => {
             <nav className="menu">
                 {menuItem.map((item, index) => (
                     <NavLink to={item.path} key={index} className="link" activeClassName="active">
-                        <div className="icon">{item.icon}</div>
+                         <div className="icon" >{item.icon}</div>
                         <div style={{ display: isOpen ? 'block' : 'none' }} className="link_text">
                             {item.name}
                         </div>
