@@ -8,11 +8,13 @@ const mapSlice = createSlice({
     name: "map",
     initialState,
     reducers: {
-        setKeyWordsSearch(state, action) {
-            state.keyWordsSearch = action.payload;
+        pushKeyWordsSearch(state, action) {
+            state.keyWordsSearch.push(action.payload);
+            // log the state
+            // console.log(JSON.stringify(state.keyWordsSearch, null, 2));
         }
     }
 });
 
-export const { setKeyWordsSearch } = mapSlice.actions;
+export const { pushKeyWordsSearch } = mapSlice.actions;
 export default mapSlice.reducer;

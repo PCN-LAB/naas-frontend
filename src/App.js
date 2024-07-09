@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Map from './components/Map';
+import MapInput from './components/MapInput';
 import { Provider } from 'react-redux';
 import store from './store/Store';
 
@@ -10,7 +10,7 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path='/map' element={<Map />} />
+            <Route path='/map-input' element={<MapInput />} />
           </Routes>
         </BrowserRouter>
       </Provider>
