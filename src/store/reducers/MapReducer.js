@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    keyWordsSearch: []
+    keyWordsSearch: [],
+    newsSource: null,
+    regionSelected: null
 }
 
 const mapSlice = createSlice({
@@ -12,9 +14,17 @@ const mapSlice = createSlice({
             state.keyWordsSearch.push(action.payload);
             // log the state
             // console.log(JSON.stringify(state.keyWordsSearch, null, 2));
+        },
+        setNewsSource(state, action) {
+            state.newsSource = action.payload;
+        },
+        setRegionSelected(state, action) {
+            state.regionSelected = action.payload;
         }
     }
 });
 
 export const { pushKeyWordsSearch } = mapSlice.actions;
+export const { setNewsSource } = mapSlice.actions;
+export const { setRegionSelected } = mapSlice.actions;
 export default mapSlice.reducer;
