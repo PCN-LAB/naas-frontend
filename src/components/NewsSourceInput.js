@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import dispatch from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setNewsSource } from '../store/reducers/MapReducer'
+import { setRegionSelected } from '../store/reducers/MapReducer'
 
 function NewsSourceInput() {
     const [selectedNewsSource, setSelectedNewsSource] = useState(null);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setNewsSource(selectedNewsSource));
+    }, [selectedNewsSource])
 
     const handleRadioClick = (value) => {
         setSelectedNewsSource(prevValue => prevValue === value ? null : value);
@@ -67,7 +74,7 @@ function NewsSourceInput() {
                         ]}
                         placeholder='Choose Region'
                         styles={customSelectStyles}
-                        
+                        onChange={(e) => dispatch(setRegionSelected(e.value))}
                     />
                 </div>
             </div>

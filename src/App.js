@@ -4,6 +4,7 @@ import MapInput from './components/MapInput';
 import { Provider } from 'react-redux';
 import store from './store/Store';
 import LandingPage from './pages/LandingPage'
+import NewsAnalytics from './components/NewsAnalytics'
 import './App.css';
 
 function App() {
