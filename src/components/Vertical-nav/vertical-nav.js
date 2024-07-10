@@ -21,12 +21,12 @@ const Sidebar = ({ children }) => {
         {
             path: "/",
             name: "User Profile",
-            icon: <IconoirProfileCircle  className="icon-bold text-xl"/>
+            icon: <IconoirProfileCircle  className="icon-bold text-x2"/>
         },
         {
             path: "/about",
             name: "Home",
-            icon: <CarbonHome className="icon-bold text-xl "/>
+            icon: <CarbonHome className="icon-bold text-x2 "/>
         },
         {
             path: "/analytics",
@@ -36,12 +36,12 @@ const Sidebar = ({ children }) => {
         {
             path: "/comment",
             name: "Analytics",
-            icon: <CilChartLine  className="icon-bold text-xl"/>
+            icon: <CilChartLine  className="icon-bold text-x2"/>
         },
         {
             path: "/product",
             name: "History",
-            icon: <RxCounterClockwiseClock className="icon-bold text-xl"/>
+            icon: <RxCounterClockwiseClock className="icon-bold text-x2"/>
         },
         {
             path: "/productList",
@@ -51,12 +51,12 @@ const Sidebar = ({ children }) => {
         {
             path: "/productList",
             name: "Help Support",
-            icon: <FluentPersonSupport16Regular className="icon-bold text-x2"/>
+            icon: <FluentPersonSupport16Regular className="icon-bold text-x5"/>
         },
         {
             path: "/productList",
             name: "Feedback",
-            icon: <FluentPersonFeedback20Regular className="icon-bold text-x2"/>
+            icon: <FluentPersonFeedback20Regular className="icon-bold text-x5"/>
         }
     ];
    

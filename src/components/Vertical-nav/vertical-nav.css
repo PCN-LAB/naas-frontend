@@ -4,14 +4,14 @@
     
   }
   
-  .text-xl {
+  .text-x5 {
     
     font-size: 1.9rem; /* Example size change */
   }
   .text-x2 {
-    
-    font-size: 2rem; /* Example size change */
-    }
+    font-size: 1.7rem; /* Example size change */
+   
+  }
     .text-x3 {
       
       width: 30px;
@@ -56,10 +56,7 @@
     text-decoration: none;
     color: rgb(0, 0, 0);
   }
-  .text-x2 {
-    font-size: 1.8rem; /* Example size change */
-   
-  }
+ 
   .link:hover {
     background-color: #ffffff; /* Tailwind's bg-gray-700 */
   }

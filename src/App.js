@@ -1,10 +1,10 @@
-
 // App.js
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MapInput from './components/MapInput';
 import { Provider } from 'react-redux';
 import store from './store/Store';
-import LandingPage from'./pages/LandingPage'
+import LandingPage from './pages/LandingPage'
+import './App.css';
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import VerifyEmail from './pages/VerifyEmail'
