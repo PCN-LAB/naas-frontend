@@ -5,6 +5,7 @@ import HeaderMapPage from '../layout/HeaderMapPage';
 import Sidebar from './Vertical-nav/vertical-nav';
 import CurrentSearch from '../layout/CurrentSearch';
 import MapComponent from './MapComponent';
+import NewsList from './NewsList'
 
 function NewsAnalytics() {
     const newsSource = useSelector(state => state.map.newsSource);
@@ -68,8 +69,9 @@ function NewsAnalytics() {
                     <div><MapComponent /></div>
                     
                 </div>
-                <div className='w-2/5'>
-                    {/* <CurrentSearch /> */}
+                <div className='w-2/5 flex flex-col gap-5'>
+                    <CurrentSearch />
+                    <NewsList />
                 </div>
                 
             </div>
