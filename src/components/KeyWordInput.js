@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import SearchIcon from '../assets/search.png';
 import SearchBlackIcon from '../assets/searchBlack.png';
@@ -36,6 +36,13 @@ function KeyWordInput() {
             padding: '10px'
         }),
     };
+
+    useEffect(() => {
+        // if selected keywords length is 4 then hide the keyword input
+        if (selectedKeywords.length === 4) {
+            setKeyWordOptions([]);
+        }
+    }, [selectedKeywords])
 
     const handleKeyWordSelect = (selectedOption) => {
         setSelectedKeywords((prevSelectedKeyWords) => [
