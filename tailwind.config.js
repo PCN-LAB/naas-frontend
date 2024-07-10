@@ -14,6 +14,7 @@ module.exports = {
         'custom-gray': 'rgba(251, 251, 251, 1)',
         colorMapHeaderBG: '#dde8f0',
         colorSearchButton: '#028abd',
+        colorVerticalNav: '#97cbdc',
 
       },
       height: {

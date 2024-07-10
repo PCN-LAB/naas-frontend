@@ -54,7 +54,7 @@ function NewsAnalytics() {
                             </label>
                         </div>
                     </div>
-                    <div className='bg-blue-200 p-5 mb-4 rounded-lg text-xl'>
+                    <div className='bg-colorMapHeaderBG p-5 mb-4 rounded-lg text-xl'>
                         <div className='text-gray-700 font-bold mb-1 p-0.5'>
                             Focus time
                         </div>
