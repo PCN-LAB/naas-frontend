@@ -6,6 +6,7 @@ import Sidebar from './Vertical-nav/vertical-nav';
 import CurrentSearch from '../layout/CurrentSearch';
 import MapComponent from './MapComponent';
 import NewsList from './NewsList'
+import background from '../assets/map-input-bg.png'
 
 function NewsAnalytics() {
     const newsSource = useSelector(state => state.map.newsSource);
@@ -18,6 +19,7 @@ function NewsAnalytics() {
 
     return (
         <div className='h-full'>
+            <img src={background} alt='background' className='absolute -z-50 opacity-20 object-cover w-full h-full' />
             <Sidebar />
             <Logo />
             <div className='flex w-11/12 mx-auto gap-4'>
