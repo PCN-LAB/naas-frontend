@@ -52,12 +52,6 @@ const MapComponent = () => {
                 };
                 setSelectedRegion(newRegion); // Set selected region
                 setErrorMessage(''); // Clear any previous error messages
-
-                // Zoom to selected region
-                if (mapRef.current) {
-                    const latLng = [coordinates[1], coordinates[0]]; // Latitude, Longitude
-                    mapRef.current.flyTo(latLng, 8); // Fly to selected region with zoom level 8 (adjust as needed)
-                }
             } else {
                 setErrorMessage('Coordinates not found or invalid format for the selected region.');
             }
@@ -91,41 +85,52 @@ const MapComponent = () => {
     return (
         <div>
             {/* Error message */}
-            {errorMessage && <p className='text-red-600 text-center'>{errorMessage}</p>}
-            {/* Map Container */}
-            <MapContainer ref={mapRef} className=' w-full rounded-lg pt-8 p-2 -z-10' style={{height: '632px'}} center={[30.3753, 69.3451]} zoom={8}>
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {/* GeoJSON layer for regions */}
-                {PAK_adm3 && (
-                    <GeoJSON
-                        data={PAK_adm3}
-                        style={getRegionStyle}
-                        onEachFeature={(feature, layer) => {
-                            layer.on({
-                                click: () => {
-                                    // Do nothing to disable editing on map
-                                },
-                            });
-                        }} 
+            <div className="relative z-10">
+                {errorMessage && <p className='text-red-600 text-center'>{errorMessage}</p>}
+
+                {/* Map Container */}
+                <MapContainer ref={mapRef} className='w-full rounded-lg pt-8 p-2' style={{ height: '632px' }} center={[30.3753, 69.3451]} zoom={6}>
+                    <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                )}
-                {/* Marker for selected region */}
-                {selectedRegion && (
-                    <Marker
-                        position={[
-                            selectedRegion.feature.geometry.coordinates[0][0][1], // Latitude
-                            selectedRegion.feature.geometry.coordinates[0][0][0], // Longitude
-                        ]}
-                        icon={defaultMarker} // Use custom marker icon
-                    >
-                        <Popup>
-                            {selectedRegion.feature.properties.NAME_3}
-                        </Popup>
-                    </Marker>
-                )}
-            </MapContainer>
+                    {/* GeoJSON layer for regions */}
+                    {PAK_adm3 && (
+                        <GeoJSON
+                            data={PAK_adm3}
+                            style={getRegionStyle}
+                            onEachFeature={(feature, layer) => {
+                                layer.on({
+                                    click: () => {
+                                        // Do nothing to disable editing on map
+                                    },
+                                });
+                            }}
+                        />
+                    )}
+                    {/* Marker for selected region */}
+                    {selectedRegion && (
+                        <Marker
+                            position={[
+                                selectedRegion.feature.geometry.coordinates[0][0][1], // Latitude
+                                selectedRegion.feature.geometry.coordinates[0][0][0], // Longitude
+                            ]}
+                            icon={defaultMarker} // Use custom marker icon
+                            eventHandlers={{
+                                click: () => {
+                                    const bounds = L.geoJSON(selectedRegion.feature).getBounds();
+                                    if (mapRef.current) {
+                                        mapRef.current.flyToBounds(bounds);
+                                    }
+                                },
+                            }}
+                        >
+                            <Popup>
+                                {selectedRegion.feature.properties.NAME_3}
+                            </Popup>
+                        </Marker>
+                    )}
+                </MapContainer>
+            </div>
         </div>
     );
 };
