@@ -4,6 +4,7 @@ import SearchIcon from '../assets/search.png';
 import SearchBlackIcon from '../assets/searchBlack.png';
 import { useDispatch } from 'react-redux';
 import { pushKeyWordsSearch } from '../store/reducers/MapReducer'
+import { useNavigate } from 'react-router-dom';
 
 function KeyWordInput() {
     const [isHovered, setIsHovered] = useState(false);
@@ -53,6 +54,13 @@ function KeyWordInput() {
         });
     };
 
+    const navigate = useNavigate();
+
+    const handleButtonClick = () => {
+        navigate('/news-analytics'); 
+    };
+    
+
     return (
         <div className='h-28 text-2xl bg-colorMapHeaderBG rounded-2xl flex justify-around w-1/2 mx-auto items-center'>
             <span className='font-bold text-3xl'>Select a word</span>
@@ -63,7 +71,7 @@ function KeyWordInput() {
                 onChange={handleKeyWordSelect}
                 styles={customSelectStyles}
             />
-            <button
+            <button onClick={handleButtonClick}
                 className='flex items-center py-3 px-5 rounded-3xl gap-2 bg-colorSearchButton text-white hover:text-black transition hover:bg-white'
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -72,7 +80,7 @@ function KeyWordInput() {
                 Search
             </button>
         </div>
-    );
+    ); 
 }
 
 export default KeyWordInput;

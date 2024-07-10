@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setNewsSource } from '../store/reducers/MapReducer'
 import { setRegionSelected } from '../store/reducers/MapReducer'
 
+import NewsAnalytics from './NewsAnalytics';
 function NewsSourceInput() {
     const [selectedNewsSource, setSelectedNewsSource] = useState(null);
     const dispatch = useDispatch();
@@ -75,7 +76,9 @@ function NewsSourceInput() {
                         placeholder='Choose Region'
                         styles={customSelectStyles}
                         onChange={(e) => dispatch(setRegionSelected(e.value))}
+                       
                     />
+                    
                 </div>
             </div>
         </div>

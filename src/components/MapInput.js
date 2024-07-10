@@ -7,6 +7,7 @@ import KeyWordsShow from '../layout/KeyWordsShow';
 import background from '../assets/map-input-bg.png'
 import Sidebar from '../components/Vertical-nav/vertical-nav';
 
+
 function MapInput() {
     return (
         <div className='relative flex flex-col flex-1'>
