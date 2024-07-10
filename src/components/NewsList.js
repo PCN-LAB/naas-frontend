@@ -14,7 +14,7 @@ function NewsList() {
             Inter-Services Intelligence (ISI) to intercept and trace calls in the “interest of national security”,
             a notification issued in this regard said.`,
             focusTime: '2021-07-01T00:00:00Z',
-            publicationTime: '2021-07-01T00:00:00Z',
+            publicationTime: '2024-07-01T00:00:00Z',
             topics: ['National Security', 'ISI', 'Telecommunication'],
             location: 'Islamabad',
             isBiased: true
