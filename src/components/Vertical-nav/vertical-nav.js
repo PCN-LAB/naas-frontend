@@ -68,7 +68,7 @@ const Sidebar = ({ children }) => {
 
     return (
         <div className="flex">
-            <div style={{ width: isOpen ? '250px' : '65px' }} className="sidebar fixed top-0 left-0 h-full  bg-colorVerticalNav text-black flex flex-col  rounded-lg">
+            <div style={{ width: isOpen ? '250px' : '65px' }} className="sidebar fixed top-0 left-0 h-full  bg-colorVerticalNav text-black flex flex-col  rounded-lg z-50">
                 <div className="top_section w-full text-2xl flex items-center justify-between p-4 ">
                     <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo "></h1>
                     <div style={{ marginLeft: isOpen ? '50px' : '0px' }} className="bars ">

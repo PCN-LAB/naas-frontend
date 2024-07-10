@@ -52,12 +52,6 @@ const MapComponent = () => {
                 };
                 setSelectedRegion(newRegion); // Set selected region
                 setErrorMessage(''); // Clear any previous error messages
-
-                // Zoom to selected region
-                if (mapRef.current) {
-                    const latLng = [coordinates[1], coordinates[0]]; // Latitude, Longitude
-                    mapRef.current.flyTo(latLng, 8); // Fly to selected region with zoom level 8 (adjust as needed)
-                }
             } else {
                 setErrorMessage('Coordinates not found or invalid format for the selected region.');
             }
@@ -91,10 +85,12 @@ const MapComponent = () => {
     return (
         <div>
             {/* Error message */}
-            {errorMessage && <p className='text-red-600 text-center'>{errorMessage}</p>}
+            <div className="relative z-10">
+                {errorMessage && <p className='text-red-600 text-center'>{errorMessage}</p>}
+            </div>
             {/* Map Container */}
-            <MapContainer ref={mapRef} className=' w-full rounded-lg pt-8 p-2 -z-10' style={{height: '632px'}} center={[30.3753, 69.3451]} zoom={8}>
-                <TileLayer
+            <MapContainer ref={mapRef} className='w-full rounded-lg pt-8 p-2' style={{ height: '632px' }} center={[30.3753, 69.3451]} zoom={6}>
+                <TileLayer 
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {/* GeoJSON layer for regions */}
@@ -119,6 +115,14 @@ const MapComponent = () => {
                             selectedRegion.feature.geometry.coordinates[0][0][0], // Longitude
                         ]}
                         icon={defaultMarker} // Use custom marker icon
+                        eventHandlers={{
+                            click: () => {
+                                const bounds = L.geoJSON(selectedRegion.feature).getBounds();
+                                if (mapRef.current) {
+                                    mapRef.current.flyToBounds(bounds);
+                                }
+                            },
+                        }}
                     >
                         <Popup>
                             {selectedRegion.feature.properties.NAME_3}
