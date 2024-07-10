@@ -68,16 +68,16 @@ const Sidebar = ({ children }) => {
 
     return (
         <div className="flex">
-            <div style={{ width: isOpen ? '250px' : '65px' }} className="sidebar fixed top-0 left-0 h-full  bg-colorVerticalNav text-black flex flex-col  rounded-lg z-50">
+            <div style={{ width: isOpen ? '250px' : '65px' }} className="sidebar fixed top-0 left-0 h-full  bg-colorVerticalNav text-black flex flex-col  rounded-lg z-50  ease-out ease-in duration-500">
                 <div className="top_section w-full text-2xl flex items-center justify-between p-4 ">
                     <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo "></h1>
-                    <div style={{ marginLeft: isOpen ? '50px' : '0px' }} className="bars ">
+                    <div style={{ marginLeft: isOpen ? '50px' : '0px' }} className="bars  ">
                         <GoChevronLeft onClick={toggle} />
                     </div>
                 </div>
                 <nav className="menu">
                     {menuItem.map((item, index) => (
-                        <NavLink to={item.path} key={index} className="link flex items-center py-3 pl-3.5 text-black no-underline hover:bg-white" activeclassname="active">
+                        <NavLink to={item.path} key={index} className="link flex items-center py-3 pl-3.5 text-black no-underline hover:bg-white " activeclassname="active">
                             <div className="icon mr-4">{item.icon}</div>
                             <div style={{ display: isOpen ? 'block' : 'none' }} className="link_text text-1xl ">
                                 {item.name}
