@@ -1,6 +1,8 @@
-import {React, useState} from 'react';
+import {React, useState, useRef} from 'react';
 import NavbarLandingPage from '../components/navbarLandingPage';
 import Bluebg from '../assets/Rectangle 6704 (1).png'
+// import portfolio from '../assets/BannerDesign.gif.gif'
+//  import portfolio from '../assets/Untitled design.gif'
 import portfolio from '../assets/portfolio.png'
 import line from '../assets/Line.png'
 import arrows from '../assets/arrows.png'
@@ -12,6 +14,7 @@ import facebook from '../assets/logos_facebook.png'
 import twitter from '../assets/icons8-twitterx-48.png'
 import insta from '../assets/skill-icons_instagram.png'
 import PCN from '../assets/PCN logo.png'
+import { useNavigate } from "react-router-dom"; 
 
 function LandingPage() {
 
@@ -41,6 +44,8 @@ function LandingPage() {
        
       ];
 
+      const navigate = useNavigate();
+      const secondPortionRef = useRef(null);
       const [currentIndex, setCurrentIndex] = useState(0);
 
       const handlePrevious = () => {
@@ -51,36 +56,40 @@ function LandingPage() {
         setCurrentIndex((prevIndex) => (prevIndex === cardData.length - 1 ? 0 : prevIndex + 1));
       };
 
+      const GetStarted=()=>{
+        secondPortionRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+
   return (
     <>
       <NavbarLandingPage />
       
       <img src={Bluebg} className="absolute w-full z-0 h-800" style={{ marginTop: "4.5%" }} />
-<div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
-    <div className="text-white w-700 h-200 flex-shrink-0 flex flex-col justify-left items-left">
-        <h1 className="text-6xl font-bold leading-tight font-Poppins">
-            News Analytics
-            <div style={{ marginTop: "0%" }}>
-                <h4 className="text-6xl">As A Service</h4>
+        <div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
+            <div className="text-white w-700 h-200 flex-shrink-0 flex flex-col justify-left items-left">
+                <h1 className="text-6xl font-bold leading-tight font-Poppins">
+                    News Analytics
+                    <div style={{ marginTop: "0%" }}>
+                        <h4 className="text-6xl">As A Service</h4>
+                    </div>
+                </h1>
+                <h1 className='text-3xl font-medium leading-tight font-Poppins' style={{ marginTop: "2%" }}>
+                    What You’re Looking For!
+                </h1>
+                <div className='flex flex-col justify-left items-left'>
+                    <button style={{ marginTop: "5%" }} className="w-[220px] h-[60px] px-5 py-3 bg-zinc-800 rounded-[50px] justify-center items-center gap-2 inline-flex">
+                        <div className="text-neutral-50 text-[30px] font-bold font-Poppins leading-normal" onClick={GetStarted}>Get Started</div>
+                    </button>
+                </div>
             </div>
-        </h1>
-        <h1 className='text-3xl font-medium leading-tight font-Poppins' style={{ marginTop: "2%" }}>
-            What You’re Looking For!
-        </h1>
-        <div className='flex flex-col justify-left items-left'>
-            <button style={{ marginTop: "5%" }} className="w-[220px] h-[60px] px-5 py-3 bg-zinc-800 rounded-[50px] justify-center items-center gap-2 inline-flex">
-                <div className="text-neutral-50 text-[30px] font-bold font-Poppins leading-normal">Get Started</div>
-            </button>
+            <div>
+                <img src={portfolio} className='w-full h-full' style={{ marginLeft: "0%", marginTop: "10%" }} />
+            </div>
         </div>
-    </div>
-    <div>
-        <img src={portfolio} className='w-full h-full' style={{ marginLeft: "0%", marginTop: "10%" }} />
-    </div>
-</div>
 
 
       {/* second portion */}
-      <div className='flex flex-row justify-center items-center gap-78' style={{marginTop:"65%"}}>
+      <div  ref={secondPortionRef} className='flex flex-row justify-center items-center gap-78' style={{marginTop:"65%"}}>
         <div className="flex flex-col items-start">
             <img className="w-25 h-1.5" src={line}></img>
             <h1 className="w-[583.18px] h-[146.39px] text-sky-950 text-[52px] font-bold font-Poppins">NAaaS Explained :</h1>
