@@ -17,13 +17,10 @@ function NewsAnalytics() {
     };
 
     return (
-       
-           
-               
         <div className='h-full'>
             <Sidebar />
             <Logo />
-            <div className='flex w-11/12 mx-auto'>
+            <div className='flex w-11/12 mx-auto gap-4'>
                 <div className='w-3/5'>
                     <div className='mb-4'>
                         <label className='text-3xl font-bold text-gray-700'>
