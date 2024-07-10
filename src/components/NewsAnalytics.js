@@ -31,11 +31,11 @@ function NewsAnalytics() {
                         <div className='border-b-2 border-gray-300 mb-4'></div>
                         <div className='flex items-center gap-2 text-xl p-2'>
                             <input
-                                type="radio" 
+                                type="radio"
                                 id="dawn"
                                 name="source"
                                 value="dawn"
-                                className='h-5 w-5 cursor-pointer' 
+                                className='h-5 w-5 cursor-pointer'
                                 checked={newsSource === 'dawn'}
                                 onChange={handleSourceChange}
                             />
@@ -63,18 +63,14 @@ function NewsAnalytics() {
                         <div className='text-gray-700 font-bold mb-1 p-0.5'>
                             Publication time
                         </div>
-                        
                     </div>
                     <div><MapComponent /></div>
-                    
                 </div>
                 <div className='w-2/5 flex flex-col gap-5'>
                     <CurrentSearch />
                     <NewsList />
                 </div>
-                
             </div>
-            
         </div>
     );
 }

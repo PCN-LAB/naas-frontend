@@ -114,7 +114,7 @@ function NewsList() {
             </div>
 
             {/* News List */}
-            <div>
+            <div className='flex flex-col max-h-[calc(100vh-18.5rem)] overflow-auto custom-scrollbar'>
                 {/* Number of articles */}
                 <div className='flex items-center gap-2 text-gray-600 text-lg'>
                     <img src={lookUpIcon} alt='lookup' className='w-6 h-7' />
@@ -137,7 +137,6 @@ function NewsList() {
                     ))
                 }
             </div>
-
         </div>
     )
 }
