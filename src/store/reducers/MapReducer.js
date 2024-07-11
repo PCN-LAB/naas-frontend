@@ -3,8 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     keyWordsSearch: [],
     newsSource: null,
-    regionSelected: null
-}
+    regionSelected: null,
+    focusTime: [],
+    publicationTime: []
+};
 
 const mapSlice = createSlice({
     name: "map",
@@ -12,19 +14,26 @@ const mapSlice = createSlice({
     reducers: {
         pushKeyWordsSearch(state, action) {
             state.keyWordsSearch.push(action.payload);
-            // log the state
-            // console.log(JSON.stringify(state.keyWordsSearch, null, 2));
+        },
+        deleteKeyWord(state, action) {
+            state.keyWordsSearch = state.keyWordsSearch.filter(
+                keyword => keyword !== action.payload
+            );
         },
         setNewsSource(state, action) {
             state.newsSource = action.payload;
         },
         setRegionSelected(state, action) {
             state.regionSelected = action.payload;
+        },
+        setFocusTimeRedux(state, action) {
+            state.focusTime = action.payload;
+        },
+        setPublicationTimeRedux(state, action) {
+            state.publicationTime = action.payload;
         }
     }
 });
 
-export const { pushKeyWordsSearch } = mapSlice.actions;
-export const { setNewsSource } = mapSlice.actions;
-export const { setRegionSelected } = mapSlice.actions;
+export const { pushKeyWordsSearch, setNewsSource, setRegionSelected, setFocusTimeRedux, setPublicationTimeRedux, deleteKeyWord } = mapSlice.actions;
 export default mapSlice.reducer;

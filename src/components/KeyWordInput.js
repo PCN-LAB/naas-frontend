@@ -2,14 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import SearchIcon from '../assets/search.png';
 import SearchBlackIcon from '../assets/searchBlack.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pushKeyWordsSearch } from '../store/reducers/MapReducer'
 import { useNavigate } from 'react-router-dom';
 
 function KeyWordInput() {
     const [isHovered, setIsHovered] = useState(false);
     const [selectedKeywords, setSelectedKeywords] = useState([]);
+    const keywords = useSelector(state => state.map.keyWordsSearch);
+    const newsSource = useSelector(state => state.map.newsSource);
+    const regionSelected = useSelector(state => state.map.regionSelected);
+    const focusTime = useSelector(state => state.map.focusTime);
+    const publicationTime = useSelector(state => state.map.publicationTime);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [keyWordOptions, setKeyWordOptions] = useState([
         { value: 'Police', label: 'Police' },
         { value: 'Protest', label: 'Protest' },
@@ -21,14 +28,6 @@ function KeyWordInput() {
         { value: 'Peaceful', label: 'Peaceful' },
         { value: 'Riot', label: 'Riot' }
     ]);
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
 
     const customSelectStyles = {
         control: (provided) => ({
@@ -44,29 +43,38 @@ function KeyWordInput() {
         }
     }, [selectedKeywords])
 
+    useEffect(() => {
+        setKeyWordOptions((options) => {
+            return options.filter(option => !keywords.includes(option.value));
+        });
+    }, [keywords]);
+
     const handleKeyWordSelect = (selectedOption) => {
-        setSelectedKeywords((prevSelectedKeyWords) => [
-            ...prevSelectedKeyWords,
+        setSelectedKeywords((prevKeyWords) => [
+            ...prevKeyWords,
             selectedOption,
         ]);
 
         // set in the store
         dispatch(pushKeyWordsSearch(selectedOption.value));
-
-        // Remove from keyword options
-        setKeyWordOptions((prevKeyWordOptions) => {
-            return prevKeyWordOptions.filter(
-                (option) => option.value !== selectedOption.value
-            );
-        });
     };
-
-    const navigate = useNavigate();
 
     const handleButtonClick = () => {
-        navigate('/news-analytics'); 
+        if (keywords && newsSource && regionSelected && focusTime && publicationTime) {
+            navigate('/news-analytics')
+        }
+        else {
+            alert('Select all fields')
+        }
     };
-    
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     return (
         <div className='h-28 text-2xl bg-colorMapHeaderBG rounded-2xl flex justify-around w-1/2 mx-auto items-center'>
@@ -87,7 +95,7 @@ function KeyWordInput() {
                 Search
             </button>
         </div>
-    ); 
+    );
 }
 
 export default KeyWordInput;

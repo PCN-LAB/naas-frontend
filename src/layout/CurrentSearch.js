@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import KeyWordsShowAnalytics from '../layout/KeyWordsShowAnalytics'
+import { useDispatch } from 'react-redux';
+import { deleteKeyWord } from '../store/reducers/MapReducer';
 
 function CurrentSearch() {
-    // const keywords = useSelector(state => state.map.keywords);
-    const [keywords, setKeywords] = useState(['police', 'crime', 'violence', 'nice', 'keyword', 'places'])
+    const keywords = useSelector(state => state.map.keyWordsSearch);
+    const dispatch = useDispatch()
 
-    const deleteKeyWord = (keywordToDelete) => {
-        const newKeywords = keywords.filter((keyword) => keyword !== keywordToDelete);
-        setKeywords(newKeywords);
+    const delKeyWord = (keywordToDelete) => {
+        dispatch(deleteKeyWord(keywordToDelete))
     }
 
     return (
@@ -19,7 +20,7 @@ function CurrentSearch() {
                     <KeyWordsShowAnalytics
                         key={index}
                         keyword={keyword}
-                        deleteKeyWord={deleteKeyWord}
+                        deleteKeyWord={delKeyWord}
                     />
                 ))}
             </div>
