@@ -1,9 +1,8 @@
 import {React, useState, useRef} from 'react';
 import NavbarLandingPage from '../components/navbarLandingPage';
-import Bluebg from '../assets/Rectangle 6704 (1).png'
+import arrowRight from '../assets/next.png'
 // import portfolio from '../assets/BannerDesign.gif.gif'
-//  import portfolio from '../assets/Untitled design.gif'
-import portfolio from '../assets/portfolio.png'
+import portfolio from '../assets/world.gif'
 import line from '../assets/Line.png'
 import arrows from '../assets/arrows.png'
 import news from '../assets/news.png'
@@ -15,7 +14,9 @@ import twitter from '../assets/icons8-twitterx-48.png'
 import insta from '../assets/skill-icons_instagram.png'
 import PCN from '../assets/PCN logo.png'
 import { useNavigate } from "react-router-dom"; 
-
+import team_profile from '../assets/team-profile.png'
+import github from '../assets/github_colored.png'
+import linkedin from '../assets/linkedin_colored.png'
 function LandingPage() {
 
     const cardData = [
@@ -44,6 +45,78 @@ function LandingPage() {
        
       ];
 
+
+      const [teamMembers, setTeamMembers] = useState([
+        {
+          name: "Zane Sorell",
+          role: "CEO",
+          description: "Enjoys adventurous travel, seeks new cultures and offbeat destinations",
+          imgSrc: `${team_profile}`
+        },
+        {
+          name: "Maya Mathy",
+          role: "Founder",
+          description: "Pop music lover, seeks joy and exciting pop concerts",
+         imgSrc: `${team_profile}`
+        },
+        {
+          name: "Alexis Jensen",
+          role: "CTO",
+          description: "Bookworm, creative software developer with precision",
+          imgSrc: `${team_profile}`
+        },
+        {
+          name: "Dominic Game",
+          role: "3D Artist",
+          description: "Football enthusiast, enjoys movie nights with friends",
+           imgSrc: `${team_profile}`
+        },
+        {
+            name: "Dominic Game",
+            role: "3D Artist",
+            description: "Football enthusiast, enjoys movie nights with friends",
+             imgSrc: `${team_profile}`
+        },
+        {
+        name: "Dominic Game",
+        role: "3D Artist",
+        description: "Football enthusiast, enjoys movie nights with friends",
+        imgSrc: `${team_profile}`
+        },
+        {
+            name: "Dominic Game",
+            role: "3D Artist",
+            description: "Football enthusiast, enjoys movie nights with friends",
+             imgSrc: `${team_profile}`
+        },
+        {
+        name: "Dominic Game",
+        role: "3D Artist",
+        description: "Football enthusiast, enjoys movie nights with friends",
+        imgSrc: `${team_profile}`
+        },
+        {
+        name: "Dominic Game",
+        role: "3D Artist",
+        description: "Football enthusiast, enjoys movie nights with friends",
+        imgSrc: `${team_profile}`
+        },
+        {
+            name: "Dominic Game",
+            role: "3D Artist",
+            description: "Football enthusiast, enjoys movie nights with friends",
+             imgSrc: `${team_profile}`
+        },
+        {
+        name: "Dominic Game",
+        role: "3D Artist",
+        description: "Football enthusiast, enjoys movie nights with friends",
+        imgSrc: `${team_profile}`
+        }
+
+      
+      ]);
+
       const navigate = useNavigate();
       const secondPortionRef = useRef(null);
       const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,36 +133,47 @@ function LandingPage() {
         secondPortionRef.current.scrollIntoView({ behavior: 'smooth' });
       }
 
+      const [visibleMembers, setVisibleMembers] = useState(4); 
+
+      const [startIndex, setStartIndex] = useState(0); 
+
+      const scrollMoreMembers = () => {
+        const newIndex = startIndex + 4;
+        if (newIndex < teamMembers.length) {
+          setStartIndex(newIndex);
+        }
+      };
+    
+
   return (
     <>
-      <NavbarLandingPage />
-      
-      <img src={Bluebg} className="absolute w-full z-0 h-800" style={{ marginTop: "4.5%" }} />
-        <div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
-            <div className="text-white w-700 h-200 flex-shrink-0 flex flex-col justify-left items-left">
-                <h1 className="text-6xl font-bold leading-tight font-Poppins">
-                    News Analytics
-                    <div style={{ marginTop: "0%" }}>
-                        <h4 className="text-6xl">As A Service</h4>
-                    </div>
-                </h1>
-                <h1 className='text-3xl font-medium leading-tight font-Poppins' style={{ marginTop: "2%" }}>
-                    What You’re Looking For!
-                </h1>
-                <div className='flex flex-col justify-left items-left'>
-                    <button style={{ marginTop: "5%" }} className="w-[220px] h-[60px] px-5 py-3 bg-zinc-800 rounded-[50px] justify-center items-center gap-2 inline-flex">
-                        <div className="text-neutral-50 text-[30px] font-bold font-Poppins leading-normal" onClick={GetStarted}>Get Started</div>
-                    </button>
-                </div>
+  <NavbarLandingPage />
+{/* <img src={Bluebg} className="absolute w-full z-0 h-800" style={{ marginTop: "4.5%" }} /> */}
+<div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
+<div className="text-black absolute left-0 w-1/2 p-12 z-50" style={{marginTop:"43%", marginLeft:"12%"}}>
+        <h1 className="text-6xl font-bold leading-tight font-Poppins">
+            News <span className='text-white'>Analytics</span> 
+            <div style={{ marginTop: "0%" }}>
+                <h4 className="text-6xl">As A <span className='text-white'>Service</span> </h4>
             </div>
-            <div>
-                <img src={portfolio} className='w-full h-full' style={{ marginLeft: "0%", marginTop: "10%" }} />
-            </div>
+        </h1>
+        <h1 className='text-3xl font-medium leading-tight font-Poppins' style={{ marginTop: "2%" }}>
+            What You’re <span className='text-white'>Looking For</span> 
+        </h1>
+        <div className='flex flex-col justify-left items-left'>
+            <button style={{ marginTop: "5%" }} className="w-[260px] h-[70px] px-5 py-3 bg-custom-blue rounded-[50px] justify-center items-center gap-2 inline-flex">
+                <div className="text-neutral-50 text-[30px] font-bold font-Poppins leading-normal" onClick={GetStarted}>Get Started</div>
+            </button>
         </div>
+    </div>
+    <div className='absolute top-0 w-[1300px] h-[1150px]' style={{ marginRight: "-30%", marginTop: "-12%", zIndex: "20" }}>
+        <img src={portfolio} className='w-full h-full rounded-full z-20' style={{ objectFit: "cover", borderRadius: "50%", boxShadow: "0 10px 20px rgba(0, 0, 0, 0.8), 0 25px 50px rgba(0, 0, 0, 0.9)" }} />
+    </div>
+</div>
 
 
       {/* second portion */}
-      <div  ref={secondPortionRef} className='flex flex-row justify-center items-center gap-78' style={{marginTop:"65%"}}>
+      <div  ref={secondPortionRef} className='flex flex-row justify-center items-center gap-78' style={{marginTop:"73%"}}>
         <div className="flex flex-col items-start">
             <img className="w-25 h-1.5" src={line}></img>
             <h1 className="w-[583.18px] h-[146.39px] text-sky-950 text-[52px] font-bold font-Poppins">NAaaS Explained :</h1>
@@ -140,9 +224,92 @@ function LandingPage() {
         </div>
         </div>
 
+       {/* meet our team */}
+
+    <div class="w-full h-[1090px] pl-[248px] pr-[95px] py-16 bg-white flex-col justify-start items-start gap-[120px] inline-flex" style={{marginTop:"5%"}}>
+    
+    <div class="self-stretch h-[172px] flex-col justify-center items-start gap-4 flex">
+    <div class="self-stretch h-[172px] flex-col justify-center items-start gap-6 flex">
+        <div class="self-stretch h-[172px] flex-col justify-center items-start gap-4 flex" style={{ marginTop: "10%" }}>
+            <div class="self-stretch text-zinc-900 text-5xl font-bold font-['Inter'] leading-[72px]">Meet our team members</div>
+            <div class="self-stretch text-zinc-600 text-lg font-normal font-['Inter'] leading-7">Complete the form below to send us a message. Our support team will promptly respond to your request.</div>
+            <div class="justify-start items-start gap-4 inline-flex">
+                <div class="w-[121px] p-3 bg-gray-100 rounded-xl justify-center items-center gap-2 flex">
+                    <div class="text-zinc-900 text-sm font-medium font-['Inter'] leading-[25px]">Apply Now</div>
+                    <div class="w-4 h-4 relative">
+                        <img class="h-4 left-0 top-0 absolute w-28" src={arrowRight} />
+                    </div>
+                </div>
+                <button class="w-[140px] h-12 p-3 bg-violet-600 rounded-xl justify-center items-center gap-2 flex">
+                    <div class="text-white text-sm font-medium font-['Inter'] leading-[25px]">Contact Us</div>
+                    <div class="w-4 h-4 relative">
+                        <img class="h-4 left-0 top-0 absolute w-28" src={arrowRight} />
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div className="flex flex-col items-start gap-4">
+    <div className="flex items-center gap-4">
+        {startIndex > 0 && (
+            <button
+                onClick={() => setStartIndex(startIndex - 4)}
+                className="px-4 py-2 bg-transparent"
+            >
+                <img src={arrowRight} alt="Arrow Right" style={{ transform: 'scaleX(-1)' }} />
+            </button>
+        )}
+        <div className="flex flex-wrap justify-start items-start gap-8">
+            {teamMembers.slice(startIndex, startIndex + 4).map((member, index) => (
+                <div key={index} className="flex flex-col items-center gap-4 w-56">
+                    <div className="w-56 h-56 flex justify-center items-center">
+                        <img
+                            style={{ width: '200px', height: '200px', borderRadius: '50%' }}
+                            src={member.imgSrc}
+                            alt={member.name}
+                        />
+                    </div>
+                    <div className="flex flex-col items-center text-center gap-2">
+                        <div className="text-zinc-900 text-lg font-bold">{member.name}</div>
+                        <div className="text-violet-600 text-sm font-medium">{member.role}</div>
+                    </div>
+                    <div className="text-zinc-500 text-sm font-normal text-center h-20 overflow-hidden">
+                        {member.description}
+                    </div>
+                    <div className="flex justify-center items-center gap-4 mt-2">
+                        <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+                            <img src={facebook} alt="Facebook" style={{ width: '60%' }} />
+                        </div>
+                        <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+                            <img src={github} alt="GitHub" style={{width: '60%' }} />
+                        </div>
+                        <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+                            <img src={linkedin} alt="LinkedIn" style={{width: '60%'}} />
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+        {startIndex + 4 < teamMembers.length && (
+            <button
+                onClick={scrollMoreMembers}
+                className="px-4 py-2 bg-transparent flex items-center"
+            >
+                <img src={arrowRight} alt="Arrow Right" className="w-[30px]" />
+            </button>
+        )}
+    </div>
+</div>
+
+
+
+</div>
+
         {/* footer */}
 
-        <div className="relative w-full h-[580px] px-[111px] pt-12 pb-[80px] bg-blue-300 border justify-center items-center inline-flex" style={{ marginTop: "10%" }}>
+        <div className="relative w-full h-[580px] px-[111px] pt-12 pb-[80px] bg-blue-300 border justify-center items-center inline-flex" style={{ marginTop: "0%" }}>
         <div className="absolute top-10" style={{ left: "15%" }}>
             <img src={PCN} alt="PCN Logo" />
         </div>
