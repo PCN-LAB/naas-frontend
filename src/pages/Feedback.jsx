@@ -103,7 +103,7 @@ const Feedback = () => {
         >
           Submit!
         </button>
-        <div className="absolute left-[1360px] top-[750px] flex flex-col items-center">
+        <div className="absolute left-[1700px] top-[750px] flex flex-col items-center">
           <img className="w-full h-full shadow" src={Help} alt="help icon" />
         </div>
       </div>
