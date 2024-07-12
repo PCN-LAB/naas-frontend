@@ -12,7 +12,7 @@ import VerifyEmail from './pages/VerifyEmail'
 import ForgotPassword from './pages/ForgotPassword'
 import ChangePassword from './pages/ChangePassword'
 import Error404 from './pages/error404'
-
+import Feedback from './pages/Feedback'
 function App() {
   return (
     <div className="App min-h-screen flex flex-col">
@@ -28,6 +28,7 @@ function App() {
             <Route path="/ChangePassword" element={<ChangePassword />} />
             <Route path="/error404" element={<Error404 />} />
             <Route path='/news-analytics' element={<NewsAnalytics />} />
+            <Route path='/Feedback' element={<Feedback />} />
         </Routes>
         </BrowserRouter>
       </Provider>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/styled": "^11.11.5",
     "@iconify/icons-ic": "^1.2.13",
     "@mui/icons-material": "^5.15.21",
     "@reduxjs/toolkit": "^2.2.6",

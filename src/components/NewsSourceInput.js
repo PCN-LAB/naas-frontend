@@ -113,7 +113,7 @@ function NewsSourceInput() {
                         className='h-16 text-gray-500 p-4 text-2xl'
                         position='right'
                     >
-                        <Dropdown.Item className='text-2xl px-20'>
+                        <Dropdown.Item className='text-xl px-16 text-center py-2'>
                             Focus Time
                             <Dropdown.Submenu position='right' className='w-fit'>
                                 <Dropdown.Item>
@@ -121,7 +121,7 @@ function NewsSourceInput() {
                                 </Dropdown.Item>
                             </Dropdown.Submenu>
                         </Dropdown.Item>
-                        <Dropdown.Item className='text-2xl px-12'>
+                        <Dropdown.Item className='text-xl px-16 py-2'>
                             Publication Time
                             <Dropdown.Submenu position='right' className='w-fit'>
                                 <Dropdown.Item>
