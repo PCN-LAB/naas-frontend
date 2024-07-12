@@ -12,6 +12,7 @@ import { LineMdLogOut } from "./icons/LineMdLogOut.tsx";
 import { FluentPersonFeedback20Regular } from "./icons/FluentPersonFeedback20Regular.tsx";
 import ChatbotIcon from "./icons/chatbot.png";
 import link from "./icons/link.png";
+import { LuMapPin } from "react-icons/lu";
 
 const Sidebar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,11 @@ const Sidebar = ({ children }) => {
             path: "/about",
             name: "Home",
             icon: <CarbonHome className="icon-bold  w-7 h-7"/>
+        },
+        {
+            path: "/map-input",
+            name: "Map",
+            icon: <LuMapPin  className="icon-bold  w-7 h-7"/>
         },
         {
             path: "/analytics",
