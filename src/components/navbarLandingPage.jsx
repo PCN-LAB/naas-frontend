@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import NAAS_logo from '../assets/NAAS_logo.png';
 
 const NavbarLandingPage = () => {
@@ -9,7 +9,7 @@ const NavbarLandingPage = () => {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      if (offset > 500) { 
+      if (offset > 500) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -24,11 +24,19 @@ const NavbarLandingPage = () => {
   }, []);
 
   const gotoSignIn = () => {
-    navigate("/SignIn"); 
+    navigate("/SignIn");
   }
 
   const gotoSignUp = () => {
-    navigate("/SignUp"); 
+    navigate("/SignUp");
+  }
+
+  const handleMapClick = () => {
+    navigate('/map-input')
+  }
+
+  const handleHomeClick = () => {
+    navigate('/')
   }
 
   return (
@@ -36,19 +44,19 @@ const NavbarLandingPage = () => {
       style={{
         borderBlockStyle: "none",
         background: scrolled
-          ? "#97CBDC" 
-          : "linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1))", 
+          ? "#97CBDC"
+          : "linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1))",
         boxShadow: scrolled
-          ? "none" 
-          : "0 10px 20px rgba(0, 0, 0, 0.05), 0 25px 50px rgba(0, 0, 0, 0.15)" 
+          ? "none"
+          : "0 10px 20px rgba(0, 0, 0, 0.05), 0 25px 50px rgba(0, 0, 0, 0.15)"
       }}
     >
       <div className="logo flex items-center">
         <img src={NAAS_logo} className="w-[150px] h-[100px]" alt="NAAS Logo" />
       </div>
       <div className="flex items-center space-x-6">
-        <a href="#home" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">HOME</a>
-        <a href="#pages" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">PAGES</a>
+        <button onClick={handleHomeClick} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">HOME</button>
+        <button onClick={handleMapClick} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">MAP</button>
         <a href="#contact" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">CONTACT</a>
         <a href="#about" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">ABOUT US</a>
         <button className={`text-white ${scrolled ? 'bg-custom-blue hover:bg-custom-blue' : 'bg-transparent hover:bg-white hover:text-custom-blue'} border-white border px-8 py-2 rounded-full font-Montserrat-SemiBold text-lg`} onClick={gotoSignIn}>Sign In</button>

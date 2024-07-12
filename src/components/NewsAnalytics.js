@@ -25,7 +25,7 @@ function NewsAnalytics() {
             <div className='flex w-11/12 mx-auto gap-4'>
                 <div className='w-3/5'>
                     <div className='mb-4'>
-                        <label className='text-3xl font-bold text-gray-700'>
+                        <label className='text-2xl font-semibold'>
                             Source
                         </label>
                         <div className='border-b-2 border-gray-300 mb-4'></div>
