@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet'; // Import Leaflet library
-import PAK_adm3 from '../assets/PAK_Data.json';
+import PAK_adm3 from '../assets/merge.json';
 
 // Import marker icon assets from Leaflet
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -68,7 +68,7 @@ const MapComponent = () => {
             fillOpacity: 0.7,
             color: selectedRegion && selectedRegion.feature.properties.NAME_3 === feature.properties.NAME_3
                 ? selectedRegion.color
-                : 'transparent',
+                : 'green',
             fillColor: selectedRegion && selectedRegion.feature.properties.NAME_3 === feature.properties.NAME_3
                 ? selectedRegion.color
                 : 'transparent',
