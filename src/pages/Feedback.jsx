@@ -50,7 +50,7 @@ const Feedback = () => {
           <img src={logo} alt="Logo" className="h-24" />
         </div>
         <div className="absolute w-full h-[622px] left-0 top-[266px] bg-gradient-to-b from-white to-slate-300 rounded-[65px]"></div>
-        <div className="mt-14 absolute left-[63px] top-[270px] text-sky-950 text-xl font-extrabold">Give us Feedback</div>
+        <div className="mt-14 absolute left-[63px] top-[270px] text-sky-950 text-2xl font-extrabold">Give us Feedback</div>
         <div className="absolute left-[63px] top-[355px] text-sky-950 text-base font-normal">Write your suggestion here</div>
         <textarea
           className="absolute left-[63px] top-[383px] w-[619px] h-[279px] p-4 bg-gradient-to-b from-slate-300 to-sky-600 border border-sky-950 rounded-md text-sky-950 text-base font-light"
@@ -59,7 +59,7 @@ const Feedback = () => {
           onChange={handleFeedbackChange}
         ></textarea>
         <div className="absolute left-[63px] top-[672px] text-sky-950 text-base font-light">100 words limit</div>
-        <div className="absolute left-[744px] top-[386px] text-sky-950 text-xl font-extrabold">How reputable do you find NAaaS compared to other news sources?</div>
+        <div className="absolute left-[744px] top-[386px] text-sky-950 text-2xl font-extrabold">How reputable do you find NAaaS compared to other news sources?</div>
         <div className="absolute left-[744px] top-[449px] flex items-center gap-1 border border-sky-950 p-2">
           <div className="text-sky-800 text-base font-semibold">Barely</div>
           {[1, 2, 3, 4, 5].map((value) => (
@@ -76,7 +76,7 @@ const Feedback = () => {
           ))}
           <div className="text-sky-800 text-base font-semibold">Reputable</div>
         </div>
-        <div className="absolute left-[744px] top-[494px] text-sky-950 text-xl font-extrabold">Would you consider NAaaS credible enough for providing accurate news?</div>
+        <div className="absolute left-[744px] top-[512px] text-sky-950 text-2xl font-extrabold">Would you consider NAaaS credible enough for providing accurate news?</div>
         <div className="absolute left-[744px] top-[554px] flex items-center gap-4 border border-sky-950 p-2">
           <div
             className={`w-[39.53px] h-[22px] shadow text-center text-base font-semibold cursor-pointer ${
@@ -113,7 +113,7 @@ const Feedback = () => {
             <div>
               <img src={thumbsup} />
             </div>
-            <div className="text-center text-sky-950 text-xl font-extrabold mb-4">
+            <div className="text-center text-sky-950 text-2xl font-extrabold mb-4">
               THANK YOU FOR SUBMITTING THE FEEDBACK!
             </div>
             <button

@@ -204,7 +204,7 @@ function LandingPage() {
                 <img style={{ marginTop: "5%" }} src={news}></img>
             </div>
 
-            {/* Credits Section */}
+            {/* Credits Section
             <div className='flex flex-col justify-center items-center' style={{ marginTop: "8%" }}>
                 <div className="w-[156px] h-[63px] text-sky-950 text-[52px] font-bold font-Poppins">Credits</div>
                 <div className="flex flex-col items-center " style={{ marginTop: "4%" }}>
@@ -222,11 +222,11 @@ function LandingPage() {
                         />
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* meet our team */}
 
-            <div class="w-full h-[1090px] pl-[248px] pr-[95px] py-16 bg-white flex-col justify-start items-start gap-[120px] inline-flex" style={{ marginTop: "5%", marginLeft: '10%'}}>
+            <div class="w-full h-[1090px] pl-[248px] pr-[95px] py-16 bg-white flex-col justify-start items-start gap-[120px] inline-flex" style={{ marginTop: "5%", marginLeft: '10%' }}>
 
                 <div class="self-stretch h-[172px] flex-col justify-center items-start gap-4 flex">
                     <div class="self-stretch h-[172px] flex-col justify-center items-start gap-6 flex">

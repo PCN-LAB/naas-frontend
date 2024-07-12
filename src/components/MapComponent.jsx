@@ -68,7 +68,7 @@ const MapComponent = () => {
             fillOpacity: 0.7,
             color: selectedRegion && selectedRegion.feature.properties.NAME_3 === feature.properties.NAME_3
                 ? selectedRegion.color
-                : 'transparent',
+                : 'green',
             fillColor: selectedRegion && selectedRegion.feature.properties.NAME_3 === feature.properties.NAME_3
                 ? selectedRegion.color
                 : 'transparent',
