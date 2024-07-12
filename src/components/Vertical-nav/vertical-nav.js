@@ -25,7 +25,7 @@ const Sidebar = ({ children }) => {
             icon: <IconoirProfileCircle className="icon-bold  w-7 h-7"/>
         },
         {
-            path: "/about",
+            path: "/",
             name: "Home",
             icon: <CarbonHome className="icon-bold  w-7 h-7"/>
         },
@@ -60,7 +60,7 @@ const Sidebar = ({ children }) => {
             icon: <FluentPersonSupport16Regular className="icon-bold  w-8 h-8"/>
         },
         {
-            path: "/productList",
+            path: "/Feedback",
             name: "Feedback",
             icon: <FluentPersonFeedback20Regular className="icon-bold  w-8 h-8"/>
         }
