@@ -72,7 +72,10 @@ function NewsSourceInput() {
         control: (provided) => ({
             ...provided,
             padding: '10px',
-            hover: 'cursor-pointer'
+            cursor: 'pointer',
+            '&:hover': {
+                cursor: 'pointer'
+            }
         }),
     };
 

@@ -32,7 +32,11 @@ function KeyWordInput() {
     const customSelectStyles = {
         control: (provided) => ({
             ...provided,
-            padding: '10px'
+            padding: '10px',
+            cursor: 'pointer',
+            '&:hover': {
+                cursor: 'pointer'
+            }
         }),
     };
 
@@ -60,11 +64,11 @@ function KeyWordInput() {
     };
 
     const handleButtonClick = () => {
-        if (keywords && newsSource && regionSelected && focusTime && publicationTime) {
+        if (keywords && newsSource && regionSelected && (focusTime || publicationTime)) {
             navigate('/news-analytics')
         }
         else {
-            alert('Select all fields')
+            alert('Select fields to search');
         }
     };
 
