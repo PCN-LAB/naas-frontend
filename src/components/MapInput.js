@@ -6,6 +6,7 @@ import KeyWordInput from './KeyWordInput';
 import KeyWordsShow from '../layout/KeyWordsShow';
 import background from '../assets/map-input-bg.png'
 import Sidebar from '../components/Vertical-nav/vertical-nav';
+import Chatbot from './Chatbot';
 
 
 function MapInput() {
@@ -20,6 +21,7 @@ function MapInput() {
                 <KeyWordInput />
                 <KeyWordsShow />
             </div>
+            <Chatbot />
         </div>
     );
 }
