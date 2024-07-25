@@ -15,7 +15,7 @@ module.exports = {
         colorMapHeaderBG: '#dde8f0',
         colorSearchButton: '#028abd',
         colorVerticalNav: '#97cbdc',
-
+        colorInputChatbot: '#004581',
       },
       height: {
         '800': '800px',
@@ -27,8 +27,10 @@ module.exports = {
       },
       spacing: {
         '40': '40rem',
-      }
-
+      },
+      backgroundImage: {
+        'chat-bot-gradient': 'linear-gradient(to bottom, #018abd, #001b48)',
+      },
     },
   },
   plugins: [
@@ -48,6 +50,19 @@ module.exports = {
           'background-color': '#888',
           'border-radius': '10px',
           'border': '3px solid #e0e0e0', /* This creates a margin effect */
+        },
+
+        '.chat-scrollbar': {
+          'scrollbar-width': 'thin',
+          'scrollbar-color': '#888 #e0e0e0',
+        },
+        '.chat-scrollbar::-webkit-scrollbar': {
+          'height': '12px', /* Increase the height to simulate margin */
+        },
+        '.chat-scrollbar::-webkit-scrollbar-thumb': {
+          'background-color': '#e0e0e0',
+          'border-radius': '10px',
+          'border': '3px solid #004581', /* This creates a margin effect */
         },
       });
     },
