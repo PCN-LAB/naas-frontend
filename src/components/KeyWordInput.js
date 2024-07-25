@@ -41,6 +41,15 @@ function KeyWordInput() {
     };
 
     useEffect(() => {
+        // set selected keywords
+        if (keywords.length > 0) {
+            setSelectedKeywords(keywords.map(keyword => {
+                return { value: keyword, label: keyword }
+            }));
+        }
+    }, [])
+
+    useEffect(() => {
         // if selected keywords length is 4 then hide the keyword input
         if (selectedKeywords.length === 4) {
             setKeyWordOptions([]);
