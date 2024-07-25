@@ -13,6 +13,9 @@ import ForgotPassword from './pages/ForgotPassword'
 import ChangePassword from './pages/ChangePassword'
 import Error404 from './pages/error404'
 import Feedback from './pages/Feedback'
+import ContactUs from './pages/ContactUs'
+import UserProfile from './pages/UserProfile';
+
 function App() {
   return (
     <div className="App min-h-screen flex flex-col">
@@ -26,9 +29,11 @@ function App() {
             <Route path="/VerifyEmail" element={<VerifyEmail />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/ChangePassword" element={<ChangePassword />} />
-            <Route path="/error404" element={<Error404 />} />
+            <Route path="*" element={<Error404 />} />
             <Route path='/news-analytics' element={<NewsAnalytics />} />
             <Route path='/Feedback' element={<Feedback />} />
+            <Route path='/ContactUs' element={<ContactUs />} />
+            <Route path='/UserProfile' element={<UserProfile />} />
         </Routes>
         </BrowserRouter>
       </Provider>

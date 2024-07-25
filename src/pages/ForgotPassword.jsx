@@ -19,10 +19,13 @@ const ForgotPassword = () => {
    
   };
 
+  const gotoLandingPage = () => {
+    navigate("/LandingPage"); 
+};
   return (
     <div className="h-screen bg-cover bg-center flex flex-col items-center" style={{ backgroundImage: `url(${background})` }}>
       <div className="absolute top-12 left-0 p-3">
-        <img src={logo} alt="Logo" className="h-20" />
+        <img onClick={gotoLandingPage} src={logo} alt="Logo" className="h-20" />
       </div>
       <div className="bg-transparent bg-opacity-90 p-8 rounded-lg text-center mt-12">
         <h2 className="text-[40px] mb-4 font-bold font-Poppins text-custom-blue" style={{ marginTop: "60%" }}>Forgot Password</h2>

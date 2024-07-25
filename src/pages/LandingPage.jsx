@@ -133,12 +133,12 @@ function LandingPage() {
         secondPortionRef.current.scrollIntoView({ behavior: 'smooth' });
       }
 
-      const [visibleMembers, setVisibleMembers] = useState(4); 
+      const [visibleMembers, setVisibleMembers] = useState(3); 
 
       const [startIndex, setStartIndex] = useState(0); 
 
       const scrollMoreMembers = () => {
-        const newIndex = startIndex + 4;
+        const newIndex = startIndex + 3;
         if (newIndex < teamMembers.length) {
           setStartIndex(newIndex);
         }
@@ -166,37 +166,36 @@ function LandingPage() {
             </button>
         </div>
     </div>
-    <div className='absolute top-0 w-[1300px] h-[1150px]' style={{ marginRight: "-30%", marginTop: "-12%", zIndex: "20" }}>
+    {/* <div className='absolute top-0 w-[1300px] h-[1150px]' style={{ marginRight: "-30%", marginTop: "-12%", zIndex: "20" }}>
         <img src={portfolio} className='w-full h-full rounded-full z-20' style={{ objectFit: "cover", borderRadius: "50%", boxShadow: "0 10px 20px rgba(0, 0, 0, 0.8), 0 25px 50px rgba(0, 0, 0, 0.9)" }} />
-    </div>
+    </div> */}
 </div>
 
 
-      {/* second portion */}
-      <div  ref={secondPortionRef} className='flex flex-row justify-center items-center gap-78' style={{marginTop:"73%"}}>
-        <div className="flex flex-col items-start">
-            <img className="w-25 h-1.5" src={line}></img>
-            <h1 className="w-[583.18px] h-[146.39px] text-sky-950 text-[52px] font-bold font-Poppins">NAaaS Explained :</h1>
-            <h1 className="w-[583.18px] h-[146.39px] text-sky-950 text-[52px] font-bold font-Poppins" style={{ marginTop: "-15%" }}>How does it work?</h1>
-            <h2 className='w-[587.87px] h-[134.03px] text-zinc-500 text-4xl font-normal font-Ubuntu '  style={{ marginTop: "-6%" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed  do</h2>
-            <div className='flex flex-row justify-center gap-4'>
-            <h2 className='font-Poppins text-[#4cc0eb]'  style={{ marginTop: "-15%" }}>Watch as Guest</h2>
-            <img className='w-[55px] h-[30px]' src={arrows} style={{ marginTop: "-15.5%" }}></img>
-            </div>
-        
+      {/* Second Portion */}
+<div ref={secondPortionRef} className='flex flex-col md:flex-row justify-center items-center gap-16' style={{ marginTop: "73%", padding: '0 5%' }}>
+    <div className="flex flex-col items-start">
+        <img className="w-25 h-1.5 mb-4" src={line} alt="Line" />
+        <h1 className="text-sky-950 text-3xl md:text-4xl lg:text-5xl font-bold font-Poppins mb-4">NAaaS Explained:</h1>
+        <h1 className="text-sky-950 text-3xl md:text-4xl lg:text-5xl font-bold font-Poppins mb-4">How does it work?</h1>
+        <h2 className='text-zinc-500 text-xl md:text-2xl lg:text-3xl font-normal font-Ubuntu mb-4'>Lorem ipsum dolor sit amet,<br/> consectetur adipiscing elit, sed do</h2>
+        <div className='flex flex-row items-center gap-4 mt-4'>
+            <h2 className='font-Poppins text-[#4cc0eb]'>Watch as Guest</h2>
+            <img className='w-[55px] h-[30px]' src={arrows} alt="Arrows" />
         </div>
-        <div>
-            <iframe
-            width="500"
-            height="300"
+    </div>
+    <div className="w-full md:w-auto mt-8 md:mt-0">
+        <iframe
+            className="w-full h-64 md:w-[500px] md:h-[300px]"
             src="https://youtube.com/embed/swWqYLvYNzY"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            ></iframe>
-        </div>
-      </div>
+        ></iframe>
+    </div>
+</div>
+
 
       {/* NEWS Section */}
       <div className='flex flex-col justify-center items-center' style={{marginTop:"8%"}}>
@@ -204,191 +203,157 @@ function LandingPage() {
         <img style={{marginTop:"5%"}} src={news}></img>
       </div>
 
-       {/* Credits Section */}
-        <div className='flex flex-col justify-center items-center' style={{ marginTop: "8%" }}>
-        <div className="w-[156px] h-[63px] text-sky-950 text-[52px] font-bold font-Poppins">Credits</div>
-        <div className="flex flex-col items-center " style={{ marginTop: "4%" }}>
-            <div className="relative flex items-center">
-            <img
-                src={backArrow}
-                onClick={handlePrevious}
-                className="w-15 h-15 absolute left-[-150px] top-1/2 transform -translate-y-1/2 p-2 rounded-full  cursor-pointer"
-            />
-            <Card {...cardData[currentIndex]} />
-            <img
-                src={nextArrow}
-                onClick={handleNext}
-                className="w-15 h-15 absolute right-[-150px] top-1/2 transform -translate-y-1/2 p-2 rounded-full  cursor-pointer"
-            />
-            </div>
-        </div>
-        </div>
-
-       {/* meet our team */}
-
-    <div class="w-full h-[1090px] pl-[248px] pr-[95px] py-16 bg-white flex-col justify-start items-start gap-[120px] inline-flex" style={{marginTop:"5%"}}>
-    
-    <div class="self-stretch h-[172px] flex-col justify-center items-start gap-4 flex">
-    <div class="self-stretch h-[172px] flex-col justify-center items-start gap-6 flex">
-        <div class="self-stretch h-[172px] flex-col justify-center items-start gap-4 flex" style={{ marginTop: "10%" }}>
-            <div class="self-stretch text-zinc-900 text-5xl font-bold font-['Inter'] leading-[72px]">Meet our team members</div>
-            <div class="self-stretch text-zinc-600 text-lg font-normal font-['Inter'] leading-7">Complete the form below to send us a message. Our support team will promptly respond to your request.</div>
-            <div class="justify-start items-start gap-4 inline-flex">
-                <div class="w-[121px] p-3 bg-gray-100 rounded-xl justify-center items-center gap-2 flex">
-                    <div class="text-zinc-900 text-sm font-medium font-['Inter'] leading-[25px]">Apply Now</div>
-                    <div class="w-4 h-4 relative">
-                        <img class="h-4 left-0 top-0 absolute w-28" src={arrowRight} />
-                    </div>
+      
+      {/* meet our team */}
+        <div className="w-full py-16 bg-white flex flex-col items-center" style={{ marginTop: "5%"}}>
+    <div className="w-full max-w-6xl px-4 md:px-8">
+        <div className="flex flex-col justify-center items-start gap-4 mb-12">
+            <h2 className="text-zinc-900 text-3xl md:text-5xl font-bold">Meet our team members</h2>
+            <p className="text-zinc-600 text-lg">Complete the form below to send us a message. Our support team will promptly respond to your request.</p>
+            <div className="flex gap-4 mt-4">
+                <div className="p-3 bg-gray-100 rounded-xl flex justify-center items-center gap-2 cursor-pointer">
+                    <span className="text-zinc-900 text-sm font-medium">Apply Now</span>
+                    <img className="w-4 h-4" src={arrowRight} alt="Apply Now" />
                 </div>
-                <button class="w-[140px] h-12 p-3 bg-violet-600 rounded-xl justify-center items-center gap-2 flex">
-                    <div class="text-white text-sm font-medium font-['Inter'] leading-[25px]">Contact Us</div>
-                    <div class="w-4 h-4 relative">
-                        <img class="h-4 left-0 top-0 absolute w-28" src={arrowRight} />
-                    </div>
+                <button className="p-3 bg-violet-600 rounded-xl flex justify-center items-center gap-2">
+                    <span className="text-white text-sm font-medium">Contact Us</span>
+                    <img className="w-4 h-4" src={arrowRight} alt="Contact Us" />
                 </button>
             </div>
         </div>
-    </div>
-</div>
 
-<div className="flex flex-col items-start gap-4">
-    <div className="flex items-center gap-4">
-        {startIndex > 0 && (
-            <button
-                onClick={() => setStartIndex(startIndex - 4)}
-                className="px-4 py-2 bg-transparent"
-            >
-                <img src={arrowRight} alt="Arrow Right" style={{ transform: 'scaleX(-1)' }} />
-            </button>
-        )}
-        <div className="flex flex-wrap justify-start items-start gap-8">
-            {teamMembers.slice(startIndex, startIndex + 4).map((member, index) => (
-                <div key={index} className="flex flex-col items-center gap-4 w-56">
-                    <div className="w-56 h-56 flex justify-center items-center">
-                        <img
-                            style={{ width: '200px', height: '200px', borderRadius: '50%' }}
-                            src={member.imgSrc}
-                            alt={member.name}
-                        />
-                    </div>
-                    <div className="flex flex-col items-center text-center gap-2">
-                        <div className="text-zinc-900 text-lg font-bold">{member.name}</div>
-                        <div className="text-violet-600 text-sm font-medium">{member.role}</div>
-                    </div>
-                    <div className="text-zinc-500 text-sm font-normal text-center h-20 overflow-hidden">
-                        {member.description}
-                    </div>
-                    <div className="flex justify-center items-center gap-4 mt-2">
-                        <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
-                            <img src={facebook} alt="Facebook" style={{ width: '60%' }} />
+        <div className="flex items-center justify-between gap-8">
+            {startIndex > 0 && (
+                <button
+                    onClick={() => setStartIndex(startIndex - 3)}
+                    className="p-2 bg-transparent flex items-center"
+                >
+                    <img src={arrowRight} alt="Arrow Left" style={{ transform: 'scaleX(-1)', width: '30px' }} />
+                </button>
+            )}
+            <div className="flex flex-wrap justify-center items-center gap-20">
+                {teamMembers.slice(startIndex, startIndex + 3).map((member, index) => (
+                    <div key={index} className="flex flex-col items-center gap-4 w-56">
+                        <div className="w-48 h-48 flex justify-center items-center">
+                            <img
+                                className="w-48 h-48 rounded-full object-cover"
+                                src={member.imgSrc}
+                                alt={member.name}
+                            />
                         </div>
-                        <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
-                            <img src={github} alt="GitHub" style={{width: '60%' }} />
+                        <div className="flex flex-col items-center text-center gap-2">
+                            <div className="text-zinc-900 text-lg font-bold">{member.name}</div>
+                            <div className="text-violet-600 text-sm font-medium">{member.role}</div>
                         </div>
-                        <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
-                            <img src={linkedin} alt="LinkedIn" style={{width: '60%'}} />
+                        <div className="text-zinc-500 text-sm font-normal text-center h-20 overflow-hidden">
+                            {member.description}
                         </div>
-                    </div>
-                </div>
-            ))}
-        </div>
-        {startIndex + 4 < teamMembers.length && (
-            <button
-                onClick={scrollMoreMembers}
-                className="px-4 py-2 bg-transparent flex items-center"
-            >
-                <img src={arrowRight} alt="Arrow Right" className="w-[30px]" />
-            </button>
-        )}
-    </div>
-</div>
-
-
-
-</div>
-
-        {/* footer */}
-
-        <div className="relative w-full h-[580px] px-[111px] pt-12 pb-[80px] bg-blue-300 border justify-center items-center inline-flex" style={{ marginTop: "0%" }}>
-        <div className="absolute top-10" style={{ left: "15%" }}>
-            <img src={PCN} alt="PCN Logo" />
-        </div>
-            <div className="flex-col justify-center items-center gap-10 inline-flex">
-                <div className="w-[1218px] h-px bg-stone-500"></div>
-                <div className="justify-start items-start gap-[155px] inline-flex">
-                    <div className="justify-start items-start gap-16 flex">
-                        <div className="flex-col justify-start items-start gap-2 inline-flex">
-                            <div className="text-white text-xl font-bold font-Poppins">Product</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-Poppins">Pricing</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Solutions</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Education</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Team plans</div>
-                        </div>
-                        <div className="flex-col justify-start items-start gap-2 inline-flex">
-                            <div className="text-center text-white text-xl font-medium font-Poppins">About us</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">About</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Branding</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Newsroom</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Partnerships</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Affiliates</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Careers</div>
-                        </div>
-                        <div className="flex-col justify-start items-start gap-2 inline-flex">
-                            <div className="text-white text-xl font-medium font-Poppins">Help and support</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Help center</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Privacy & Terms</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Safety information</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Sitemap</div>
-                        </div>
-                        <div className="flex-col justify-start items-start gap-2 inline-flex">
-                            <div className="text-white text-xl font-medium font-Poppins">Community</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Agencies</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Freelancers</div>
-                            <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Engineers</div>
-                        </div>
-                    </div>
-                    <div className="justify-start items-start gap-4 flex">
-                        <div className="w-[180px] h-[52px] justify-center items-center flex">
-                            <div className="w-[180px] h-[52px] relative">
-                                <div className="w-[103.37px] h-[9.08px] left-[58.23px] top-[8.52px] absolute">
-                                </div>
-                                <div className="w-[106.33px] h-[22.64px] left-[56.55px] top-[23.40px] absolute">
-                                </div>
+                        <div className="flex justify-center items-center gap-4 mt-2">
+                            <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+                                <img src={facebook} alt="Facebook" style={{ width: '60%' }} />
                             </div>
-                        </div>
-                        <div className="w-36 h-[41.60px] justify-center items-center flex">
-                            <div className="w-36 h-[41.60px] relative">
-                                <div className="w-[26.23px] h-[28.35px] left-[9.84px] top-[6.62px] absolute">
-                                </div>
-                                <div className="w-[41.44px] h-[6.52px] left-[44.11px] top-[27.94px] absolute">
-                                </div>
+                            <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+                                <img src={github} alt="GitHub" style={{ width: '60%' }} />
+                            </div>
+                            <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+                                <img src={linkedin} alt="LinkedIn" style={{ width: '60%' }} />
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="w-[1218px] h-px bg-white"></div>
-                <div className='flex flex-row justify-center gap-40'>
-                    <div className="text-white text-lg font-normal font-Poppins">Copyright 2024, PCN</div>
-                    <div className="w-[373px] h-6 justify-start items-start gap-10 inline-flex">
-                        <div className="justify-center items-end gap-3 flex">
-                            <div className="w-6 h-6 relative opacity-80" style={{marginTop:"5%"}}>
-                                <img src={facebook} alt="Facebook" className="w-[17.50px] h-[17.50px] left-[1.25px] top-[1.25px] absolute rounded-md" />
-                            </div>
-                            <div className="w-6 h-6 relative opacity-80">
-                                <img src={twitter} alt="Twitter" className="w-[17.50px] h-[17.50px] left-[1.25px] top-[1.25px] absolute rounded-md" />
-                            </div>
-                            <div className="w-6 h-6 relative opacity-80">
-                                <img src={insta} alt="Instagram" className="w-[17.50px] h-[17.50px] left-[1.25px] top-[1.25px] absolute rounded-md" />
-                            </div>
-                        </div>
-                        <div className="pl-2 justify-center items-center gap-0.1 flex">
-                            <div className="text-black text-lg font-normal font-Poppins">English (United Kingdom)</div>
-                            <div className="w-6 h-6 relative"></div>
-                        </div>
-                    </div>
-                </div>
+                ))}
             </div>
+            {startIndex + 3 < teamMembers.length && (
+                <button
+                    onClick={scrollMoreMembers}
+                    className="p-2 bg-transparent flex items-center"
+                >
+                    <img src={arrowRight} alt="Arrow Right" className="w-[30px]" />
+                </button>
+            )}
         </div>
+    </div>
+</div>
+
+
+   {/* footer */}
+<div className="relative w-full h-auto px-4 md:px-[111px] pt-12 pb-[80px] bg-blue-300 border justify-center items-center inline-flex" style={{ marginTop: "0%" }}>
+<div className="absolute top-3 left-1/2 transform -translate-x-[100%] md:left-[15%]">
+  <img src={PCN} alt="PCN Logo" />
+</div>
+
+  <div className="flex flex-col justify-center items-center gap-10 w-full">
+    <div className="w-full max-w-screen-xl h-px bg-stone-500"></div>
+    <div className="flex flex-col md:flex-row justify-start items-start gap-10 md:gap-[155px] w-full max-w-screen-xl">
+      <div className="flex flex-wrap justify-start items-start gap-10 md:gap-16 w-full">
+        <div className="flex flex-col justify-start items-start gap-2">
+          <div className="text-white text-xl font-bold font-Poppins">Product</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-Poppins">Pricing</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Solutions</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Education</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Team plans</div>
+        </div>
+        <div className="flex flex-col justify-start items-start gap-2">
+          <div className="text-white text-xl font-medium font-Poppins">About us</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">About</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Branding</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Newsroom</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Partnerships</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Affiliates</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Careers</div>
+        </div>
+        <div className="flex flex-col justify-start items-start gap-2">
+          <div className="text-white text-xl font-medium font-Poppins">Help and support</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Help center</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Privacy & Terms</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Safety information</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Sitemap</div>
+        </div>
+        <div className="flex flex-col justify-start items-start gap-2">
+          <div className="text-white text-xl font-medium font-Poppins">Community</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Agencies</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Freelancers</div>
+          <div className="text-blue-200 text-lg hover:text-white cursor-pointer font-medium font-Poppins">Engineers</div>
+        </div>
+      </div>
+      <div className="flex justify-start items-start gap-4">
+        <div className="w-[180px] h-[52px] flex justify-center items-center">
+          <div className="w-[180px] h-[52px] relative">
+            <div className="w-[103.37px] h-[9.08px] left-[58.23px] top-[8.52px] absolute"></div>
+            <div className="w-[106.33px] h-[22.64px] left-[56.55px] top-[23.40px] absolute"></div>
+          </div>
+        </div>
+        <div className="w-36 h-[41.60px] flex justify-center items-center">
+          <div className="w-36 h-[41.60px] relative">
+            <div className="w-[26.23px] h-[28.35px] left-[9.84px] top-[6.62px] absolute"></div>
+            <div className="w-[41.44px] h-[6.52px] left-[44.11px] top-[27.94px] absolute"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="w-full max-w-screen-xl h-px bg-white"></div>
+    <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-40 w-full mt-4 md:mt-0">
+      <div className="text-white text-lg font-normal font-Poppins">Copyright 2024, PCN</div>
+      <div className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-10 w-full md:w-auto">
+        <div className="flex justify-center items-end gap-3">
+          <div className="w-6 h-6 relative opacity-80" style={{ marginTop: "5%" }}>
+            <img src={facebook} alt="Facebook" className="w-[17.50px] h-[17.50px] left-[1.25px] top-[1.25px] absolute rounded-md" />
+          </div>
+          <div className="w-6 h-6 relative opacity-80">
+            <img src={twitter} alt="Twitter" className="w-[17.50px] h-[17.50px] left-[1.25px] top-[1.25px] absolute rounded-md" />
+          </div>
+          <div className="w-6 h-6 relative opacity-80">
+            <img src={insta} alt="Instagram" className="w-[17.50px] h-[17.50px] left-[1.25px] top-[1.25px] absolute rounded-md" />
+          </div>
+        </div>
+        <div className="pl-2 flex justify-center items-center gap-0.1">
+          <div className="text-black text-lg font-normal font-Poppins">English (United Kingdom)</div>
+          <div className="w-6 h-6 relative"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     </>
   );

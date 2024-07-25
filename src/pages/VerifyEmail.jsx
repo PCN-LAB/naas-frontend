@@ -25,10 +25,14 @@ const VerifyEmail = () => {
 
   };
 
+  const gotoLandingPage = () => {
+    navigate("/LandingPage"); 
+  };
+
   return (
     <div className="h-screen bg-cover bg-center flex flex-col items-center" style={{ backgroundImage: `url(${background})` }}>
       <div className="absolute top-12 left-0 p-3">
-        <img src={logo} alt="Logo" className="h-20 " />
+        <img  onClick={gotoLandingPage} src={logo} alt="Logo" className="h-20 " />
       </div>
       <div className="bg-transparent bg-opacity-90 p-8  text-center mt-12" style={{marginTop:"15%"}} >
         <h2 class="text-zinc-800 text-[40px] font-bold font-Poppins ">Verify Your Email</h2>
