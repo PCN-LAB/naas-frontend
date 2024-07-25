@@ -12,6 +12,10 @@ const SignIn = () => {
     const gotoSignUp = () => {
         navigate("/SignUp"); 
     };
+
+    const gotoLandingPage = () => {
+      navigate("/LandingPage"); 
+    };
     
 
     const GoToForgotPassword = () => {
@@ -23,7 +27,7 @@ const SignIn = () => {
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="absolute top-12 left-0 p-3">
-        <img src={logo} alt="Logo" className="h-20 " />
+        <img src={logo} alt="Logo" className="h-20" onClick={gotoLandingPage} />
       </div>
       <div className="bg-transparent p-8 w-full max-w-md">
         <div className="text-custom-blue text-[32px] font-Poppins text-2xl font-extrabold mb-4 text-center" style={{ marginBottom: "15%" }}>

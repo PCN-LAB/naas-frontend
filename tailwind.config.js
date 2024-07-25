@@ -25,7 +25,15 @@ module.exports = {
         'Montserrat': ['Montserrat', 'sans-serif'],
         'Ubuntu': ['Ubuntu', 'sans-serif']
       },
+      width: {
+        '60': '15rem',
+        '72': '18rem',
+      },
+    
       spacing: {
+        '72': '18rem',
+        '84': '21rem',
+        '96': '24rem',
         '40': '40rem',
       },
       backgroundImage: {

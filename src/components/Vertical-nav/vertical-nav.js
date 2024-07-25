@@ -20,7 +20,7 @@ const Sidebar = ({ children }) => {
 
     const menuItem = [
         {
-            path: "/b",
+            path: "/UserProfile",
             name: "User Profile",
             icon: <IconoirProfileCircle className="icon-bold  w-7 h-7"/>
         },

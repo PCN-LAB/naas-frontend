@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import logo from '../assets/NAaas-logo.png';
 import Help from '../assets/NeedHelp.png';
 import background from '../assets/background.png'; 
-import thumbsup from '../assets/ThumbsUp.png'
-import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon from Material-UI
+import thumbsup from '../assets/ThumbsUp.png';
+import CloseIcon from '@mui/icons-material/Close'; 
+import Sidebar from '../components/Vertical-nav/vertical-nav';
 
 const Feedback = () => {
   const [rating, setRating] = useState(null);
@@ -41,90 +42,96 @@ const Feedback = () => {
   };
 
   return (
-    <div className="w-full min-h-screen relative bg-white">
-      <div className={`w-full h-full ${isPopupVisible ? 'blur-sm' : ''}`}>
-        <div className="w-full h-[327px] left-0 top-0 absolute bg-gradient-to-b from-slate-200 to-sky-600"></div>
-        <div className="absolute left-[43px] top-[133px] text-black text-2xl font-bold" style={{ marginTop: "1%" }}>How do you feel?</div>
-        <div className="absolute left-[43px] top-[160px] text-black text-base font-normal" style={{ marginTop: "1%" }}>Tell us about your experience, and help us improve the website! :)</div>
-        <div className="absolute top-12 left-0 p-3" style={{ marginLeft: "-7%" }}>
-          <img src={logo} alt="Logo" className="h-24" />
-        </div>
-        <div className="absolute w-full h-[622px] left-0 top-[266px] bg-gradient-to-b from-white to-slate-300 rounded-[65px]"></div>
-        <div className="mt-14 absolute left-[63px] top-[270px] text-sky-950 text-2xl font-extrabold">Give us Feedback</div>
-        <div className="absolute left-[63px] top-[355px] text-sky-950 text-base font-normal">Write your suggestion here</div>
-        <textarea
-          className="absolute left-[63px] top-[383px] w-[619px] h-[279px] p-4 bg-gradient-to-b from-slate-300 to-sky-600 border border-sky-950 rounded-md text-sky-950 text-base font-light"
-          placeholder="Answer here..."
-          value={feedback}
-          onChange={handleFeedbackChange}
-        ></textarea>
-        <div className="absolute left-[63px] top-[672px] text-sky-950 text-base font-light">100 words limit</div>
-        <div className="absolute left-[744px] top-[386px] text-sky-950 text-2xl font-extrabold">How reputable do you find NAaaS compared to other news sources?</div>
-        <div className="absolute left-[744px] top-[449px] flex items-center gap-1 border border-sky-950 p-2">
-          <div className="text-sky-800 text-base font-semibold">Barely</div>
-          {[1, 2, 3, 4, 5].map((value) => (
-            <div
-              key={value}
-              className={`w-[22px] h-[22px] text-center text-base font-semibold cursor-pointer ${
-                rating === value ? 'bg-sky-600 text-slate-200 border-sky-600' : 'border-transparent'
-              }`}
-              onClick={() => handleRatingClick(value)}
-             
-            >
-              {value}
+    <div className="flex min-h-screen" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <Sidebar />
+      <div className="flex-grow relative flex flex-col items-center p-0">
+        <div className={`w-full h-full ${isPopupVisible ? 'blur-sm' : ''}`}>
+          <div className="w-full h-60 bg-gradient-to-b from-sky-600 to-slate-200 flex  flex-col items-start justify-start p-4">
+            <img src={logo} alt="Logo" className="h-16 md:h-24 mr-4 " style={{marginLeft:"-9%"}}/>
+            <div className="flex flex-col items-start">
+              <div className="text-black text-2xl md:text-3xl font-bold">How do you feel?</div>
+              <div className="text-black text-lg md:text-xl">Tell us about your experience, and help us improve the website! :)</div>
             </div>
-          ))}
-          <div className="text-sky-800 text-base font-semibold">Reputable</div>
-        </div>
-        <div className="absolute left-[744px] top-[512px] text-sky-950 text-2xl font-extrabold">Would you consider NAaaS credible enough for providing accurate news?</div>
-        <div className="absolute left-[744px] top-[554px] flex items-center gap-4 border border-sky-950 p-2">
-          <div
-            className={`w-[39.53px] h-[22px] shadow text-center text-base font-semibold cursor-pointer ${
-              isCredible === 'YES' ? 'bg-sky-600 text-slate-200 ' : ' text-sky-950 '
-            }`}
-            onClick={() => handleCredibleClick('YES')}
-           
-          >
-            YES
           </div>
-          <div
-            className={`w-[39.53px] h-[22px] shadow text-center text-base font-semibold cursor-pointer ${
-                isCredible === 'NO' ? 'bg-sky-600 text-slate-200' : 'text-sky-950 '
-            }`}
-            onClick={() => handleCredibleClick('NO')}
-            >
-            NO
-         </div>
-
+          <div className="flex flex-col md:flex-row justify-around items-start w-full mt-4">
+            <div className="flex flex-col items-start w-full md:w-1/2 p-4">
+              <div className="text-sky-950 text-lg md:text-xl font-extrabold">Give us Feedback</div>
+              <div className="text-sky-950 text-base font-normal">Write your suggestion here</div>
+              <textarea
+                className="w-[90%] h-30 md:h-80 p-4 bg-white border border-custom-blue rounded-lg md:rounded-3xl text-sky-950 text-base font-light mt-2"
+                placeholder="Write here..."
+                value={feedback}
+                onChange={handleFeedbackChange}
+              ></textarea>
+              <div className="text-sky-950 text-base font-light mt-2">100 words limit</div>
+            </div>
+            <div className="flex flex-col items-start w-full md:w-1/2 p-4 mt-16" >
+              <div className="text-sky-950 text-lg md:text-xl font-extrabold">How reputable do you find NAaaS compared to other news sources?</div>
+              <div className="flex items-center gap-1 border border-sky-950 p-2 rounded-3xl mt-2">
+                <div className="text-sky-800 text-sm md:text-base font-semibold">Barely</div>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <div
+                    key={value}
+                    className={`w-8 h-8 md:w-[2vw] md:h-[2vw] text-center text-sm md:text-base font-semibold cursor-pointer border rounded-full ${
+                      rating === value ? 'bg-custom-blue text-slate-200 border-sky-600' : 'border-transparent'
+                    }`}
+                    onClick={() => handleRatingClick(value)}
+                  >
+                    {value}
+                  </div>
+                ))}
+                <div className="text-sky-800 text-sm md:text-base font-semibold">Reputable</div>
+              </div>
+              <div className="text-sky-950 text-lg md:text-xl font-extrabold mt-4">Would you consider NAaaS credible enough for providing accurate news?</div>
+              <div className="flex items-center gap-4 border border-sky-950 rounded-3xl p-2 mt-2">
+                <div
+                  className={`w-24 h-10 md:w-[11vw] md:h-[4vh] shadow text-center text-sm md:text-base font-semibold cursor-pointer rounded-full ${
+                    isCredible === 'YES' ? 'bg-custom-blue text-slate-200 ' : ' text-sky-950 '
+                  }`}
+                  onClick={() => handleCredibleClick('YES')}
+                >
+                  YES
+                </div>
+                <div
+                  className={`w-20 h-10 md:w-[8vw] md:h-[4vh] shadow text-center text-sm md:text-base font-semibold cursor-pointer rounded-full ${
+                    isCredible === 'NO' ? 'bg-custom-blue text-slate-200' : 'text-sky-950 '
+                  }`}
+                  onClick={() => handleCredibleClick('NO')}
+                >
+                  NO
+                </div>
+              </div>
+              <button
+                className="mt-12 w-40 h-12 md:w-[15vw] md:h-[8vh] bg-custom-blue shadow text-white text-lg md:text-2xl font-semibold rounded-full"
+                onClick={handleSubmit}
+              >
+                Submit!
+              </button>
+            </div>
+          </div>
+          <div className="fixed bottom-4 right-10">
+            <img className="w-12 h-12 md:w-full md:h-full shadow" src={Help} alt="help icon" />
+          </div>
         </div>
-        <button
-          className="absolute left-[889px] top-[660px] w-[259px] h-[70px] bg-sky-600 shadow text-white text-3xl font-semibold rounded-md"
-          onClick={handleSubmit}
-        >
-          Submit!
-        </button>
-        <div className="absolute left-[1700px] top-[750px] flex flex-col items-center">
-          <img className="w-full h-full shadow" src={Help} alt="help icon" />
-        </div>
+        {isPopupVisible && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
+            <div className="relative w-[40%] h-[40vh] flex flex-col items-center justify-center p-4 rounded-md shadow-lg bg-blue-100" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover' }}>
+              <div>
+                <img src={thumbsup} />
+              </div>
+              <div className="text-center text-sky-950 text-lg md:text-xl font-extrabold mb-4">
+                THANK YOU FOR SUBMITTING THE FEEDBACK!
+              </div>
+              <button
+                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                onClick={closePopup}
+              >
+                <CloseIcon />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-      {isPopupVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
-          <div className="relative w-[550px] h-[300px] flex flex-col items-center justify-center p-4 rounded-md shadow-lg bg-blue-100" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover' }}>
-            <div>
-              <img src={thumbsup} />
-            </div>
-            <div className="text-center text-sky-950 text-2xl font-extrabold mb-4">
-              THANK YOU FOR SUBMITTING THE FEEDBACK!
-            </div>
-            <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
-              onClick={closePopup}
-            >
-              <CloseIcon />
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
