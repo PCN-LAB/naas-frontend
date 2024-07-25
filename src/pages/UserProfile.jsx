@@ -17,7 +17,7 @@ function UserProfile() {
 
     return (
         <div>
-            <NavbarLandingPage />
+            <NavbarLandingPage isColored={true}/>
             <div >
                 <div className="min-h-screen bg-gray-50 flex flex-col items-center w-full p-4 md:p-16 bg-cover" style={{ backgroundImage: `url(${background})` }}>
                     <div className="w-full max-w-6xl mt-20" >

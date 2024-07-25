@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import team_profile from '../assets/team-profile.png'
 import github from '../assets/github_colored.png'
 import linkedin from '../assets/linkedin_colored.png'
+import orbit from '../assets/orbit1.mp4'
+
 function LandingPage() {
 
     const cardData = [
@@ -150,7 +152,7 @@ function LandingPage() {
   <NavbarLandingPage />
 {/* <img src={Bluebg} className="absolute w-full z-0 h-800" style={{ marginTop: "4.5%" }} /> */}
 <div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
-<div className="text-black absolute left-0 w-1/2 p-12 z-50" style={{marginTop:"43%", marginLeft:"12%"}}>
+<div className="text-black absolute left-0 w-1/2 p-12 z-50" style={{marginTop:"5%", marginLeft:"17%"}}>
         <h1 className="text-6xl font-bold leading-tight font-Poppins">
             News <span className='text-white'>Analytics</span> 
             <div style={{ marginTop: "0%" }}>
@@ -169,6 +171,19 @@ function LandingPage() {
     {/* <div className='absolute top-0 w-[1300px] h-[1150px]' style={{ marginRight: "-30%", marginTop: "-12%", zIndex: "20" }}>
         <img src={portfolio} className='w-full h-full rounded-full z-20' style={{ objectFit: "cover", borderRadius: "50%", boxShadow: "0 10px 20px rgba(0, 0, 0, 0.8), 0 25px 50px rgba(0, 0, 0, 0.9)" }} />
     </div> */}
+ 
+      <video 
+          className='w-full h-full  z-20 p-0' 
+          style={{ objectFit: "cover",marginTop:"-6%"}} 
+          autoPlay 
+          loop 
+          muted
+      >
+          <source src={orbit} type="video/mp4" />
+          Your browser does not support the video tag.
+      </video>
+
+
 </div>
 
 
@@ -276,7 +291,7 @@ function LandingPage() {
 
 
    {/* footer */}
-<div className="relative w-full h-auto px-4 md:px-[111px] pt-12 pb-[80px] bg-blue-300 border justify-center items-center inline-flex" style={{ marginTop: "0%" }}>
+<div className="relative w-full h-auto px-4 md:px-[111px] pt-12 pb-[80px] bg-[#5985be] border justify-center items-center inline-flex" style={{ marginTop: "0%" }}>
 <div className="absolute top-3 left-1/2 transform -translate-x-[100%] md:left-[15%]">
   <img src={PCN} alt="PCN Logo" />
 </div>

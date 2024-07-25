@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NAAS_logo from '../assets/NAAS_logo.png';
 
-const NavbarLandingPage = () => {
+const NavbarLandingPage = ({ isColored }) => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,16 +36,18 @@ const NavbarLandingPage = () => {
   }
 
   return (
-    <div className="w-full z-50 fixed top-0 left-0 px-12 h-20 flex items-center justify-between bg-blue-300"
-      // style={{
-      //   borderBlockStyle: "none",
-      //   background: scrolled
-      //     ? "#97CBDC" 
-      //     : "linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1))", 
-      //   boxShadow: scrolled
-      //     ? "none" 
-      //     : "0 10px 20px rgba(0, 0, 0, 0.05), 0 25px 50px rgba(0, 0, 0, 0.15)" 
-      // }}
+    <div className="w-full z-50 fixed top-0 left-0 px-12 h-20 flex items-center justify-between "
+    style={{
+      borderBlockStyle: "none",
+      background: isColored
+        ? "#5985be" // Dark blue if isColored is true
+        : scrolled
+        ? "#5985be" // Original color if scrolled
+        : "linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1))", 
+      boxShadow: scrolled
+        ? "none" 
+        : "0 10px 20px rgba(0, 0, 0, 0.05), 0 25px 50px rgba(0, 0, 0, 0.15)" 
+    }}
     >
       <div className="logo flex items-center">
         <img src={NAAS_logo} className="w-[150px] h-[100px]" alt="NAAS Logo" />
