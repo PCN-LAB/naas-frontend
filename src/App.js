@@ -13,6 +13,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import ChangePassword from './pages/ChangePassword'
 import Error404 from './pages/error404'
 import Feedback from './pages/Feedback'
+import Graph from './components/Graph'
 function App() {
   return (
     <div className="App min-h-screen flex flex-col">
@@ -29,6 +30,7 @@ function App() {
             <Route path="/error404" element={<Error404 />} />
             <Route path='/news-analytics' element={<NewsAnalytics />} />
             <Route path='/Feedback' element={<Feedback />} />
+            <Route path='/Graphs' element={<Graph />}/>
         </Routes>
         </BrowserRouter>
       </Provider>

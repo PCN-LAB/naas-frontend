@@ -40,7 +40,7 @@ const Sidebar = ({ children }) => {
             icon: <img src={link} alt="link" className="icon-bold w-7 h-10"/>
         },
         {
-            path: "/comment",
+            path: "/Graphs",
             name: "Analytics",
             icon: <CilChartLine className="icon-bold  w-7 h-7"/>
         },
