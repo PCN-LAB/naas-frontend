@@ -21,6 +21,7 @@ function NewsSourceInput() {
     const [publicationTimeValue, setPublicationTimeValue] = useState(null);
     const [regions, setRegions] = useState([]);
     const regionSelected = useSelector(state => state.map.regionSelected);
+    const showRegionsAndKeyWords = selectedNewsSource && (focusTime.length > 0 || publicationTime.length > 0);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -174,9 +175,9 @@ function NewsSourceInput() {
                 </div>
 
                 <Tooltip
-                    title={!selectedNewsSource ? <span className='text-xl'>Please select a source</span> : ""}
+                    title={!showRegionsAndKeyWords ? <span className='text-xl'>Please select a source and time</span> : ""}
                     placement='top'
-                    disableHoverListener={!!selectedNewsSource}
+                    disableHoverListener={!!showRegionsAndKeyWords}
                 >
                     <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
                         <Select
@@ -185,7 +186,7 @@ function NewsSourceInput() {
                             placeholder="Choose Region"
                             styles={customSelectStyles}
                             onChange={(e) => dispatch(setRegionSelected(e.value))}
-                            isDisabled={!selectedNewsSource}
+                            isDisabled={!showRegionsAndKeyWords}
                         />
                     </div>
                 </Tooltip>

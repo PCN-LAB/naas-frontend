@@ -21,12 +21,12 @@ function KeyWordInput() {
 
     const keyWordOptionsRedux = useSelector(state => state.map.keyWordsOptions);
 
-    const isDisabled = !keyWordOptionsRedux || keyWordOptionsRedux.length === 0;
+    const isDisabled = (!keyWordOptionsRedux || keyWordOptionsRedux.length === 0) || (focusTime.length == 0 && publicationTime.length == 0) // disable the input if no news source is selected and if none of times are selected
     const isFourKeywordsSelected = selectedKeywords.length === 4;
     const tooltipMessage = isDisabled
         ? isFourKeywordsSelected
             ? "You have selected 4 keywords"
-            : "Please select a source"
+            : "Please select a source and time"
         : "";
 
     const customSelectStyles = {
@@ -39,6 +39,10 @@ function KeyWordInput() {
             }
         }),
     };
+
+    useEffect(() => {
+        console.log(!keyWordOptionsRedux || keyWordOptionsRedux.length === 0 || (focusTime.length == 0 && publicationTime.length == 0))
+    }, [keyWordOptionsRedux, focusTime, publicationTime])
 
     useEffect(() => {
         // set selected keywords
