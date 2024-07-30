@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     keyWordsSearch: [],
+    keyWordsOptions: [],
     newsSource: null,
     regionSelected: null,
     focusTime: [],
@@ -14,6 +15,9 @@ const mapSlice = createSlice({
     reducers: {
         pushKeyWordsSearch(state, action) {
             state.keyWordsSearch.push(action.payload);
+        },
+        setKeyWordsOptions(state, action) {
+            state.keyWordsOptions = action.payload;
         },
         deleteKeyWord(state, action) {
             state.keyWordsSearch = state.keyWordsSearch.filter(
@@ -35,5 +39,5 @@ const mapSlice = createSlice({
     }
 });
 
-export const { pushKeyWordsSearch, setNewsSource, setRegionSelected, setFocusTimeRedux, setPublicationTimeRedux, deleteKeyWord } = mapSlice.actions;
+export const { pushKeyWordsSearch, setKeyWordsOptions, setNewsSource, setRegionSelected, setFocusTimeRedux, setPublicationTimeRedux, deleteKeyWord } = mapSlice.actions;
 export default mapSlice.reducer;

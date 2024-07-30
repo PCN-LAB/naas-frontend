@@ -5,6 +5,8 @@ import SearchBlackIcon from '../assets/searchBlack.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { pushKeyWordsSearch } from '../store/reducers/MapReducer'
 import { useNavigate } from 'react-router-dom';
+import { setKeyWordsOptions } from '../store/reducers/MapReducer';
+import Tooltip from '@mui/material/Tooltip';
 
 function KeyWordInput() {
     const [isHovered, setIsHovered] = useState(false);
@@ -17,17 +19,15 @@ function KeyWordInput() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [keyWordOptions, setKeyWordOptions] = useState([
-        { value: 'Police', label: 'Police' },
-        { value: 'Protest', label: 'Protest' },
-        { value: 'Violence', label: 'Violence' },
-        { value: 'Peace', label: 'Peace' },
-        { value: 'Love', label: 'Love' },
-        { value: 'Hate', label: 'Hate' },
-        { value: 'War', label: 'War' },
-        { value: 'Peaceful', label: 'Peaceful' },
-        { value: 'Riot', label: 'Riot' }
-    ]);
+    const keyWordOptionsRedux = useSelector(state => state.map.keyWordsOptions);
+
+    const isDisabled = !keyWordOptionsRedux || keyWordOptionsRedux.length === 0;
+    const isFourKeywordsSelected = selectedKeywords.length === 4;
+    const tooltipMessage = isDisabled
+        ? isFourKeywordsSelected
+            ? "You have selected 4 keywords"
+            : "Please select a source"
+        : "";
 
     const customSelectStyles = {
         control: (provided) => ({
@@ -52,14 +52,15 @@ function KeyWordInput() {
     useEffect(() => {
         // if selected keywords length is 4 then hide the keyword input
         if (selectedKeywords.length === 4) {
-            setKeyWordOptions([]);
+            dispatch(setKeyWordsOptions([]));
         }
     }, [selectedKeywords])
 
     useEffect(() => {
-        setKeyWordOptions((options) => {
-            return options.filter(option => !keywords.includes(option.value));
-        });
+        if (keywords.length !== 4) {
+            // update the keywords so that the selected keywords are filtered from the options
+            dispatch(setKeyWordsOptions(keyWordOptionsRedux.filter(keyword => !keywords.includes(keyword))));
+        }
     }, [keywords]);
 
     const handleKeyWordSelect = (selectedOption) => {
@@ -92,13 +93,28 @@ function KeyWordInput() {
     return (
         <div className='h-28 text-2xl bg-colorMapHeaderBG rounded-2xl flex justify-around w-1/2 mx-auto items-center'>
             <span className='font-bold text-3xl'>Select a word</span>
-            <Select
-                options={keyWordOptions}
-                placeholder='i.e. police, protest'
-                className='w-1/3'
-                onChange={handleKeyWordSelect}
-                styles={customSelectStyles}
-            />
+
+            {/* Show select only when news source is selected */}
+
+            <Tooltip
+                title={isDisabled ? <span className='text-lg'>{tooltipMessage}</span> : ""}
+                disableHoverListener={!isDisabled} // Tooltip should only be shown if disabled
+                arrow
+            >
+                <div className='w-1/3'>
+                    <Select
+                        options={(keyWordOptionsRedux || [])
+                            .slice(0, 5) // Show only the first 5 options
+                            .map(keyword => ({ value: keyword, label: keyword }))}
+                        placeholder='i.e. police, protest'
+                        className='w-full'
+                        onChange={handleKeyWordSelect}
+                        styles={customSelectStyles}
+                        isDisabled={isDisabled}
+                    />
+                </div>
+            </Tooltip>
+
             <button onClick={handleButtonClick}
                 className='flex items-center py-3 px-5 rounded-3xl gap-2 bg-colorSearchButton text-white hover:text-black transition hover:bg-white'
                 onMouseEnter={handleMouseEnter}
