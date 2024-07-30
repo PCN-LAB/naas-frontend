@@ -41,10 +41,6 @@ function KeyWordInput() {
     };
 
     useEffect(() => {
-        console.log(!keyWordOptionsRedux || keyWordOptionsRedux.length === 0 || (focusTime.length == 0 && publicationTime.length == 0))
-    }, [keyWordOptionsRedux, focusTime, publicationTime])
-
-    useEffect(() => {
         // set selected keywords
         if (keywords.length > 0) {
             setSelectedKeywords(keywords.map(keyword => {

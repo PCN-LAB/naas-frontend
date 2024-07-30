@@ -67,7 +67,9 @@ function NewsSourceInput() {
             const timestamp2 = focusTime[1].getTime(); // Convert second Date object to timestamp
 
             dispatch(setFocusTimeRedux([timestamp1, timestamp2]));
-
+        }
+        else {
+            dispatch(setFocusTimeRedux([]));
         }
     }, [focusTime])
 
@@ -77,6 +79,9 @@ function NewsSourceInput() {
             const timestamp2 = publicationTime[1].getTime(); // Convert second Date object to timestamp
 
             dispatch(setPublicationTimeRedux([timestamp1, timestamp2]));
+        }
+        else {
+            dispatch(setPublicationTimeRedux([]));
         }
     }, [publicationTime])
 
