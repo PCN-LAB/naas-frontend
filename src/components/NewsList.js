@@ -4,6 +4,7 @@ import Select from 'react-select'
 import lookUpIcon from '../assets/lookup.png'
 import NewsCard from './NewsCard';
 import { toast } from 'react-hot-toast'
+import { PropagateLoader } from 'react-spinners';
 
 function NewsList() {
     const [sortBy, setSortBy] = useState('descending');
@@ -16,49 +17,9 @@ function NewsList() {
     const publicationTime = useSelector(state => state.map.publicationTime);
 
     let useEffectCalled = false;
+    const [isLoading, setIsLoading] = useState(false);
 
-    const [news, setNews] = useState([
-        {
-            title: 'Govt formally authorises ISI to ‘trace, intercept’ calls and messages in ‘interest of national security’',
-            summary: `The Ministry of Information Technology and Telecommunication has authorised the 
-            Inter-Services Intelligence (ISI) to intercept and trace calls in the “interest of national security”,
-            a notification issued in this regard said.`,
-            focusTime: '2021-07-01T00:00:00Z',
-            publicationTime: '2024-07-01T00:00:00Z',
-            topics: ['National Security', 'ISI', 'Telecommunication'],
-            location: 'Islamabad',
-            isBiased: true
-        },
-        {
-            title: 'PM Shehbaz urges collective responsibility, int’l recognition of Pakistan’s Afghan refugee ‘burden’',
-            summary: `Prime Minister Imran Khan on Thursday urged the international community to`,
-            focusTime: '2021-07-01T00:00:00Z',
-            publicationTime: '2021-07-02T00:00:00Z',
-            topics: ['Afghan Refugees', 'Imran Khan', 'International Community'],
-            location: 'Lahore',
-            isBiased: true
-        },
-        {
-            title: 'Pakistan’s Covid-19 positivity rate drops to 1.5%',
-            summary: `Pakistan’s Covid-19 positivity rate dropped to 1.5% on Thursday, the lowest 
-            in the country since the pandemic began.`,
-            focusTime: '2021-07-04T00:00:00Z',
-            publicationTime: '2021-07-03T00:00:00Z',
-            topics: ['Covid-19', 'Positivity Rate', 'Pandemic'],
-            location: 'Karachi',
-            isBiased: false
-        },
-        {
-            title: 'Editorial: Altering the original budget sans parliamentary nod to supplementary statements is not new',
-            summary: `The government’s decision to present a supplementary budget without parliamentary approval is not new.`,
-            focusTime: '2021-08-01T00:00:00Z',
-            publicationTime: '2021-07-04T00:00:00Z',
-            topics: ['Budget', 'Parliamentary Approval', 'Supplementary Statements'],
-            location: 'Peshawar',
-            isBiased: true
-        }
-    ]);
-
+    const [news, setNews] = useState([]);
 
     const customSelectStyles = {
         control: (provided) => ({
@@ -100,6 +61,8 @@ function NewsList() {
             // fetch news according to the selected filters
 
             const fetchNews = async () => {
+                setIsLoading(true);
+
                 const data = {
                     location: regionSelected,
                     topics: keywords,
@@ -118,13 +81,14 @@ function NewsList() {
                 // const requestUrl = `${process.env.REACT_APP_API_URL}/SearchDawn/${dataString}`;
                 const requestUrl = `${process.env.REACT_APP_API_URL}/Search${newsSource}/${dataString}`;
 
-                console.log(requestUrl);
+                // console.log(requestUrl);
 
                 // fetch news
                 const response = await fetch(requestUrl);
 
                 if (response.ok) {
                     toast.success('News fetched successfully')
+                    setIsLoading(false);
                 }
 
                 else {
@@ -134,7 +98,6 @@ function NewsList() {
 
                 setNewsState(responseData);
             }
-
             fetchNews();
         }
     }, [])
@@ -157,11 +120,6 @@ function NewsList() {
         // Update the state with the new news object
         setNews(formattedNews);
     }
-
-    const convertToISO = (dateStr) => {
-        const date = new Date(dateStr);
-        return isNaN(date.getTime()) ? null : date.toISOString();
-    };
 
     const timestampToDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -200,7 +158,7 @@ function NewsList() {
             </div>
 
             {/* News List */}
-            <div className='flex flex-col max-h-[calc(100vh-18.5rem)] overflow-auto custom-scrollbar'>
+            <div className='flex flex-col min-h-[calc(100vh-18.5rem)] max-h-[calc(100vh-18.5rem)] overflow-auto custom-scrollbar'>
                 {/* Number of articles */}
                 <div className='flex items-center gap-2 text-gray-600 text-lg'>
                     <img src={lookUpIcon} alt='lookup' className='w-6 h-7' />
@@ -208,7 +166,7 @@ function NewsList() {
                 </div>
 
                 {/* News List */}
-                {
+                {!isLoading ? (
                     news.map((newsItem, index) => (
                         <NewsCard
                             key={index}
@@ -221,7 +179,12 @@ function NewsList() {
                             isBiased={newsItem.isBiased}
                         />
                     ))
-                }
+                ) : (
+                    <div className='h-full w-full flex justify-center items-center'>
+                        <PropagateLoader color='#000' />
+                    </div>
+                )}
+
             </div>
         </div>
     )
