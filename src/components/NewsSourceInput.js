@@ -35,21 +35,21 @@ function NewsSourceInput() {
                 const url = `${process.env.REACT_APP_API_URL}/getData/${encodeURIComponent(JSON.stringify({ source: selectedNewsSource }))}`;
                 try {
                     const response = await fetch(url);
-                    if (!response.ok) {
+
+                    if (response.ok) {
+                        toast.success('Locations fetched successfully')
+                    }
+
+                    else {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     const data = await response.json();
 
                     // set regions 
                     setRegions(data.locations);
-
-                    // set the keywords options in store
-                    dispatch(setKeyWordsOptions(data.topics));
                 } catch (error) {
                     console.error('Error fetching keywords and locations data:', error);
-                }
-                finally {
-                    toast.success('Keywords and locations fetched successfully')
+                    toast.error("Error fetching locations")
                 }
             }
         };
@@ -83,7 +83,73 @@ function NewsSourceInput() {
         else {
             dispatch(setPublicationTimeRedux([]));
         }
+
+        // fetch keywords according to the publication time and source
+        const fetchKeyWords = async () => {
+            if (selectedNewsSource && publicationTime.length > 0) {
+                const data = {
+                    // "startDate": formatDateForDB(new Date(publicationTime[0])),
+                    // "endDate": formatDateForDB(new Date(publicationTime[1])),
+                    // set start date at year 2000 and end date as year 2024 to get all keywords
+                    "startDate": formatDateForDB(new Date(946684800000)),
+                    "endDate": formatDateForDB(new Date(1704067200000)),
+                    "source": selectedNewsSource
+                }
+
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/keywords`, {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                    })
+
+                    if (response.ok) {
+                        toast.success('Keywords fetched successfully')
+                    }
+                    else {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const responseData = await response.json();
+
+                    const keywords = extractWords(responseData)
+
+                    // set in store
+                    dispatch(setKeyWordsOptions(keywords));
+                }
+                catch {
+                    
+                }
+            }
+        }
+
+        fetchKeyWords();
     }, [publicationTime])
+
+    const extractWords = (data) => {
+        // Initialize an empty array to store all words
+        let allWords = [];
+
+        // Iterate over each item in the data
+        data.forEach(item => {
+            // Remove curly braces and split the words by comma
+            const words = item.word.replace(/[{}]/g, '').split(',');
+            // Combine the words into the allWords array
+            allWords = allWords.concat(words);
+        });
+
+        return allWords;
+    };
+
+    const formatDateForDB = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    };
 
     const handleRadioClick = (value) => {
         setSelectedNewsSource(prevValue => prevValue === value ? null : value);

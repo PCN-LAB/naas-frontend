@@ -7,6 +7,7 @@ import { pushKeyWordsSearch } from '../store/reducers/MapReducer'
 import { useNavigate } from 'react-router-dom';
 import { setKeyWordsOptions } from '../store/reducers/MapReducer';
 import Tooltip from '@mui/material/Tooltip';
+import MenuList from '../layout/MenuList';
 
 function KeyWordInput() {
     const [isHovered, setIsHovered] = useState(false);
@@ -102,7 +103,7 @@ function KeyWordInput() {
                 arrow
             >
                 <div className='w-1/3'>
-                    <Select
+                    {/* <Select
                         options={(keyWordOptionsRedux || [])
                             .slice(0, 5) // Show only the first 5 options
                             .map(keyword => ({ value: keyword, label: keyword }))}
@@ -111,7 +112,17 @@ function KeyWordInput() {
                         onChange={handleKeyWordSelect}
                         styles={customSelectStyles}
                         isDisabled={isDisabled}
+                    /> */}
+                    <Select
+                        options={keyWordOptionsRedux.map(keyword => ({ value: keyword, label: keyword }))}
+                        placeholder='i.e. police, protest'
+                        className='w-full'
+                        onChange={handleKeyWordSelect}
+                        isDisabled={isDisabled}
+                        components={{ MenuList }} // Make sure this is pointing to the correct component
+                        styles={customSelectStyles}
                     />
+
                 </div>
             </Tooltip>
 
