@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import Select from 'react-select'
 import lookUpIcon from '../assets/lookup.png'
 import NewsCard from './NewsCard';
+import { toast } from 'react-hot-toast'
 
 function NewsList() {
     const [sortBy, setSortBy] = useState('descending');
     const [sortField, setSortField] = useState('publicationDate');
+
+    // search options
+    const keywords = useSelector(state => state.map.keyWordsSearch);
+    const newsSource = useSelector(state => state.map.newsSource);
+    const regionSelected = useSelector(state => state.map.regionSelected);
+    const publicationTime = useSelector(state => state.map.publicationTime);
+
+    let useEffectCalled = false;
 
     const [news, setNews] = useState([
         {
@@ -83,7 +93,83 @@ function NewsList() {
         setNews(sortNews());
     }, [sortBy, sortField]);
 
+    useEffect(() => {
+        if (!useEffectCalled) {
+            useEffectCalled = true;
 
+            // fetch news according to the selected filters
+
+            const fetchNews = async () => {
+                const data = {
+                    location: regionSelected,
+                    topics: keywords,
+                    startDate: timestampToDate(publicationTime[0]),
+                    endDate: timestampToDate(publicationTime[1])
+                }
+
+                // Convert data object to JSON string and encode it
+                const dataString = encodeURIComponent(JSON.stringify({
+                    topics: data.topics,
+                    startDate: data.startDate,
+                    endDate: data.endDate
+                }));
+
+                // Construct the request URL
+                // const requestUrl = `${process.env.REACT_APP_API_URL}/SearchDawn/${dataString}`;
+                const requestUrl = `${process.env.REACT_APP_API_URL}/Search${newsSource}/${dataString}`;
+
+                console.log(requestUrl);
+
+                // fetch news
+                const response = await fetch(requestUrl);
+
+                if (response.ok) {
+                    toast.success('News fetched successfully')
+                }
+
+                else {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const responseData = await response.json();
+
+                setNewsState(responseData);
+            }
+
+            fetchNews();
+        }
+    }, [])
+
+    const setNewsState = (data) => {
+        // set news
+
+        const formattedNews = data.map(item => {
+            return {
+                title: item.header,
+                summary: `Sentiment: ${item.sentiment}, Location Type: ${item.locationType}`,
+                focusTime: item.focusTime,
+                publicationTime: item.creationDate,
+                topics: item.topics.replace(/[{}]/g, '').split(',').map(topic => topic.trim()), // Convert topics string to array
+                location: item.focusLocation,
+                isBiased: item.sentiment > 0.5 // Example logic for isBiased
+            };
+        });
+
+        // Update the state with the new news object
+        setNews(formattedNews);
+    }
+
+    const convertToISO = (dateStr) => {
+        const date = new Date(dateStr);
+        return isNaN(date.getTime()) ? null : date.toISOString();
+    };
+
+    const timestampToDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
 
     return (
         <div className='flex flex-col gap-5'>
