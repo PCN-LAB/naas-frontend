@@ -110,7 +110,9 @@ function NewsSourceInput() {
                     }
 
                     const responseData = await response.json();
-
+                    
+                    console.log(responseData)
+                    
                     const keywords = extractWords(responseData)
 
                     // set in store
