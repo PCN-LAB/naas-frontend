@@ -14,11 +14,11 @@ import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
 function NewsSourceInput() {
-    const [selectedNewsSource, setSelectedNewsSource] = useState(null);
-    const [focusTime, setFocusTime] = useState([]);
-    const [publicationTime, setPublicationTime] = useState([]);
-    const [focusTimeValue, setFocusTimeValue] = useState(null);
-    const [publicationTimeValue, setPublicationTimeValue] = useState(null);
+    const [selectedNewsSource, setSelectedNewsSource] = useState(useSelector(state => state.map.newsSource)); // default value of stored news source
+    const [focusTime, setFocusTime] = useState(useSelector(state => state.map.focusTime).map(time => new Date(time)));
+    const [publicationTime, setPublicationTime] = useState(useSelector(state => state.map.publicationTime).map(time => new Date(time)));
+    const [focusTimeValue, setFocusTimeValue] = useState(useSelector(state => state.map.focusTime).map(time => new Date(time)));
+    const [publicationTimeValue, setPublicationTimeValue] = useState(useSelector(state => state.map.publicationTime).map(time => new Date(time)));
     const [regions, setRegions] = useState([]);
     const regionSelected = useSelector(state => state.map.regionSelected);
     const showRegionsAndKeyWords = selectedNewsSource && (focusTime.length > 0 || publicationTime.length > 0);
@@ -195,26 +195,26 @@ function NewsSourceInput() {
             <div className='h-4/5 flex flex-1 w-full items-center gap-3 text-2xl'>
 
                 <div className='h-20 flex-1 flex justify-evenly items-center border-8 border-colorMapHeaderBG rounded-lg bg-white'>
-                    <div className='flex gap-2 items-center' onClick={() => handleRadioClick('Dawn')}>
+                    <div className='flex gap-2 items-center'>
                         <input
                             className='h-5 w-5 hover:cursor-pointer'
                             type='radio'
                             id='Dawn'
                             value='Dawn'
                             checked={selectedNewsSource === 'Dawn'}
-                            readOnly
+                            onChange={() => handleRadioClick('Dawn')} // Add onChange handler to update the selected value
                         />
                         <label className='h-fit' htmlFor='Dawn'>Dawn</label>
                     </div>
 
-                    <div className='flex gap-2 items-center' onClick={() => handleRadioClick('Tribune')}>
+                    <div className='flex gap-2 items-center'>
                         <input
                             className='h-5 w-5 hover:cursor-pointer'
                             type='radio'
                             id='Tribune'
                             value='Tribune'
                             checked={selectedNewsSource === 'Tribune'}
-                            readOnly
+                            onChange={() => handleRadioClick('Tribune')} // Add onChange handler to update the selected value
                         />
                         <label className='h-fit' htmlFor='Tribune'>Tribune</label>
                     </div>

@@ -78,7 +78,6 @@ function NewsList() {
                 }));
 
                 // Construct the request URL
-                // const requestUrl = `${process.env.REACT_APP_API_URL}/SearchDawn/${dataString}`;
                 const requestUrl = `${process.env.REACT_APP_API_URL}/Search${newsSource}/${dataString}`;
 
                 // console.log(requestUrl);
