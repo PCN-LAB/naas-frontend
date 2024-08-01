@@ -67,7 +67,7 @@ function KeyWordInput() {
     useEffect(() => {
         console.log(isDisabled)
         console.log(keyWordOptionsRedux)
-    }, [isDisabled, keywords])
+    }, [isDisabled, keyWordOptionsRedux])
 
     const handleKeyWordSelect = (selectedOption) => {
         setSelectedKeywords((prevKeyWords) => [
