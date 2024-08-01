@@ -13,7 +13,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import ChangePassword from './pages/ChangePassword'
 import Error404 from './pages/error404'
 import Feedback from './pages/Feedback'
-import Graph from './components/Graph'
+import Graph from './components/Graphs/Graph'
 function App() {
   return (
     <div className="App min-h-screen flex flex-col">
