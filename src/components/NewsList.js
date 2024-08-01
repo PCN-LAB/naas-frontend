@@ -83,24 +83,43 @@ function NewsList() {
 
                 // console.log(requestUrl);
 
-                // fetch news
-                const response = await fetch(requestUrl);
+                try {
+                    // fetch news
+                    const response = await fetch(requestUrl);
 
-                if (response.ok) {
-                    toast.success('News fetched successfully')
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const responseData = await response.json();
+
+                    if (responseData) {
+                        toast.success('News fetched successfully')
+                        setNewsState(responseData);
+                    }
+                    else {
+                        setNewsState([]);
+                    }
+                }
+                catch (error) {
+                    toast.error('Error fetching news')
+                    console.error('Error fetching news:', error);
+                }
+                finally {
                     setIsLoading(false);
                 }
-
-                else {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const responseData = await response.json();
-
-                setNewsState(responseData);
             }
             fetchNews();
         }
     }, [])
+
+    useEffect(() => {
+        // if keywords change, update the news accordingly
+        const filteredNews = news.filter(newsItem =>
+            newsItem.topics.some(topic => keywords.includes(topic))
+        );
+        setNews(filteredNews);
+    }, [keywords])
 
     const setNewsState = (data) => {
         // set news
@@ -113,7 +132,7 @@ function NewsList() {
                 publicationTime: item.creationDate,
                 topics: item.topics.replace(/[{}]/g, '').split(',').map(topic => topic.trim()), // Convert topics string to array
                 location: item.focusLocation,
-                isBiased: item.sentiment > 0.5 // Example logic for isBiased
+                isBiased: item.sentiment > 0.5 
             };
         });
 
@@ -167,18 +186,26 @@ function NewsList() {
 
                 {/* News List */}
                 {!isLoading ? (
-                    news.map((newsItem, index) => (
-                        <NewsCard
-                            key={index}
-                            index={index + 1}
-                            title={newsItem.title}
-                            summary={newsItem.summary}
-                            focusTime={newsItem.focusTime}
-                            publicationTime={newsItem.publicationTime}
-                            topics={newsItem.topics}
-                            isBiased={newsItem.isBiased}
-                        />
-                    ))
+                    Array.isArray(news) && news.length === 0 ? (
+                        <div className='h-full w-full flex justify-center items-center'>
+                            <span className='text-gray-500 text-xl font-semibold'>
+                                No articles found
+                            </span>
+                        </div>
+                    ) : (
+                        Array.isArray(news) && news.map((newsItem, index) => (
+                            <NewsCard
+                                key={index}
+                                index={index + 1}
+                                title={newsItem.title}
+                                summary={newsItem.summary}
+                                focusTime={newsItem.focusTime}
+                                publicationTime={newsItem.publicationTime}
+                                topics={newsItem.topics}
+                                isBiased={newsItem.isBiased}
+                            />
+                        ))
+                    )
                 ) : (
                     <div className='h-full w-full flex justify-center items-center'>
                         <PropagateLoader color='#000' />
