@@ -53,7 +53,7 @@ function ContactUS() {
         </div>
 
          {/* footer */}
-        <div className="relative w-full h-auto px-4 md:px-[111px] pt-12 pb-[80px] bg-[#5985be] border justify-center items-center inline-flex" style={{ marginTop: "0%" }}>
+        <div className="relative w-full h-auto px-4 md:px-[111px] pt-12 pb-[80px] bg-[#4c7ca3] border justify-center items-center inline-flex" style={{ marginTop: "0%" }}>
           <div className="absolute top-3 left-1/2 transform -translate-x-[100%] md:left-[15%]">
             <img src={PCN} alt="PCN Logo" />
           </div>

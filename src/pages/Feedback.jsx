@@ -46,7 +46,7 @@ const Feedback = () => {
       <Sidebar />
       <div className="flex-grow relative flex flex-col items-center p-0">
         <div className={`w-full h-full ${isPopupVisible ? 'blur-sm' : ''}`}>
-          <div className="w-full h-60 bg-gradient-to-b from-sky-600 to-slate-200 flex  flex-col items-start justify-start p-4">
+          <div className="w-full h-60 bg-gradient-to-b from-colorVerticalNav to-slate-200 flex  flex-col items-start justify-start p-4">
             <img src={logo} alt="Logo" className="h-16 md:h-24 mr-4 " style={{marginLeft:"-9%"}}/>
             <div className="flex flex-col items-start">
               <div className="text-black text-2xl md:text-3xl font-bold">How do you feel?</div>

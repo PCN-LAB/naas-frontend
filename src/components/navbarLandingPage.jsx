@@ -9,7 +9,7 @@ const NavbarLandingPage = ({ isColored }) => {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      if (offset > 500) {
+      if (offset > 580) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -40,9 +40,9 @@ const NavbarLandingPage = ({ isColored }) => {
     style={{
       borderBlockStyle: "none",
       background: isColored
-        ? "#5985be" // Dark blue if isColored is true
+        ? "#4c7ca3" // Dark blue if isColored is true
         : scrolled
-        ? "#5985be" // Original color if scrolled
+        ? "#4c7ca3" // Original color if scrolled
         : "linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1))", 
       boxShadow: scrolled
         ? "none" 
