@@ -101,7 +101,7 @@ function NewsSourceInput() {
                         method: 'POST',
                         body: JSON.stringify(data),
                     })
-
+                    
                     if (response.ok) {
                         toast.success('Keywords fetched successfully')
                     }
@@ -110,8 +110,6 @@ function NewsSourceInput() {
                     }
 
                     const responseData = await response.json();
-                    
-                    console.log(responseData)
                     
                     const keywords = extractWords(responseData)
 
