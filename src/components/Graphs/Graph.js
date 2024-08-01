@@ -4,6 +4,7 @@ import Sidebar from '../../components/Vertical-nav/vertical-nav';
 import Modal from './Modal'; // Import the Modal component
 import BarGraph from './BarGraph'; // Import the BarGraph component
 import AreaChart from './AreaChart';
+import HistogramGraph from './HistogramGraph';
 import PieChart from './PieChart';
 import DashedLineChart from './DashedLineGraph'; // Import the DashedLineChart component
 import axios from 'axios';
@@ -22,7 +23,8 @@ const generateUniqueColors = (numColors) => {
 function Graphs() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState(null); 
-    const [data, setData] = useState({ labels: [], datasets: [], colors: [] });
+    const [modalGraphType, setModalGraphType] = useState(''); // New state to keep track of graph type
+    const [data, setData] = useState({ labels: [], datasets: [], colors: [], keywords: [] });
 
     useEffect(() => {
         // Function to fetch data from the API
@@ -80,7 +82,7 @@ function Graphs() {
                     fill: false,
                 }));
 
-                setData({ labels: uniqueDates2, datasets: newDatasets, colors });
+                setData({ labels: uniqueDates2, datasets: newDatasets, colors, keywords });
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -110,39 +112,41 @@ function Graphs() {
                             <button
                                 className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'
                                 onClick={() => {
-                                    setModalContent(<BarGraph chartData={data} />); // Pass data as chartData
+                                    setModalContent(<BarGraph chartData={data} />);
+                                    setModalGraphType('bar'); // Set graph type
                                     setIsModalOpen(true);
                                 }}
                             >
-                                Bar Graph
+                                Bar Chart
                             </button>
-                            {/*<button className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'
-                             onClick={() => {
-                                setModalContent(<AreaChart />);
-                                setIsModalOpen(true);
-                            }}
-                             >
-                                Area Chart
-                            </button>*/}
-                            <button className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'
-                             onClick={() => {
-                                setModalContent(<PieChart chartData={data} />); // Pass data as chartData
-                                setIsModalOpen(true);
-                            }}
+                            <button
+                                className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'
+                                onClick={() => {
+                                    setModalContent(<PieChart chartData={data} />);
+                                    setModalGraphType('pie'); // Set graph type
+                                    setIsModalOpen(true);
+                                }}
                             >
                                 Pie Chart
                             </button>
-                           {/* <button className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'>
-                                Step Line Chart
-                            </button>*/}
+                            <button
+                                className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'
+                                onClick={() => {
+                                    setModalContent(<HistogramGraph chartData={data} />);
+                                    setModalGraphType('histogram'); // Set graph type
+                                    setIsModalOpen(true);
+                                }}
+                            >
+                                Histogram Chart
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Modal Component */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            {modalContent}
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} graphType={modalGraphType}>
+                {modalContent}
             </Modal>
         </div>
     );
