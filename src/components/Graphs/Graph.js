@@ -141,7 +141,9 @@ function Graphs() {
                             </button>
                         </div>
                     </div>
+                    
                 </div>
+                
             </div>
 
             {/* Modal Component */}
