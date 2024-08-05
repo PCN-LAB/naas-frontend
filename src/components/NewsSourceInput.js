@@ -193,17 +193,19 @@ function NewsSourceInput() {
     };
 
     const getTimeTitle = () => {
-        // Assuming focusTimeValue and publicationTimeValue are arrays of Date objects
-        const formattedFocusTime = focusTimeValue ? formatDate(focusTimeValue[0]) + ' - ' + formatDate(focusTimeValue[1])  : '';
-        const formattedPublicationTime = publicationTimeValue ? formatDate(publicationTimeValue[0]) + ' - ' + formatDate(publicationTimeValue[1]) : '';
+        if (focusTimeValue && publicationTimeValue) {
+            // Assuming focusTimeValue and publicationTimeValue are arrays of Date objects
+            const formattedFocusTime = focusTimeValue ? formatDate(focusTimeValue[0]) + ' - ' + formatDate(focusTimeValue[1]) : '';
+            const formattedPublicationTime = publicationTimeValue ? formatDate(publicationTimeValue[0]) + ' - ' + formatDate(publicationTimeValue[1]) : '';
 
-        if (focusTimeValue.length && publicationTimeValue.length) {
-            return `${formattedFocusTime}, ${formattedPublicationTime}`; // Both times selected
-        } else if (focusTimeValue.length || publicationTimeValue.length) { // Only one time selected
-            if (focusTimeValue.length) {
-                return formattedFocusTime    
+            if (focusTimeValue.length && publicationTimeValue.length) {
+                return `${formattedFocusTime}, ${formattedPublicationTime}`; // Both times selected
+            } else if (focusTimeValue.length || publicationTimeValue.length) { // Only one time selected
+                if (focusTimeValue.length) {
+                    return formattedFocusTime
+                }
+                return formattedPublicationTime;
             }
-            return formattedPublicationTime; 
         }
         return 'Choose Time'; // No times selected
     };
