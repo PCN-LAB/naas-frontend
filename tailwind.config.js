@@ -39,6 +39,9 @@ module.exports = {
       backgroundImage: {
         'chat-bot-gradient': 'linear-gradient(to bottom, #018abd, #001b48)',
       },
+      boxShadow: {
+        'bottom-left-right': '2px 0 6px -1px rgba(0, 0, 0, 0.1), -2px 0 6px -1px rgba(0, 0, 0, 0.1), 0 6px 6px -1px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
   plugins: [
