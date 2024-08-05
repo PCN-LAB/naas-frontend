@@ -35,10 +35,16 @@ function NewsSourceInput() {
 
                 const url = `${process.env.REACT_APP_API_URL}/getData/${encodeURIComponent(JSON.stringify({ source: selectedNewsSource }))}`;
                 try {
+                    const loadToast = toast.loading("Fetching locations")
                     const response = await fetch(url);
 
-                    if (response.ok && response.headers.get('Content-Type')?.includes('application/json')) {
-                        toast.success('Locations fetched successfully')
+                    if (response.ok &&
+                        (response.headers.get('Content-Type')?.includes('application/json') ||
+                            response.headers.get('Content-Type')?.includes('text/plain'))
+                    ) {
+                        toast.success('Locations fetched successfully', {
+                            id: loadToast,
+                        });
                     }
 
                     else {
@@ -98,13 +104,16 @@ function NewsSourceInput() {
                 }
 
                 try {
+                    const load_toast = toast.loading("Fetching keywords")
                     const response = await fetch(`${process.env.REACT_APP_API_URL}/keywords`, {
                         method: 'POST',
                         body: JSON.stringify(data),
                     })
 
                     if (response.ok) {
-                        toast.success('Keywords fetched successfully')
+                        toast.success('Keywords fetched successfully', {
+                            id: load_toast,
+                        });
                     }
                     else {
                         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -185,13 +194,16 @@ function NewsSourceInput() {
 
     const getTimeTitle = () => {
         // Assuming focusTimeValue and publicationTimeValue are arrays of Date objects
-        const formattedFocusTime = focusTimeValue ? formatDate(focusTimeValue[0]) : ''; // Adjust for single or multiple dates
-        const formattedPublicationTime = publicationTimeValue ? formatDate(publicationTimeValue[0]) : ''; // Adjust for single or multiple dates
+        const formattedFocusTime = focusTimeValue ? formatDate(focusTimeValue[0]) + ' - ' + formatDate(focusTimeValue[1])  : '';
+        const formattedPublicationTime = publicationTimeValue ? formatDate(publicationTimeValue[0]) + ' - ' + formatDate(publicationTimeValue[1]) : '';
 
-        if (formattedFocusTime && formattedPublicationTime) {
+        if (focusTimeValue.length && publicationTimeValue.length) {
             return `${formattedFocusTime}, ${formattedPublicationTime}`; // Both times selected
-        } else if (formattedFocusTime || formattedPublicationTime) {
-            return formattedFocusTime || formattedPublicationTime; // Only one time selected
+        } else if (focusTimeValue.length || publicationTimeValue.length) { // Only one time selected
+            if (focusTimeValue.length) {
+                return formattedFocusTime    
+            }
+            return formattedPublicationTime; 
         }
         return 'Choose Time'; // No times selected
     };
@@ -240,8 +252,8 @@ function NewsSourceInput() {
 
                 <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
                     <Dropdown
-                        title={<span className='text-sm sm:text-base md:text-2xl lg:text-2xl truncate'>{getTimeTitle()}</span>}
-                        className='h-16 text-gray-500 p-4 text-2xl overflow-x-auto' // Add overflow-x-auto for horizontal scrollbar
+                        title={getTimeTitle()}
+                        className='text-left h-16 text-gray-500 p-4 text-2xl overflow-x-auto whitespace-nowrap w-72 custom-scrollbar overflow-y-hidden'
                         position='right'
                     >
                         <Dropdown.Item className='text-xl px-16 text-center py-2'>
