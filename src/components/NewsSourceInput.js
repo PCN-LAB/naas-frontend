@@ -8,6 +8,7 @@ import { setFocusTimeRedux } from '../store/reducers/MapReducer';
 import { setPublicationTimeRedux } from '../store/reducers/MapReducer';
 import { setKeyWordsOptions } from '../store/reducers/MapReducer';
 import { toast } from 'react-hot-toast'
+import { format } from 'date-fns';
 import Tooltip from '@mui/material/Tooltip';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
@@ -34,13 +35,22 @@ function NewsSourceInput() {
 
                 const url = `${process.env.REACT_APP_API_URL}/getData/${encodeURIComponent(JSON.stringify({ source: selectedNewsSource }))}`;
                 try {
+                    const loadToast = toast.loading("Fetching locations")
                     const response = await fetch(url);
 
-                    if (response.ok) {
-                        toast.success('Locations fetched successfully')
+                    if (response.ok &&
+                        (response.headers.get('Content-Type')?.includes('application/json') ||
+                            response.headers.get('Content-Type')?.includes('text/plain'))
+                    ) {
+                        toast.success('Locations fetched successfully', {
+                            id: loadToast,
+                        });
                     }
 
                     else {
+                        toast.error('Error fetching locations', {
+                            id: loadToast,
+                        });
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     const data = await response.json();
@@ -49,7 +59,6 @@ function NewsSourceInput() {
                     setRegions(data.locations);
                 } catch (error) {
                     console.error('Error fetching keywords and locations data:', error);
-                    toast.error("Error fetching locations")
                 }
             }
         };
@@ -97,33 +106,39 @@ function NewsSourceInput() {
                 }
 
                 try {
+                    const load_toast = toast.loading("Fetching keywords")
                     const response = await fetch(`${process.env.REACT_APP_API_URL}/keywords`, {
                         method: 'POST',
                         body: JSON.stringify(data),
                     })
-                    
+
                     if (response.ok) {
-                        toast.success('Keywords fetched successfully')
+                        toast.success('Keywords fetched successfully', {
+                            id: load_toast,
+                        });
                     }
                     else {
+                        toast.error('Error fetching keywords', {
+                            id: load_toast,
+                        })
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
 
                     const responseData = await response.json();
-                    
+
                     const keywords = extractWords(responseData)
 
                     // set in store
                     dispatch(setKeyWordsOptions(keywords));
                 }
                 catch {
-                    
+
                 }
             }
         }
 
         fetchKeyWords();
-    }, [publicationTime])
+    }, [publicationTime, selectedNewsSource])
 
     const extractWords = (data) => {
         // Initialize an empty array to store all words
@@ -155,6 +170,24 @@ function NewsSourceInput() {
         setSelectedNewsSource(prevValue => prevValue === value ? null : value);
     };
 
+    const groupRegionsByType = (regions) => {
+        const grouped = regions.reduce((acc, region) => {
+            const { location_type, name } = region;
+            if (!acc[location_type]) {
+                acc[location_type] = [];
+            }
+            acc[location_type].push({ value: name, label: name });
+            return acc;
+        }, {});
+
+        return Object.keys(grouped).map(type => ({
+            label: type, // Group header
+            options: grouped[type]
+        }));
+    };
+
+    const groupedOptions = groupRegionsByType(regions);
+
     const handleFocusDateChange = (dates) => {
         if (dates) {
             setFocusTime(dates)
@@ -176,6 +209,28 @@ function NewsSourceInput() {
             setPublicationTime([])
             setPublicationTimeValue(null);
         }
+    };
+
+    const formatDate = (date) => {
+        return date ? format(date, 'MMM d, yyyy') : ''; // Adjust format as needed
+    };
+
+    const getTimeTitle = () => {
+        if (focusTimeValue && publicationTimeValue) {
+            // Assuming focusTimeValue and publicationTimeValue are arrays of Date objects
+            const formattedFocusTime = focusTimeValue ? formatDate(focusTimeValue[0]) + ' - ' + formatDate(focusTimeValue[1]) : '';
+            const formattedPublicationTime = publicationTimeValue ? formatDate(publicationTimeValue[0]) + ' - ' + formatDate(publicationTimeValue[1]) : '';
+
+            if (focusTimeValue.length && publicationTimeValue.length) {
+                return `${formattedFocusTime}, ${formattedPublicationTime}`; // Both times selected
+            } else if (focusTimeValue.length || publicationTimeValue.length) { // Only one time selected
+                if (focusTimeValue.length) {
+                    return formattedFocusTime
+                }
+                return formattedPublicationTime;
+            }
+        }
+        return 'Choose Time'; // No times selected
     };
 
     const customSelectStyles = {
@@ -222,8 +277,8 @@ function NewsSourceInput() {
 
                 <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
                     <Dropdown
-                        title='Choose Time'
-                        className='h-16 text-gray-500 p-4 text-2xl'
+                        title={getTimeTitle()}
+                        className='text-left h-16 text-gray-500 p-4 text-2xl overflow-x-auto whitespace-nowrap w-72 custom-scrollbar overflow-y-hidden'
                         position='right'
                     >
                         <Dropdown.Item className='text-xl px-16 text-center py-2'>
@@ -251,8 +306,16 @@ function NewsSourceInput() {
                     disableHoverListener={!!showRegionsAndKeyWords}
                 >
                     <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
-                        <Select
+                        {/* <Select
                             options={regions.map(region => ({ value: region.name, label: region.name }))}
+                            value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
+                            placeholder="Choose Region"
+                            styles={customSelectStyles}
+                            onChange={(e) => dispatch(setRegionSelected(e.value))}
+                            isDisabled={!showRegionsAndKeyWords}
+                        /> */}
+                        <Select
+                            options={groupedOptions}
                             value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
                             placeholder="Choose Region"
                             styles={customSelectStyles}

@@ -6,7 +6,8 @@ const initialState = {
     newsSource: null,
     regionSelected: null,
     focusTime: [],
-    publicationTime: []
+    publicationTime: [],
+    news: []
 };
 
 const mapSlice = createSlice({
@@ -35,9 +36,12 @@ const mapSlice = createSlice({
         },
         setPublicationTimeRedux(state, action) {
             state.publicationTime = action.payload;
+        },
+        setNewsRedux(state, action) {
+            state.news = action.payload;
         }
     }
 });
 
-export const { pushKeyWordsSearch, setKeyWordsOptions, setNewsSource, setRegionSelected, setFocusTimeRedux, setPublicationTimeRedux, deleteKeyWord } = mapSlice.actions;
+export const { setNewsRedux, pushKeyWordsSearch, setKeyWordsOptions, setNewsSource, setRegionSelected, setFocusTimeRedux, setPublicationTimeRedux, deleteKeyWord } = mapSlice.actions;
 export default mapSlice.reducer;

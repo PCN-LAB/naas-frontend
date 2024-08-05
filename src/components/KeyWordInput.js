@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Select from 'react-select';
+import Select from 'react-select-virtualized';
 import SearchIcon from '../assets/search.png';
 import SearchBlackIcon from '../assets/searchBlack.png';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ import { pushKeyWordsSearch } from '../store/reducers/MapReducer'
 import { useNavigate } from 'react-router-dom';
 import { setKeyWordsOptions } from '../store/reducers/MapReducer';
 import Tooltip from '@mui/material/Tooltip';
-import MenuList from '../layout/MenuList';
 
 function KeyWordInput() {
     const [isHovered, setIsHovered] = useState(false);
@@ -65,14 +64,28 @@ function KeyWordInput() {
     }, [keywords]);
 
     const handleKeyWordSelect = (selectedOption) => {
-        setSelectedKeywords((prevKeyWords) => [
-            ...prevKeyWords,
-            selectedOption,
-        ]);
+        if (selectedOption) {
+            setSelectedKeywords((prevKeyWords) => [
+                ...prevKeyWords,
+                selectedOption,
+            ]);
 
-        // set in the store
-        dispatch(pushKeyWordsSearch(selectedOption.value));
+            // set in the store
+            dispatch(pushKeyWordsSearch(selectedOption.value));
+        }
     };
+
+    const truncateLabel = (label, maxLength) => {
+        if (label.length > maxLength) {
+            return `${label.substring(0, maxLength)}...`;
+        }
+        return label;
+    };
+
+    const options = keyWordOptionsRedux.map(keyword => ({
+        value: keyword,
+        label: truncateLabel(keyword, 15),
+    }));
 
     const handleButtonClick = () => {
         if (keywords && newsSource && regionSelected && (focusTime || publicationTime)) {
@@ -103,26 +116,14 @@ function KeyWordInput() {
                 arrow
             >
                 <div className='w-1/3'>
-                    {/* <Select
-                        options={(keyWordOptionsRedux || [])
-                            .slice(0, 5) // Show only the first 5 options
-                            .map(keyword => ({ value: keyword, label: keyword }))}
-                        placeholder='i.e. police, protest'
-                        className='w-full'
-                        onChange={handleKeyWordSelect}
-                        styles={customSelectStyles}
-                        isDisabled={isDisabled}
-                    /> */}
                     <Select
-                        options={keyWordOptionsRedux.map(keyword => ({ value: keyword, label: keyword }))}
+                        options={options}
                         placeholder='i.e. police, protest'
                         className='w-full'
                         onChange={handleKeyWordSelect}
-                        isDisabled={isDisabled}
-                        components={{ MenuList }} // Make sure this is pointing to the correct component
                         styles={customSelectStyles}
+                        isDisabled={isDisabled}
                     />
-
                 </div>
             </Tooltip>
 
