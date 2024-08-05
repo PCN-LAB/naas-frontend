@@ -16,7 +16,7 @@ import Feedback from './pages/Feedback'
 import ContactUs from './pages/ContactUs'
 import UserProfile from './pages/UserProfile';
 
-import Graph from './components/Graph'
+import Graph from './components/Graphs/Graph'
 function App() {
   return (
     <div className="App min-h-screen flex flex-col">
