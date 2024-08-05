@@ -48,15 +48,18 @@ function NewsSourceInput() {
                     }
 
                     else {
+                        toast.error('Error fetching locations', {
+                            id: loadToast,
+                        });
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     const data = await response.json();
 
                     // set regions 
+                    console.log(data)
                     setRegions(data.locations);
                 } catch (error) {
                     console.error('Error fetching keywords and locations data:', error);
-                    toast.error("Error fetching locations")
                 }
             }
         };
@@ -116,6 +119,9 @@ function NewsSourceInput() {
                         });
                     }
                     else {
+                        toast.error('Error fetching keywords', {
+                            id: load_toast,
+                        })
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
 
@@ -133,7 +139,7 @@ function NewsSourceInput() {
         }
 
         fetchKeyWords();
-    }, [publicationTime])
+    }, [publicationTime, selectedNewsSource])
 
     const extractWords = (data) => {
         // Initialize an empty array to store all words
