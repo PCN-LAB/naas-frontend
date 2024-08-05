@@ -8,6 +8,7 @@ import { setFocusTimeRedux } from '../store/reducers/MapReducer';
 import { setPublicationTimeRedux } from '../store/reducers/MapReducer';
 import { setKeyWordsOptions } from '../store/reducers/MapReducer';
 import { toast } from 'react-hot-toast'
+import { format } from 'date-fns';
 import Tooltip from '@mui/material/Tooltip';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
@@ -36,7 +37,7 @@ function NewsSourceInput() {
                 try {
                     const response = await fetch(url);
 
-                    if (response.ok) {
+                    if (response.ok && response.headers.get('Content-Type')?.includes('application/json')) {
                         toast.success('Locations fetched successfully')
                     }
 
@@ -101,7 +102,7 @@ function NewsSourceInput() {
                         method: 'POST',
                         body: JSON.stringify(data),
                     })
-                    
+
                     if (response.ok) {
                         toast.success('Keywords fetched successfully')
                     }
@@ -110,14 +111,14 @@ function NewsSourceInput() {
                     }
 
                     const responseData = await response.json();
-                    
+
                     const keywords = extractWords(responseData)
 
                     // set in store
                     dispatch(setKeyWordsOptions(keywords));
                 }
                 catch {
-                    
+
                 }
             }
         }
@@ -178,6 +179,23 @@ function NewsSourceInput() {
         }
     };
 
+    const formatDate = (date) => {
+        return date ? format(date, 'MMM d, yyyy') : ''; // Adjust format as needed
+    };
+
+    const getTimeTitle = () => {
+        // Assuming focusTimeValue and publicationTimeValue are arrays of Date objects
+        const formattedFocusTime = focusTimeValue ? formatDate(focusTimeValue[0]) : ''; // Adjust for single or multiple dates
+        const formattedPublicationTime = publicationTimeValue ? formatDate(publicationTimeValue[0]) : ''; // Adjust for single or multiple dates
+
+        if (formattedFocusTime && formattedPublicationTime) {
+            return `${formattedFocusTime}, ${formattedPublicationTime}`; // Both times selected
+        } else if (formattedFocusTime || formattedPublicationTime) {
+            return formattedFocusTime || formattedPublicationTime; // Only one time selected
+        }
+        return 'Choose Time'; // No times selected
+    };
+
     const customSelectStyles = {
         control: (provided) => ({
             ...provided,
@@ -222,8 +240,8 @@ function NewsSourceInput() {
 
                 <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
                     <Dropdown
-                        title='Choose Time'
-                        className='h-16 text-gray-500 p-4 text-2xl'
+                        title={<span className='text-sm sm:text-base md:text-2xl lg:text-2xl truncate'>{getTimeTitle()}</span>}
+                        className='h-16 text-gray-500 p-4 text-2xl overflow-x-auto' // Add overflow-x-auto for horizontal scrollbar
                         position='right'
                     >
                         <Dropdown.Item className='text-xl px-16 text-center py-2'>
