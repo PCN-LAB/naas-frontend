@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { GoChevronLeft } from "react-icons/go";
 import { RxCounterClockwiseClock } from "react-icons/rx";
 import { NavLink } from 'react-router-dom';
-
 import { CarbonHome } from "./icons/CarbonHome.tsx";
 import { CilChartLine } from "./icons/CilChartLine.tsx";
 import { FluentPersonSupport16Regular } from "./icons/FluentPersonSupport16Regular.tsx";
@@ -44,7 +43,7 @@ const Sidebar = ({ children }) => {
             icon: <CilChartLine className="icon-bold  w-7 h-7" />
         },
         {
-            path: "/product",
+            path: "/History",
             name: "History",
             icon: <RxCounterClockwiseClock className="icon-bold  w-7 h-7" />
         },

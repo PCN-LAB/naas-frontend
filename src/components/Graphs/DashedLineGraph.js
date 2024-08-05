@@ -96,15 +96,14 @@ const DashedLineChart = ({ data, setData, handleRemoveDataset }) => {
                 <h2 className='text-xl mb-4 font-medium'>Dashed Line Chart</h2>
                 {legend()}
             </div>
-            <div>
+            <div className='flex flex-row justify-between mt-8 mr-10'>
                 <p className='text-zinc-400'>Statistics</p>
+                <p className="text-zinc-500 ">Note: You can zoom in and zoom out on the graph</p>
             </div>
             <div className='w-full mx-auto mt-4'>
                 <Line data={data} options={options} />
             </div>
-            <div className="flex justify-end">
-                <p className="text-zinc-500 mt-6">Note: You can zoom in and zoom out on the graph</p>
-            </div>
+           
 
         </div>
     );

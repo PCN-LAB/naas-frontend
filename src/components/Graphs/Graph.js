@@ -40,7 +40,7 @@ function Graphs() {
                 });
 
                 const response = await axios.post(
-                    'http://23.23.64.27:5000/plotSentiment',
+                    'http://54.81.234.19:5000/plotSentiment',
                     JSON.stringify({
                         keywords,
                         date: dateString,
