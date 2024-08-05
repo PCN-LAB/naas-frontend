@@ -56,7 +56,6 @@ function NewsSourceInput() {
                     const data = await response.json();
 
                     // set regions 
-                    console.log(data)
                     setRegions(data.locations);
                 } catch (error) {
                     console.error('Error fetching keywords and locations data:', error);
@@ -170,6 +169,24 @@ function NewsSourceInput() {
     const handleRadioClick = (value) => {
         setSelectedNewsSource(prevValue => prevValue === value ? null : value);
     };
+
+    const groupRegionsByType = (regions) => {
+        const grouped = regions.reduce((acc, region) => {
+            const { location_type, name } = region;
+            if (!acc[location_type]) {
+                acc[location_type] = [];
+            }
+            acc[location_type].push({ value: name, label: name });
+            return acc;
+        }, {});
+
+        return Object.keys(grouped).map(type => ({
+            label: type, // Group header
+            options: grouped[type]
+        }));
+    };
+
+    const groupedOptions = groupRegionsByType(regions);
 
     const handleFocusDateChange = (dates) => {
         if (dates) {
@@ -289,8 +306,16 @@ function NewsSourceInput() {
                     disableHoverListener={!!showRegionsAndKeyWords}
                 >
                     <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
-                        <Select
+                        {/* <Select
                             options={regions.map(region => ({ value: region.name, label: region.name }))}
+                            value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
+                            placeholder="Choose Region"
+                            styles={customSelectStyles}
+                            onChange={(e) => dispatch(setRegionSelected(e.value))}
+                            isDisabled={!showRegionsAndKeyWords}
+                        /> */}
+                        <Select
+                            options={groupedOptions}
                             value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
                             placeholder="Choose Region"
                             styles={customSelectStyles}

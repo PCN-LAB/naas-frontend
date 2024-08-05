@@ -5,10 +5,13 @@ import lookUpIcon from '../assets/lookup.png'
 import NewsCard from './NewsCard';
 import { toast } from 'react-hot-toast'
 import { PropagateLoader } from 'react-spinners';
+import { setNewsRedux } from '../store/reducers/MapReducer';
+import { useDispatch } from 'react-redux';
 
 function NewsList() {
     const [sortBy, setSortBy] = useState('descending');
     const [sortField, setSortField] = useState('publicationDate');
+    const dispatch = useDispatch();
 
     // search options
     const keywords = useSelector(state => state.map.keyWordsSearch);
@@ -84,6 +87,7 @@ function NewsList() {
 
                 try {
                     // fetch news
+                    const load_toast = toast.loading("Fetching news");
                     const response = await fetch(requestUrl);
 
                     if (!response.ok) {
@@ -93,15 +97,20 @@ function NewsList() {
                     const responseData = await response.json();
 
                     if (responseData) {
-                        toast.success('News fetched successfully')
+                        toast.success('News fetched successfully', {
+                            id: load_toast
+                        })
                         setNewsState(responseData);
+                        dispatch(setNewsRedux(responseData));
                     }
                     else {
+                        toast.success('News fetched successfully', {
+                            id: load_toast
+                        })
                         setNewsState([]);
                     }
                 }
                 catch (error) {
-                    toast.error('Error fetching news')
                     console.error('Error fetching news:', error);
                 }
                 finally {
