@@ -105,36 +105,72 @@ function KeyWordInput() {
     };
 
     return (
-        <div className='h-28 text-2xl bg-colorMapHeaderBG rounded-2xl flex justify-around w-1/2 mx-auto items-center'>
-            <span className='font-bold text-3xl'>Select a word</span>
+        <div>
+            {/* Desktop view */}
+            <div className='h-28 hidden text-2xl bg-colorMapHeaderBG rounded-2xl md:flex justify-around w-1/2 mx-auto items-center'>
+                <span className='font-bold text-3xl'>Select a word</span>
 
-            {/* Show select only when news source is selected */}
+                {/* Show select only when news source is selected */}
 
-            <Tooltip
-                title={isDisabled ? <span className='text-lg'>{tooltipMessage}</span> : ""}
-                disableHoverListener={!isDisabled} // Tooltip should only be shown if disabled
-                arrow
-            >
-                <div className='w-1/3'>
-                    <Select
-                        options={options}
-                        placeholder='i.e. police, protest'
-                        className='w-full'
-                        onChange={handleKeyWordSelect}
-                        styles={customSelectStyles}
-                        isDisabled={isDisabled}
-                    />
-                </div>
-            </Tooltip>
+                <Tooltip
+                    title={isDisabled ? <span className='text-lg'>{tooltipMessage}</span> : ""}
+                    disableHoverListener={!isDisabled} // Tooltip should only be shown if disabled
+                    arrow
+                >
+                    <div className='w-1/3'>
+                        <Select
+                            options={options}
+                            placeholder='i.e. police, protest'
+                            className='w-full'
+                            onChange={handleKeyWordSelect}
+                            styles={customSelectStyles}
+                            isDisabled={isDisabled}
+                        />
+                    </div>
+                </Tooltip>
 
-            <button onClick={handleButtonClick}
-                className='flex items-center py-3 px-5 rounded-3xl gap-2 bg-colorSearchButton text-white hover:text-black transition hover:bg-white'
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-            >
-                <img src={isHovered ? SearchBlackIcon : SearchIcon} alt='Search Icon' className='h-5' />
-                Search
-            </button>
+                <button onClick={handleButtonClick}
+                    className='flex items-center py-3 px-5 rounded-3xl gap-2 bg-colorSearchButton text-white hover:text-black transition hover:bg-white'
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    <img src={isHovered ? SearchBlackIcon : SearchIcon} alt='Search Icon' className='h-5' />
+                    Search
+                </button>
+            </div>
+
+            {/* Mobile view */}
+            <div className='md:hidden h-28 text-2xl bg-colorMapHeaderBG rounded-2xl flex flex-col justify-around mx-auto items-center'>
+                <span className='font-bold text-3xl'>Select a word</span>
+
+                {/* Show select only when news source is selected */}
+
+                <Tooltip
+                    title={isDisabled ? <span className='text-lg'>{tooltipMessage}</span> : ""}
+                    disableHoverListener={!isDisabled} // Tooltip should only be shown if disabled
+                    arrow
+                >
+                    <div className='w-1/3'>
+                        <Select
+                            options={options}
+                            placeholder='i.e. police, protest'
+                            className='w-full'
+                            onChange={handleKeyWordSelect}
+                            styles={customSelectStyles}
+                            isDisabled={isDisabled}
+                        />
+                    </div>
+                </Tooltip>
+
+                <button onClick={handleButtonClick}
+                    className='flex items-center py-3 px-5 rounded-3xl gap-2 bg-colorSearchButton text-white hover:text-black transition hover:bg-white'
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    <img src={isHovered ? SearchBlackIcon : SearchIcon} alt='Search Icon' className='h-5' />
+                    Search
+                </button>
+            </div>
         </div>
     );
 }

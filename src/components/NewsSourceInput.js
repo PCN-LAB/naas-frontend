@@ -245,68 +245,70 @@ function NewsSourceInput() {
     };
 
     return (
-        <div className='h-30 w-1/2 mx-auto flex flex-col'>
-            <p className='h-1/5 font-bold text-3xl'>Choose a source</p>
-            <div className='h-4/5 flex flex-1 w-full items-center gap-3 text-2xl'>
+        <div>
+            {/* Desktop view */}
+            <div className='hidden h-30 w-1/2 mx-auto md:flex flex-col'>
+                <p className='h-1/5 font-bold text-3xl'>Choose a source</p>
+                <div className='h-4/5 flex flex-1 w-full items-center gap-3 text-2xl'>
 
-                <div className='h-20 flex-1 flex justify-evenly items-center border-8 border-colorMapHeaderBG rounded-lg bg-white'>
-                    <div className='flex gap-2 items-center'>
-                        <input
-                            className='h-5 w-5 hover:cursor-pointer'
-                            type='radio'
-                            id='Dawn'
-                            value='Dawn'
-                            checked={selectedNewsSource === 'Dawn'}
-                            onChange={() => handleRadioClick('Dawn')} // Add onChange handler to update the selected value
-                        />
-                        <label className='h-fit' htmlFor='Dawn'>Dawn</label>
+                    <div className='h-20 flex-1 flex justify-evenly items-center border-8 border-colorMapHeaderBG rounded-lg bg-white'>
+                        <div className='flex gap-2 items-center'>
+                            <input
+                                className='h-5 w-5 hover:cursor-pointer'
+                                type='radio'
+                                id='Dawn'
+                                value='Dawn'
+                                checked={selectedNewsSource === 'Dawn'}
+                                onChange={() => handleRadioClick('Dawn')} // Add onChange handler to update the selected value
+                            />
+                            <label className='h-fit' htmlFor='Dawn'>Dawn</label>
+                        </div>
+
+                        <div className='flex gap-2 items-center'>
+                            <input
+                                className='h-5 w-5 hover:cursor-pointer'
+                                type='radio'
+                                id='Tribune'
+                                value='Tribune'
+                                checked={selectedNewsSource === 'Tribune'}
+                                onChange={() => handleRadioClick('Tribune')} // Add onChange handler to update the selected value
+                            />
+                            <label className='h-fit' htmlFor='Tribune'>Tribune</label>
+                        </div>
                     </div>
 
-                    <div className='flex gap-2 items-center'>
-                        <input
-                            className='h-5 w-5 hover:cursor-pointer'
-                            type='radio'
-                            id='Tribune'
-                            value='Tribune'
-                            checked={selectedNewsSource === 'Tribune'}
-                            onChange={() => handleRadioClick('Tribune')} // Add onChange handler to update the selected value
-                        />
-                        <label className='h-fit' htmlFor='Tribune'>Tribune</label>
+                    <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
+                        <Dropdown
+                            title={getTimeTitle()}
+                            className='text-left h-16 text-gray-500 p-4 text-2xl overflow-x-auto whitespace-nowrap w-72 custom-scrollbar overflow-y-hidden'
+                            position='right'
+                        >
+                            <Dropdown.Item className='text-xl px-16 text-center py-2'>
+                                Focus Time
+                                <Dropdown.Submenu position='right' className='w-fit'>
+                                    <Dropdown.Item>
+                                        <DateRangePicker value={focusTimeValue} onChange={handleFocusDateChange} />
+                                    </Dropdown.Item>
+                                </Dropdown.Submenu>
+                            </Dropdown.Item>
+                            <Dropdown.Item className='text-xl px-16 py-2'>
+                                Publication Time
+                                <Dropdown.Submenu position='right' className='w-fit'>
+                                    <Dropdown.Item>
+                                        <DateRangePicker value={publicationTimeValue} onChange={handlePublicationDateChange} />
+                                    </Dropdown.Item>
+                                </Dropdown.Submenu>
+                            </Dropdown.Item>
+                        </Dropdown>
                     </div>
-                </div>
 
-                <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
-                    <Dropdown
-                        title={getTimeTitle()}
-                        className='text-left h-16 text-gray-500 p-4 text-2xl overflow-x-auto whitespace-nowrap w-72 custom-scrollbar overflow-y-hidden'
-                        position='right'
+                    <Tooltip
+                        title={!showRegionsAndKeyWords ? <span className='text-xl'>Please select a source and time</span> : ""}
+                        placement='top'
+                        disableHoverListener={!!showRegionsAndKeyWords}
                     >
-                        <Dropdown.Item className='text-xl px-16 text-center py-2'>
-                            Focus Time
-                            <Dropdown.Submenu position='right' className='w-fit'>
-                                <Dropdown.Item>
-                                    <DateRangePicker value={focusTimeValue} onChange={handleFocusDateChange} />
-                                </Dropdown.Item>
-                            </Dropdown.Submenu>
-                        </Dropdown.Item>
-                        <Dropdown.Item className='text-xl px-16 py-2'>
-                            Publication Time
-                            <Dropdown.Submenu position='right' className='w-fit'>
-                                <Dropdown.Item>
-                                    <DateRangePicker value={publicationTimeValue} onChange={handlePublicationDateChange} />
-                                </Dropdown.Item>
-                            </Dropdown.Submenu>
-                        </Dropdown.Item>
-                    </Dropdown>
-                </div>
-
-                <Tooltip
-                    title={!showRegionsAndKeyWords ? <span className='text-xl'>Please select a source and time</span> : ""}
-                    placement='top'
-                    disableHoverListener={!!showRegionsAndKeyWords}
-                >
-                    <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
-                        {/* <Select
+                        <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
+                            {/* <Select
                             options={regions.map(region => ({ value: region.name, label: region.name }))}
                             value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
                             placeholder="Choose Region"
@@ -314,16 +316,100 @@ function NewsSourceInput() {
                             onChange={(e) => dispatch(setRegionSelected(e.value))}
                             isDisabled={!showRegionsAndKeyWords}
                         /> */}
-                        <Select
-                            options={groupedOptions}
+                            <Select
+                                options={groupedOptions}
+                                value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
+                                placeholder="Choose Region"
+                                styles={customSelectStyles}
+                                onChange={(e) => dispatch(setRegionSelected(e.value))}
+                                isDisabled={!showRegionsAndKeyWords}
+                            />
+                        </div>
+                    </Tooltip>
+                </div>
+            </div>
+
+            {/* Mobile view */}
+            <div className='md:hidden h-30 w-1/2 mx-auto flex flex-col'>
+                <p className='h-1/5 font-bold text-lg text-center'>Choose a source</p>
+                <div className='h-4/5 flex flex-col flex-1 w-full items-center gap-3 text-2xl'>
+
+                    <div className='h-20 flex-1 flex justify-evenly items-center border-8 border-colorMapHeaderBG rounded-lg bg-white'>
+                        <div className='flex gap-2 items-center'>
+                            <input
+                                className='h-5 w-5 hover:cursor-pointer'
+                                type='radio'
+                                id='Dawn'
+                                value='Dawn'
+                                checked={selectedNewsSource === 'Dawn'}
+                                onChange={() => handleRadioClick('Dawn')} // Add onChange handler to update the selected value
+                            />
+                            <label className='h-fit' htmlFor='Dawn'>Dawn</label>
+                        </div>
+
+                        <div className='flex gap-2 items-center'>
+                            <input
+                                className='h-5 w-5 hover:cursor-pointer'
+                                type='radio'
+                                id='Tribune'
+                                value='Tribune'
+                                checked={selectedNewsSource === 'Tribune'}
+                                onChange={() => handleRadioClick('Tribune')} // Add onChange handler to update the selected value
+                            />
+                            <label className='h-fit' htmlFor='Tribune'>Tribune</label>
+                        </div>
+                    </div>
+
+                    <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
+                        <Dropdown
+                            title={getTimeTitle()}
+                            className='text-left h-16 text-gray-500 p-4 text-2xl overflow-x-auto whitespace-nowrap w-72 custom-scrollbar overflow-y-hidden'
+                            position='right'
+                        >
+                            <Dropdown.Item className='text-xl px-16 text-center py-2'>
+                                Focus Time
+                                <Dropdown.Submenu position='right' className='w-fit'>
+                                    <Dropdown.Item>
+                                        <DateRangePicker value={focusTimeValue} onChange={handleFocusDateChange} />
+                                    </Dropdown.Item>
+                                </Dropdown.Submenu>
+                            </Dropdown.Item>
+                            <Dropdown.Item className='text-xl px-16 py-2'>
+                                Publication Time
+                                <Dropdown.Submenu position='right' className='w-fit'>
+                                    <Dropdown.Item>
+                                        <DateRangePicker value={publicationTimeValue} onChange={handlePublicationDateChange} />
+                                    </Dropdown.Item>
+                                </Dropdown.Submenu>
+                            </Dropdown.Item>
+                        </Dropdown>
+                    </div>
+
+                    <Tooltip
+                        title={!showRegionsAndKeyWords ? <span className='text-xl'>Please select a source and time</span> : ""}
+                        placement='top'
+                        disableHoverListener={!!showRegionsAndKeyWords}
+                    >
+                        <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
+                            {/* <Select
+                            options={regions.map(region => ({ value: region.name, label: region.name }))}
                             value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
                             placeholder="Choose Region"
                             styles={customSelectStyles}
                             onChange={(e) => dispatch(setRegionSelected(e.value))}
                             isDisabled={!showRegionsAndKeyWords}
-                        />
-                    </div>
-                </Tooltip>
+                        /> */}
+                            <Select
+                                options={groupedOptions}
+                                value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
+                                placeholder="Choose Region"
+                                styles={customSelectStyles}
+                                onChange={(e) => dispatch(setRegionSelected(e.value))}
+                                isDisabled={!showRegionsAndKeyWords}
+                            />
+                        </div>
+                    </Tooltip>
+                </div>
             </div>
         </div>
     );
