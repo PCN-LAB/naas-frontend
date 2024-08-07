@@ -195,7 +195,7 @@ function NewsSourceInput() {
         }
         else {
             setFocusTime([])
-            setFocusTimeValue(null);
+            setFocusTimeValue([]);
         }
     };
 
@@ -207,7 +207,7 @@ function NewsSourceInput() {
         }
         else {
             setPublicationTime([])
-            setPublicationTimeValue(null);
+            setPublicationTimeValue([]);
         }
     };
 
@@ -216,7 +216,7 @@ function NewsSourceInput() {
     };
 
     const getTimeTitle = () => {
-        if (focusTimeValue && publicationTimeValue) {
+        if (focusTimeValue || publicationTimeValue) {
             // Assuming focusTimeValue and publicationTimeValue are arrays of Date objects
             const formattedFocusTime = focusTimeValue ? formatDate(focusTimeValue[0]) + ' - ' + formatDate(focusTimeValue[1]) : '';
             const formattedPublicationTime = publicationTimeValue ? formatDate(publicationTimeValue[0]) + ' - ' + formatDate(publicationTimeValue[1]) : '';
@@ -330,14 +330,14 @@ function NewsSourceInput() {
             </div>
 
             {/* Mobile view */}
-            <div className='md:hidden h-30 w-1/2 mx-auto flex flex-col'>
+            <div className='md:hidden h-30 mx-auto flex flex-col ml-16'>
                 <p className='h-1/5 font-bold text-lg text-center'>Choose a source</p>
-                <div className='h-4/5 flex flex-col flex-1 w-full items-center gap-3 text-2xl'>
+                <div className='h-4/5 flex flex-col flex-1 w-full items-center gap-3 text-md'>
 
-                    <div className='h-20 flex-1 flex justify-evenly items-center border-8 border-colorMapHeaderBG rounded-lg bg-white'>
-                        <div className='flex gap-2 items-center'>
+                    <div className='py-2 w-11/12 flex-1 flex justify-evenly items-center border-8 border-colorMapHeaderBG rounded-lg bg-white'>
+                        <div className='flex gap-1 items-center'>
                             <input
-                                className='h-5 w-5 hover:cursor-pointer'
+                                className='h-3 w-3 hover:cursor-pointer'
                                 type='radio'
                                 id='Dawn'
                                 value='Dawn'
@@ -347,9 +347,9 @@ function NewsSourceInput() {
                             <label className='h-fit' htmlFor='Dawn'>Dawn</label>
                         </div>
 
-                        <div className='flex gap-2 items-center'>
+                        <div className='flex gap-1 items-center'>
                             <input
-                                className='h-5 w-5 hover:cursor-pointer'
+                                className='h-3 w-3 hover:cursor-pointer'
                                 type='radio'
                                 id='Tribune'
                                 value='Tribune'
@@ -360,23 +360,23 @@ function NewsSourceInput() {
                         </div>
                     </div>
 
-                    <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
+                    <div className='w-11/12 flex-1 border-8 border-colorMapHeaderBG rounded-lg bg-white'>
                         <Dropdown
                             title={getTimeTitle()}
-                            className='text-left h-16 text-gray-500 p-4 text-2xl overflow-x-auto whitespace-nowrap w-72 custom-scrollbar overflow-y-hidden'
+                            className='text-left h-16 text-gray-500 p-4 overflow-x-auto whitespace-nowrap w-64 custom-scrollbar overflow-y-hidden'
                             position='right'
                         >
-                            <Dropdown.Item className='text-xl px-16 text-center py-2'>
+                            <Dropdown.Item className='text-md px-10 text-center py-2'>
                                 Focus Time
-                                <Dropdown.Submenu position='right' className='w-fit'>
+                                <Dropdown.Submenu position='bottom' className='w-fit'>
                                     <Dropdown.Item>
-                                        <DateRangePicker value={focusTimeValue} onChange={handleFocusDateChange} />
+                                        <DateRangePicker className='text-xs' value={focusTimeValue} onChange={handleFocusDateChange} />
                                     </Dropdown.Item>
                                 </Dropdown.Submenu>
                             </Dropdown.Item>
-                            <Dropdown.Item className='text-xl px-16 py-2'>
+                            <Dropdown.Item className='text-md px-10 py-2'>
                                 Publication Time
-                                <Dropdown.Submenu position='right' className='w-fit'>
+                                <Dropdown.Submenu position='bottom' className='w-fit'>
                                     <Dropdown.Item>
                                         <DateRangePicker value={publicationTimeValue} onChange={handlePublicationDateChange} />
                                     </Dropdown.Item>
@@ -390,15 +390,7 @@ function NewsSourceInput() {
                         placement='top'
                         disableHoverListener={!!showRegionsAndKeyWords}
                     >
-                        <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
-                            {/* <Select
-                            options={regions.map(region => ({ value: region.name, label: region.name }))}
-                            value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
-                            placeholder="Choose Region"
-                            styles={customSelectStyles}
-                            onChange={(e) => dispatch(setRegionSelected(e.value))}
-                            isDisabled={!showRegionsAndKeyWords}
-                        /> */}
+                        <div className='w-11/12 h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
                             <Select
                                 options={groupedOptions}
                                 value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
