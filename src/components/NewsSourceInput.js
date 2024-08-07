@@ -244,6 +244,36 @@ function NewsSourceInput() {
         }),
     };
 
+    const customSelectStylesRegion = {
+        control: (provided) => ({
+            ...provided,
+            padding: '10px',
+            cursor: 'pointer',
+            overflow: 'hidden', // Hide overflow
+            '&:hover': {
+                cursor: 'pointer'
+            },
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            overflow: 'hidden', // Hide overflow
+            textOverflow: 'ellipsis', // Add ellipsis if text overflows
+            whiteSpace: 'nowrap', // Prevent wrapping of text
+        }),
+        input: (provided) => ({
+            ...provided,
+            overflow: 'hidden', // Hide overflow
+            textOverflow: 'ellipsis', // Add ellipsis if text overflows
+            whiteSpace: 'nowrap', // Prevent wrapping of text
+        }),
+        menu: (provided) => ({
+            ...provided,
+            maxHeight: '200px', // Optional: Set a max height for the dropdown menu
+            overflowY: 'auto', // Enable vertical scrolling if content overflows
+        }),
+    };
+
+
     return (
         <div>
             {/* Desktop view */}
@@ -308,19 +338,11 @@ function NewsSourceInput() {
                         disableHoverListener={!!showRegionsAndKeyWords}
                     >
                         <div className='h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
-                            {/* <Select
-                            options={regions.map(region => ({ value: region.name, label: region.name }))}
-                            value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
-                            placeholder="Choose Region"
-                            styles={customSelectStyles}
-                            onChange={(e) => dispatch(setRegionSelected(e.value))}
-                            isDisabled={!showRegionsAndKeyWords}
-                        /> */}
                             <Select
                                 options={groupedOptions}
                                 value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
                                 placeholder="Choose Region"
-                                styles={customSelectStyles}
+                                styles={customSelectStylesRegion}
                                 onChange={(e) => dispatch(setRegionSelected(e.value))}
                                 isDisabled={!showRegionsAndKeyWords}
                             />
