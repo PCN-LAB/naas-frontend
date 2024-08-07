@@ -46,9 +46,9 @@ const Chatbot = () => {
             {(!showChatbot) && (
                 <button
                     onClick={toggleChatbot}
-                    className="fixed bottom-0 right-0 mr-8 mb-2"
+                    className="fixed bottom-0 right-0 md:mr-8 md:mb-2 mr-1 mb-1"
                 >
-                    <img src={ChatBotLogo} alt="Chatbot" className='h-20' />
+                    <img src={ChatBotLogo} alt="Chatbot" className='md:h-20 h-10' />
                 </button>
             )}
 

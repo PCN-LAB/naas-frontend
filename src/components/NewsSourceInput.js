@@ -385,22 +385,18 @@ function NewsSourceInput() {
                         </Dropdown>
                     </div>
 
-                    <Tooltip
-                        title={!showRegionsAndKeyWords ? <span className='text-xl'>Please select a source and time</span> : ""}
-                        placement='top'
-                        disableHoverListener={!!showRegionsAndKeyWords}
-                    >
-                        <div className='w-11/12 h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
-                            <Select
-                                options={groupedOptions}
-                                value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
-                                placeholder="Choose Region"
-                                styles={customSelectStyles}
-                                onChange={(e) => dispatch(setRegionSelected(e.value))}
-                                isDisabled={!showRegionsAndKeyWords}
-                            />
-                        </div>
-                    </Tooltip>
+
+                    <div className='w-11/12 h-full flex-1 border-8 border-colorMapHeaderBG rounded-lg'>
+                        <Select
+                            options={groupedOptions}
+                            value={regionSelected ? { value: regionSelected, label: regionSelected } : null}
+                            placeholder="Choose Region"
+                            styles={customSelectStyles}
+                            onChange={(e) => dispatch(setRegionSelected(e.value))}
+                            isDisabled={!showRegionsAndKeyWords}
+                        />
+                    </div>
+
                 </div>
             </div>
         </div>

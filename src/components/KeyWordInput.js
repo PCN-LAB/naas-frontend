@@ -171,22 +171,16 @@ function KeyWordInput() {
 
                 {/* Show select only when news source is selected */}
 
-                <Tooltip
-                    title={isDisabled ? <span className='text-lg'>{tooltipMessage}</span> : ""}
-                    disableHoverListener={!isDisabled} // Tooltip should only be shown if disabled
-                    arrow
-                >
-                    <div className='md:w-1/3 w-11/12 text-sm'>
-                        <Select
-                            options={options}
-                            placeholder='i.e. police, protest'
-                            className='w-full'
-                            onChange={handleKeyWordSelect}
-                            styles={customSelectStylesMobile}
-                            isDisabled={isDisabled}
-                        />
-                    </div>
-                </Tooltip>
+                <div className='md:w-1/3 w-11/12 text-sm'>
+                    <Select
+                        options={options}
+                        placeholder='i.e. police, protest'
+                        className='w-full'
+                        onChange={handleKeyWordSelect}
+                        styles={customSelectStylesMobile}
+                        isDisabled={isDisabled}
+                    />
+                </div>
 
                 <button onClick={handleButtonClick}
                     className='flex items-center py-1 px-2 rounded-3xl gap-2 bg-colorSearchButton text-sm text-white hover:text-black transition hover:bg-white'
