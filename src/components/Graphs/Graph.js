@@ -120,11 +120,15 @@ function Graphs() {
                 const aggregatedData = aggregateCounts(barData.x, barData.y);
                 const labels = Object.keys(aggregatedData);
                 const counts = Object.values(aggregatedData);
-    
+
+                // Map colors from the DashedLineChart
+                const colorMap = new Map(data.keywords.map((keyword, index) => [keyword, data.colors[index]]));
+                const backgroundColors = labels.map(label => colorMap.get(label) || generateUniqueColors(1)[0]);
+
                 const datasets = [{
                     label: 'Article Count',
                     data: counts,
-                    backgroundColor: generateUniqueColors(labels.length),
+                    backgroundColor: backgroundColors,
                 }];
     
                 setBarGraphData({ labels, datasets });
@@ -150,8 +154,6 @@ function Graphs() {
             return acc;
         }, {});
     };
-    
-   
     
     const handleRemoveDataset = (datasetId) => {
         setData((prevData) => ({

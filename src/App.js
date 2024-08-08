@@ -37,8 +37,6 @@ function App() {
             <Route path='/ContactUs' element={<ContactUs />} />
             <Route path='/UserProfile' element={<UserProfile />} />
             <Route path='/Graphs' element={<Graph />}/>
-            <Route path='/History' element={<History />}/>
-            <Route path='/HelpAndSupport' element={<HelpAndSupport />}/>
         </Routes>
         </BrowserRouter>
       </Provider>
