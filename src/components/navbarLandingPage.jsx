@@ -94,7 +94,7 @@ const NavbarLandingPage = ({ isColored }) => {
       <div className="flex items-center space-x-6">
         <div className="hidden md:flex space-x-6">
           <a href="#home" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">HOME</a>
-          <a href="#pages" onClick={scrollToMap}  className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">Map</a>
+          <a href="#pages" onClick={scrollToMap}  className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">MAP</a>
           <a href="#contact" onClick={GoToContactUS} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">CONTACT</a>
           <a href="#about" onClick={scrollToAboutUs} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">ABOUT US</a>
         </div>
