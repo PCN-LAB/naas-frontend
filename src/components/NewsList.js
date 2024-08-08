@@ -128,8 +128,14 @@ function NewsList() {
 
     const setNewsState = (data) => {
         // set news
-
         const formattedNews = data.map(item => {
+            console.log(item);
+            const averageBias = (parseFloat(item.hate_speech) + parseFloat(item.political_bias)
+                + parseFloat(item.racial_bias)) / 3;
+
+            // Log the average bias score
+            console.log(`Average Bias Score: ${averageBias}`);
+
             return {
                 title: item.header,
                 summary: `Sentiment: ${item.sentiment}, Location Type: ${item.locationType}`,
@@ -137,7 +143,8 @@ function NewsList() {
                 publicationTime: item.creationDate,
                 topics: item.topics.replace(/[{}]/g, '').split(',').map(topic => topic.trim()), // Convert topics string to array
                 location: item.focusLocation,
-                isBiased: item.sentiment > 0.5 
+                isBiased: ((parseFloat(item.hate_speech) + parseFloat(item.political_bias)
+                    + parseFloat(item.racial_bias)) / 3) > 0.65
             };
         });
 
