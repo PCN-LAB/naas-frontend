@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import NAAS_logo from '../assets/NAAS_logo.png';
 
@@ -6,6 +6,9 @@ const NavbarLandingPage = ({ isColored }) => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Create a ref for the "ABOUT US" section
+  const aboutUsRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,26 +41,37 @@ const NavbarLandingPage = ({ isColored }) => {
 
   const gotoSignIn = () => {
     navigate("/SignIn");
-  }
+  };
 
   const gotoSignUp = () => {
     navigate("/SignUp");
-  }
+  };
 
   const GoToContactUS = () => {
-    navigate("/ContactUs"); 
-  }
+    navigate("/ContactUs");
+  };
 
-  const GoToLandingPage=()=>{
-    navigate("/"); 
-  }
-  
+  const GoToLandingPage = () => {
+    navigate("/");
+  };
+
+  // Function to scroll to the "ABOUT US" section
+  const scrollToAboutUs = () => {
+    if (aboutUsRef.current) {
+      aboutUsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const scrollLeft = () => {
     document.getElementById('nav-links').scrollBy({ left: -100, behavior: 'smooth' });
-  }
+  };
 
   const scrollRight = () => {
     document.getElementById('nav-links').scrollBy({ left: 100, behavior: 'smooth' });
+  };
+
+  const scrollToMap=()=>{
+    navigate("/map-input")
   }
 
   return (
@@ -80,19 +94,19 @@ const NavbarLandingPage = ({ isColored }) => {
       <div className="flex items-center space-x-6">
         <div className="hidden md:flex space-x-6">
           <a href="#home" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">HOME</a>
-          <a href="#pages" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">PAGES</a>
+          <a href="#pages" onClick={scrollToMap}  className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">MAP</a>
           <a href="#contact" onClick={GoToContactUS} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">CONTACT</a>
-          <a href="#about" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">ABOUT US</a>
+          <a href="#about" onClick={scrollToAboutUs} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">ABOUT US</a>
         </div>
         <div className="flex md:hidden items-center space-x-2">
           <button onClick={scrollLeft} className="text-white focus:outline-none">
             &#9664;
           </button>
           <div id="nav-links" className="flex space-x-6 overflow-x-scroll no-scrollbar">
-            <a href="#home"  onClick={GoToLandingPage} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">HOME</a>
+            <a href="#home" onClick={GoToLandingPage} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">HOME</a>
             <a href="#pages" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">PAGES</a>
             <a href="#contact" onClick={GoToContactUS} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">CONTACT</a>
-            <a href="#about" className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">ABOUT US</a>
+            <a href="#about" onClick={scrollToAboutUs} className="text-white hover:text-gray-300 no-underline font-Montserrat text-lg">ABOUT US</a>
           </div>
           <button onClick={scrollRight} className="text-white focus:outline-none">
             &#9654;

@@ -122,6 +122,7 @@ function LandingPage() {
     const navigate = useNavigate();
     const secondPortionRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const aboutUsRef = useRef(null);
 
     const handlePrevious = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? cardData.length - 1 : prevIndex - 1));
@@ -363,8 +364,8 @@ function LandingPage() {
       )}
     </div>
 
-    {/* Display vertically on smaller screens */}
-    <div className="flex flex-col items-center gap-8 mt-14 md:hidden">
+    {/* Meet our Team */}
+    <div   className="flex flex-col items-center gap-8 mt-14 md:hidden">
       {teamMembers.map((member, index) => (
         <div key={index} className="flex flex-col items-center gap-4 w-full mb-8">
           <div className="w-36 h-36 flex justify-center items-center">
@@ -395,9 +396,8 @@ function LandingPage() {
 </div>
 
 
-
    {/* footer */}
-<div className="relative w-full h-auto px-4 md:px-[111px] pt-12 pb-[80px] bg-[#4c7ca3] border justify-center items-center inline-flex" style={{ marginTop: "4%" }}>
+<div  id="about" ref={aboutUsRef} className="relative w-full h-auto px-4 md:px-[111px] pt-12 pb-[80px] bg-[#4c7ca3] border justify-center items-center inline-flex" style={{ marginTop: "4%" }}>
 <div className="absolute top-3 left-1/2 transform -translate-x-[100%] md:left-[15%]">
   <img src={PCN} alt="PCN Logo" />
 </div>

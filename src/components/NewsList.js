@@ -130,13 +130,6 @@ function NewsList() {
     const setNewsState = (data) => {
         // set news
         const formattedNews = data.map(item => {
-            console.log(item);
-            const averageBias = (parseFloat(item.hate_speech) + parseFloat(item.political_bias)
-                + parseFloat(item.racial_bias)) / 3;
-
-            // Log the average bias score
-            console.log(`Average Bias Score: ${averageBias}`);
-
             return {
                 title: item.header,
                 summary: `Sentiment: ${item.sentiment}, Location Type: ${item.locationType}`,
