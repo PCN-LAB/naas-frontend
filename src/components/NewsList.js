@@ -127,6 +127,7 @@ function NewsList() {
             newsItem.topics.some(topic => keywords.includes(topic))
         );
         setNews(filteredNews);
+        dispatch(setNewsRedux(filteredNews));
     }, [keywords])
 
     const setNewsState = (data) => {
