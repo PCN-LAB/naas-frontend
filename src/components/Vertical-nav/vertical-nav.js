@@ -53,7 +53,7 @@ const Sidebar = ({ children }) => {
             icon: <img src={ChatbotIcon} alt="Chatbot" className="icon-bold w-7.5 h-10" />
         },
         {
-            path: "/productList",
+            path: "/HelpAndSupport",
             name: "Help Support",
             icon: <FluentPersonSupport16Regular className="icon-bold  w-8 h-8" />
         },

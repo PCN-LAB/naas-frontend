@@ -16,14 +16,30 @@ const VerifyEmail = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
     const verificationCode = code.join('');
-    console.log(verificationCode);
-  
+    const email = localStorage.getItem('userEmail');
 
-  };
+    try {
+        const response = await fetch('http://localhost:3002/auth/verify-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, code: verificationCode }),
+        });
+
+        if (response.ok) {
+            navigate('/map-input');
+        } else {
+            const errorData = await response.json();
+            alert(`Verification failed: ${errorData.error}`);
+        }
+    } catch (error) {
+        console.error("Error verifying email:", error);
+    }
+};
 
   const gotoLandingPage = () => {
     navigate("/LandingPage"); 
@@ -51,7 +67,7 @@ const VerifyEmail = () => {
         </form>
         <button className="mt-2 text-custom-blue underline hover:text-blue-700">Resend Code</button>
         <button className="w-full bg-custom-blue hover:bg-gray-500 text-white py-2 rounded-3xl pt-2 pb-2 mt-3 text-lg" style={{ marginTop: "5%" }}
-         onClck={handleSubmit}
+         onClick={handleSubmit}
         >
           Verify
         </button>

@@ -15,7 +15,8 @@ import Error404 from './pages/error404'
 import Feedback from './pages/Feedback'
 import ContactUs from './pages/ContactUs'
 import UserProfile from './pages/UserProfile';
-import History from './components/History';
+import History from './components/History';import HelpAndSupport from './pages/HelpandSupport'
+
 import Graph from './components/Graphs/Graph'
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path='/UserProfile' element={<UserProfile />} />
             <Route path='/Graphs' element={<Graph />}/>
             <Route path='/History' element={<History />}/>
+            <Route path='/HelpAndSupport' element={<HelpAndSupport />}/>
         </Routes>
         </BrowserRouter>
       </Provider>

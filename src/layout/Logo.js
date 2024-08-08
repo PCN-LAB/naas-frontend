@@ -3,7 +3,7 @@ import logo from '../assets/NAaas-logo.png';
 
 function Logo() {
     return (
-        <div className='md:pl-20 h-20 flex items-center'>
+        <div className='md:pl-20 md:h-20 h-12 flex items-center'>
             <img 
                 src={logo} 
                 alt="logo" 

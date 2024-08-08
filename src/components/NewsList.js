@@ -36,19 +36,16 @@ function NewsList() {
     useEffect(() => {
         const sortNews = () => {
             const sortedNews = [...news].sort((a, b) => {
-                if (sortBy === 'ascending') {
-                    if (sortField === 'location') {
-                        return a.location.localeCompare(b.location);
-                    } else if (sortField === 'publicationDate') {
-                        return new Date(a.publicationTime) - new Date(b.publicationTime);
-                    }
-                } else {
-                    if (sortField === 'location') {
-                        return b.location.localeCompare(a.location);
-                    } else if (sortField === 'publicationDate') {
-                        return new Date(b.publicationTime) - new Date(a.publicationTime);
-                    }
+                if (sortField === 'publicationDate') {
+                    return sortBy === 'ascending'
+                        ? new Date(a.publicationTime) - new Date(b.publicationTime)
+                        : new Date(b.publicationTime) - new Date(a.publicationTime);
+                } else if (sortField === 'location') {
+                    return sortBy === 'ascending'
+                        ? a.location.localeCompare(b.location)
+                        : b.location.localeCompare(a.location);
                 }
+                return 0;
             });
 
             return sortedNews;
@@ -132,8 +129,14 @@ function NewsList() {
 
     const setNewsState = (data) => {
         // set news
-
         const formattedNews = data.map(item => {
+            console.log(item);
+            const averageBias = (parseFloat(item.hate_speech) + parseFloat(item.political_bias)
+                + parseFloat(item.racial_bias)) / 3;
+
+            // Log the average bias score
+            console.log(`Average Bias Score: ${averageBias}`);
+
             return {
                 title: item.header,
                 summary: `Sentiment: ${item.sentiment}, Location Type: ${item.locationType}`,
@@ -141,7 +144,8 @@ function NewsList() {
                 publicationTime: item.creationDate,
                 topics: item.topics.replace(/[{}]/g, '').split(',').map(topic => topic.trim()), // Convert topics string to array
                 location: item.focusLocation,
-                isBiased: item.sentiment > 0.5 
+                isBiased: ((parseFloat(item.hate_speech) + parseFloat(item.political_bias)
+                    + parseFloat(item.racial_bias)) / 3) > 0.65
             };
         });
 
@@ -157,31 +161,48 @@ function NewsList() {
         return `${year}-${month}-${day}`;
     };
 
+    // Dynamic sort options based on the sort field
+    const sortOptions = sortField === 'publicationDate'
+        ? [
+            { value: 'ascending', label: 'Oldest' },
+            { value: 'descending', label: 'Latest' },
+        ]
+        : [
+            { value: 'ascending', label: 'Ascending' },
+            { value: 'descending', label: 'Descending' },
+        ];
+
     return (
         <div className='flex flex-col gap-5'>
             {/* Sort by container */}
             <div className='flex gap-10 items-center'>
                 <span className='text-xl font-semibold'>
-                    Sort by :
+                    Sort by:
                 </span>
                 <Select
                     options={[
-                        { value: 'ascending', label: 'Ascending' },
-                        { value: 'descending', label: 'Descending' },
-                    ]}
-                    defaultValue={{ value: 'descending', label: 'Descending' }}
-                    styles={customSelectStyles}
-                    onChange={(selectedOption) => setSortBy(selectedOption.value)}
-                />
-
-                <Select
-                    options={[
-                        { value: 'location', label: 'Location' },
                         { value: 'publicationDate', label: 'Publication Date' },
+                        { value: 'location', label: 'Location' },
                     ]}
                     defaultValue={{ value: 'publicationDate', label: 'Publication Date' }}
                     styles={customSelectStyles}
                     onChange={(selectedOption) => setSortField(selectedOption.value)}
+                />
+
+                <Select
+                    options={sortField === 'publicationDate'
+                        ? [
+                            { value: 'ascending', label: 'Oldest' },
+                            { value: 'descending', label: 'Latest' },
+                        ]
+                        : [
+                            { value: 'ascending', label: 'Ascending' },
+                            { value: 'descending', label: 'Descending' },
+                        ]
+                    }
+                    value={{ value: sortBy, label: sortBy === 'ascending' ? (sortField === 'publicationDate' ? 'Oldest' : 'Ascending') : (sortField === 'publicationDate' ? 'Latest' : 'Descending') }}
+                    styles={customSelectStyles}
+                    onChange={(selectedOption) => setSortBy(selectedOption.value)}
                 />
             </div>
 
