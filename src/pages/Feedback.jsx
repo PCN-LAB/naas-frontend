@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { FaRegSmile, FaRegMeh, FaRegFrown, FaRegAngry, FaRegLaugh } from 'react-icons/fa';
 import logo from '../assets/NAaas-logo.png';
 import Help from '../assets/NeedHelp.png';
-import background from '../assets/background.png'; 
+import background from '../assets/background.png';
 import thumbsup from '../assets/ThumbsUp.png';
-import CloseIcon from '@mui/icons-material/Close'; 
+import CloseIcon from '@mui/icons-material/Close';
 import Sidebar from '../components/Vertical-nav/vertical-nav';
 
 const Feedback = () => {
@@ -12,6 +13,7 @@ const Feedback = () => {
   const [feedback, setFeedback] = useState('');
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [selectedMood, setSelectedMood] = useState(null);
 
   const handleRatingClick = (value) => {
     setRating(value);
@@ -41,16 +43,38 @@ const Feedback = () => {
     setIsPopupVisible(false);
   };
 
+  const handleMoodClick = (mood) => {
+    setSelectedMood(mood);
+  };
+
   return (
     <div className="flex min-h-screen" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <Sidebar />
       <div className="flex-grow relative flex flex-col items-center p-0">
         <div className={`w-full h-full ${isPopupVisible ? 'blur-sm' : ''}`}>
-          <div className="w-full h-60 bg-gradient-to-b from-colorVerticalNav to-slate-200 flex  flex-col items-start justify-start p-4">
-            <img src={logo} alt="Logo" className="h-16 md:h-24 mr-4 " style={{marginLeft:"-9%"}}/>
+          <div className="w-full h-60 bg-gradient-to-b from-colorVerticalNav to-slate-200 flex flex-col items-start justify-start p-4">
+            <img src={logo} alt="Logo" className="h-16 md:h-24 mr-4" style={{ marginLeft: "-9%" }} />
             <div className="flex flex-col items-start">
               <div className="text-black text-2xl md:text-3xl font-bold">How do you feel?</div>
               <div className="text-black text-lg md:text-xl">Tell us about your experience, and help us improve the website! :)</div>
+              <div className="flex items-center space-x-4 mt-2">
+                {[{icon: FaRegLaugh, mood: 'happy'}, {icon: FaRegSmile, mood: 'smile'}, {icon: FaRegMeh, mood: 'neutral'}, {icon: FaRegFrown, mood: 'sad'}, {icon: FaRegAngry, mood: 'angry'}].map(({icon: Icon, mood}) => (
+                  <div
+                    key={mood}
+                    className={`p-2 rounded-lg border-2 ${selectedMood === mood ? 'bg-custom-blue border-none' : 'border-custom-blue'} flex items-center justify-center cursor-pointer`}
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      backgroundColor: selectedMood === mood ? '#002A5C' : 'transparent',
+                      borderColor: selectedMood === mood ? '#002A5C' : '#8AC7E6',
+                      color: 'transparent'
+                    }}
+                    onClick={() => handleMoodClick(mood)}
+                  >
+                    <Icon size={24} style={{ color: 'white', stroke: 'white', strokeWidth: 1.5 }} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-around items-start w-full mt-4">
@@ -65,16 +89,15 @@ const Feedback = () => {
               ></textarea>
               <div className="text-sky-950 text-base font-light mt-2">100 words limit</div>
             </div>
-            <div className="flex flex-col items-start w-full md:w-1/2 p-4 mt-16" >
+            <div className="flex flex-col items-start w-full md:w-1/2 p-4 mt-16">
               <div className="text-sky-950 text-lg md:text-xl font-extrabold">How reputable do you find NAaaS compared to other news sources?</div>
               <div className="flex items-center gap-1 border border-sky-950 p-2 rounded-3xl mt-2">
                 <div className="text-sky-800 text-sm md:text-base font-semibold">Barely</div>
                 {[1, 2, 3, 4, 5].map((value) => (
                   <div
                     key={value}
-                    className={`w-8 h-8 md:w-[2vw] md:h-[2vw] text-center text-sm md:text-base font-semibold cursor-pointer border rounded-full ${
-                      rating === value ? 'bg-custom-blue text-slate-200 border-sky-600' : 'border-transparent'
-                    }`}
+                    className={`w-8 h-8 md:w-[2vw] md:h-[2vw] text-center text-sm md:text-base font-semibold cursor-pointer border rounded-full ${rating === value ? 'bg-custom-blue text-slate-200 border-sky-600' : 'border-transparent'}`}
+                    style={{ marginTop: "2%" }}
                     onClick={() => handleRatingClick(value)}
                   >
                     {value}
@@ -83,22 +106,19 @@ const Feedback = () => {
                 <div className="text-sky-800 text-sm md:text-base font-semibold">Reputable</div>
               </div>
               <div className="text-sky-950 text-lg md:text-xl font-extrabold mt-4">Would you consider NAaaS credible enough for providing accurate news?</div>
-              <div className="flex items-center gap-4 border border-sky-950 rounded-3xl p-2 mt-2">
+              <div className="flex items-center gap-4 border border-sky-950 rounded-3xl p-2 mt-2" style={{ padding: "0px" }}>
                 <div
-                  className={`w-24 h-10 md:w-[11vw] md:h-[4vh] shadow text-center text-sm md:text-base font-semibold cursor-pointer rounded-full ${
-                    isCredible === 'YES' ? 'bg-custom-blue text-slate-200 ' : ' text-sky-950 '
-                  }`}
+                  className={` w-24 h-10 md:w-[11vw] md:h-[4vh] shadow text-center text-sm md:text-base font-semibold cursor-pointer rounded-full ${isCredible === 'YES' ? 'bg-custom-blue text-slate-200 ' : ' text-sky-950 '}`}
                   onClick={() => handleCredibleClick('YES')}
                 >
-                  YES
+                  <p className='justify-between items-center mt-1'>YES</p>
+             
                 </div>
                 <div
-                  className={`w-20 h-10 md:w-[8vw] md:h-[4vh] shadow text-center text-sm md:text-base font-semibold cursor-pointer rounded-full ${
-                    isCredible === 'NO' ? 'bg-custom-blue text-slate-200' : 'text-sky-950 '
-                  }`}
+                  className={`w-20 h-10 md:w-[8vw] md:h-[4vh] shadow text-center text-sm md:text-base font-semibold cursor-pointer rounded-full ${isCredible === 'NO' ? 'bg-custom-blue text-slate-200' : 'text-sky-950 '}`}
                   onClick={() => handleCredibleClick('NO')}
                 >
-                  NO
+                   <p className='justify-between items-center mt-1'>NO</p>
                 </div>
               </div>
               <button

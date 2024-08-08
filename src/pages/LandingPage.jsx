@@ -2,13 +2,9 @@ import { React, useState, useRef } from 'react';
 import NavbarLandingPage from '../components/navbarLandingPage';
 import arrowRight from '../assets/next.png'
 // import portfolio from '../assets/BannerDesign.gif.gif'
-import portfolio from '../assets/world.gif'
 import line from '../assets/Line.png'
 import arrows from '../assets/arrows.png'
 import news from '../assets/news.png'
-import Card from '../components/Card'
-import nextArrow from '../assets/next-arrow.png'
-import backArrow from '../assets/back-arrow.png'
 import facebook from '../assets/logos_facebook.png'
 import twitter from '../assets/icons8-twitterx-48.png'
 import insta from '../assets/skill-icons_instagram.png'
@@ -21,6 +17,7 @@ import orbit from '../assets/orbit1.mp4'
 import video from '../assets/VideoIcon.png'
 import meetIcon from '../assets/MeetIcon.png'
 import newsicon from '../assets/NewsIcon.png'
+import background from '../assets/pricingBackground.png';
 
 function LandingPage() {
 
@@ -157,6 +154,18 @@ function LandingPage() {
         sliderRef.current.style.transform = `translateX(-${(startIndex - 1) * (100 / 3)}%)`;
       }
     };
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  const togglePlan = () => {
+    setIsYearly(!isYearly);
+  };
+
    
    
   return (
@@ -164,39 +173,36 @@ function LandingPage() {
   <NavbarLandingPage />
 {/* <img src={Bluebg} className="absolute w-full z-0 h-800" style={{ marginTop: "4.5%" }} /> */}
 <div className='flex items-center justify-center absolute w-full z-10 gap-96' style={{ marginTop: "6%" }}>
-<div className="text-white absolute left-0 w-1/2 p-12 z-50" style={{marginTop:"-8%", marginLeft:"8%"}}>
-        <h1 className="text-6xl font-bold leading-tight font-Poppins">
-            News <span className='text-white'>Analytics</span> 
-            <div style={{ marginTop: "0%" }}>
-                <h4 className="text-6xl">As A <span className='text-white'>Service</span> </h4>
-            </div>
-        </h1>
-        <h1 className='text-3xl font-medium leading-tight font-Poppins' style={{ marginTop: "2%" }}>
-            What You’re <span className='text-white'>Looking For!</span> 
-        </h1>
-        <div className='flex flex-col justify-left items-left'>
-            <button style={{ marginTop: "20%" , marginLeft:"7%" }} className="w-[260px] h-[70px] px-5 py-3 bg-custom-blue rounded-[50px] justify-center items-center gap-2 inline-flex">
-                <div className="text-neutral-50 text-[30px] font-bold font-Poppins leading-normal" onClick={GetStarted}>Get Started</div>
-            </button>
-        </div>
+  <div className="text-white absolute left-0 w-full md:w-1/2 p-4 md:p-12 z-50" style={{ marginTop: "-5%", marginLeft: "8%" }}>
+    <h1 className="text-xl md:text-6xl font-bold leading-tight font-Poppins">
+      News <span className='text-white'>Analytics</span>
+      <div style={{ marginTop: "0%" }}>
+        <h4 className="text-xl md:text-6xl">As A <span className='text-white'>Service</span> </h4>
+      </div>
+    </h1>
+    <h1 className='text-base md:text-3xl font-medium leading-tight font-Poppins' style={{ marginTop: "1%" }}>
+      What You’re <span className='text-white'>Looking For!</span>
+    </h1>
+    <div className='flex flex-col justify-left items-left'>
+      <button className="w-[100px] h-[30px] md:w-[200px] md:h-[60px] px-2 md:px-3 py-1 md:py-2 bg-custom-blue rounded-[50px] justify-center items-center gap-2 inline-flex" style={{ marginTop: "4%", marginLeft: "7%" }}>
+        <div className="text-neutral-50 text-[12px] md:text-[30px] font-bold font-Poppins leading-normal" onClick={togglePopup}>Get Started</div>
+      </button>
     </div>
-    {/* <div className='absolute top-0 w-[1300px] h-[1150px]' style={{ marginRight: "-30%", marginTop: "-12%", zIndex: "20" }}>
-        <img src={portfolio} className='w-full h-full rounded-full z-20' style={{ objectFit: "cover", borderRadius: "50%", boxShadow: "0 10px 20px rgba(0, 0, 0, 0.8), 0 25px 50px rgba(0, 0, 0, 0.9)" }} />
-    </div> */}
- 
-      <video 
-          className='w-full h-full  z-20 p-0' 
-          style={{ objectFit: "cover",marginTop:"-6%"}} 
-          autoPlay 
-          loop 
-          muted
-      >
-          <source src={orbit} type="video/mp4" />
-          Your browser does not support the video tag.
-      </video>
+  </div>
 
-
+  <video 
+      className='w-full h-full z-20 p-0' 
+      style={{ objectFit: "cover", marginTop: "-6%" }} 
+      autoPlay 
+      loop 
+      muted
+  >
+    <source src={orbit} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 </div>
+
+
 
 
       {/* Second Portion */}
@@ -227,6 +233,66 @@ function LandingPage() {
     </div>
 </div>
 
+     {/* pricing popup */}
+     {showPopup && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 " >
+          <div className="w-[750px] h-[700px] bg-white p-6 rounded shadow-lg relative"  style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }} >
+          
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-4xl"
+              onClick={togglePopup}
+            >
+              x
+            </button>
+           
+              <div className="text-center mt-8 " >
+                <h2 className="text-3xl font-bold text-[#1b1b1b]">Ready to get started?</h2>
+                <p className="text-[#1b1b1b] mt-2">10 days unlimited free trial. No contract or credit card required.</p>
+              </div>
+              <div className="flex justify-center mt-6">
+                <div className="flex items-center space-x-4">
+                  <span className={`text-[#1b1b1b] ${!isYearly ? 'font-bold' : ''}`} onClick={() => setIsYearly(false)}>Monthly</span>
+                  <div className="relative inline-block w-12 h-6 bg-[#018abd] rounded-full cursor-pointer" onClick={togglePlan}>
+                    <span className={`absolute ${isYearly ? 'translate-x-full' : 'translate-x-0'} left-0 w-6 h-6 bg-white rounded-full transition-transform duration-300`}></span>
+                  </div>
+                  <span className={`text-[#1b1b1b] ${isYearly ? 'font-bold' : ''}`} onClick={() => setIsYearly(true)}>Yearly</span>
+                </div>
+              </div>
+               
+              <div className="flex justify-around mt-10">
+                <div className="bg-white p-6 rounded-lg shadow-lg w-[300px]">
+                  <h3 className="text-xl font-semibold text-[#1b1b1b]">Free Plan</h3>
+                  <ul className="mt-4 space-y-2 text-[#1b1b1b]">
+                    <li>✔ Discover 4 Topics of Interest</li>
+                    <li>✔ Line Graph Visibility</li>
+                    <li>✔ History Visibility</li>
+                  </ul>
+                  <button className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 w-full"
+                   style={{marginTop:"90%"}}
+                  >Create a free account</button>
+                </div>
+                
+                <div className="bg-[#97cbdc] p-6 rounded-lg shadow-lg w-[300px]">
+                  <h3 className="text-xl font-semibold text-[#1b1b1b]">Premium Plan</h3>
+                  <p className="text-3xl font-bold text-[#1b1b1b] mt-2">$99 <span className="text-lg font-normal">/year</span></p>
+                  <ul className="mt-4 space-y-2 text-[#1b1b1b]">
+                    <li>✔ Discover 10 Topics of Interest</li>
+                    <li>✔ Selection of News Sources</li>
+                    <li>✔ Region Highlighting</li>
+                    <li>✔ Selection of Graphs</li>
+                    <li>✔ Chatbot Availability</li>
+                  </ul>
+                  <button className="mt-6 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 w-full"
+                   style={{marginTop:"45%"}}
+                  >Create a paid account</button>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+     
+      )}
+
 
             {/* NEWS Section */}
             <div className='flex flex-col justify-center items-center' style={{ marginTop: "8%" }}>
@@ -237,36 +303,36 @@ function LandingPage() {
                 <img style={{ marginTop: "5%" }} src={news}></img>
             </div>
 
-          {/* contact Team */}
-          <div className="w-full py-16 bg-white flex flex-col items-center" style={{ marginTop: '5%' }}>
+        {/* contact Team */}
+<div className="w-full py-16 bg-white flex flex-col items-center" style={{ marginTop: '5%' }}>
   <div className="w-full max-w-6xl px-4 md:px-8">
     <div className="flex flex-col justify-center items-start gap-4 mb-12">
-      <div style={{display:"flex", flexDirection:"row"}} className='w-full'>
-        <img style={{height:"40px",width:"40px", marginTop:"0.2%", marginRight:"1%"}} src={meetIcon}></img>
+      <div className="w-full flex flex-col md:flex-row items-center md:items-start">
+        <img className="h-10 w-10 mb-2 md:mb-0 md:mr-2" src={meetIcon} alt="Meet Icon" />
         <h2 className="text-custom-blue text-3xl md:text-5xl font-bold">Meet our team members</h2>
       </div>
       <p className="text-custom-blue text-lg">Complete the form below to send us a message. Our support team will promptly respond to your request.</p>
-            <div className="flex gap-4 mt-4">
-                <button className="p-3 bg-custom-blue rounded-xl flex justify-center items-center gap-2">
-                    <span className="text-white text-sm font-medium">Contact Us</span>
-                    <img className="w-4 h-4" src={arrowRight} alt="Contact Us" />
-                </button>
-            </div>
-      
+      <div className="flex gap-4 mt-4">
+        <button className="p-3 bg-custom-blue rounded-xl flex justify-center items-center gap-2">
+          <span className="text-white text-sm font-medium">Contact Us</span>
+          <img className="w-4 h-4" src={arrowRight} alt="Contact Us" />
+        </button>
+      </div>
     </div>
 
-    <div className="flex items-center justify-between gap-8 mt-14">
+    {/* Display the slider on larger screens */}
+    <div className="hidden md:flex items-center justify-between gap-8 mt-14">
       {startIndex > 0 && (
         <button onClick={slideLeft} className="p-2 bg-transparent flex items-center">
-          <img src={arrowRight} alt="Arrow Left" style={{ transform: 'scaleX(-1)', width: '30px' }} />
+          <img src={arrowRight} alt="Arrow Left" className="w-8" style={{ transform: 'scaleX(-1)' }} />
         </button>
       )}
       <div className="overflow-hidden w-full">
-        <div className="slider" ref={sliderRef} style={{ display: 'flex', transition: 'transform 0.3s ease-in-out' }}>
+        <div className="slider flex" ref={sliderRef} style={{ transition: 'transform 0.3s ease-in-out' }}>
           {teamMembers.map((member, index) => (
             <div key={index} className="slide flex flex-col items-center gap-4" style={{ minWidth: '33.33%' }}>
-              <div className="w-48 h-48 flex justify-center items-center">
-                <img className="w-48 h-48 rounded-full object-cover" src={member.imgSrc} alt={member.name} />
+              <div className="w-36 h-36 md:w-48 md:h-48 flex justify-center items-center">
+                <img className="w-full h-full rounded-full object-cover" src={member.imgSrc} alt={member.name} />
               </div>
               <div className="flex flex-col items-center text-center gap-2">
                 <div className="text-zinc-900 text-lg font-bold">{member.name}</div>
@@ -277,13 +343,13 @@ function LandingPage() {
               </div>
               <div className="flex justify-center items-center gap-4 mt-2">
                 <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
-                  <img src={facebook} alt="Facebook" style={{ width: '60%' }} />
+                  <img src={facebook} alt="Facebook" className="w-4/5" />
                 </div>
                 <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
-                  <img src={github} alt="GitHub" style={{ width: '60%' }} />
+                  <img src={github} alt="GitHub" className="w-4/5" />
                 </div>
                 <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
-                  <img src={linkedin} alt="LinkedIn" style={{ width: '60%' }} />
+                  <img src={linkedin} alt="LinkedIn" className="w-4/5" />
                 </div>
               </div>
             </div>
@@ -292,12 +358,42 @@ function LandingPage() {
       </div>
       {startIndex + 3 < teamMembers.length && (
         <button onClick={slideRight} className="p-2 bg-transparent flex items-center">
-          <img src={arrowRight} alt="Arrow Right" className="w-[30px]" />
+          <img src={arrowRight} alt="Arrow Right" className="w-8" />
         </button>
       )}
     </div>
+
+    {/* Display vertically on smaller screens */}
+    <div className="flex flex-col items-center gap-8 mt-14 md:hidden">
+      {teamMembers.map((member, index) => (
+        <div key={index} className="flex flex-col items-center gap-4 w-full mb-8">
+          <div className="w-36 h-36 flex justify-center items-center">
+            <img className="w-full h-full rounded-full object-cover" src={member.imgSrc} alt={member.name} />
+          </div>
+          <div className="flex flex-col items-center text-center gap-2">
+            <div className="text-zinc-900 text-lg font-bold">{member.name}</div>
+            <div className="text-violet-600 text-sm font-medium">{member.role}</div>
+          </div>
+          <div className="text-zinc-500 text-sm font-normal text-center h-20 overflow-hidden">
+            {member.description}
+          </div>
+          <div className="flex justify-center items-center gap-4 mt-2">
+            <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+              <img src={facebook} alt="Facebook" className="w-4/5" />
+            </div>
+            <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+              <img src={github} alt="GitHub" className="w-4/5" />
+            </div>
+            <div className="w-8 h-8 bg-gray-200 rounded-full flex justify-center items-center">
+              <img src={linkedin} alt="LinkedIn" className="w-4/5" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   </div>
 </div>
+
 
 
    {/* footer */}
