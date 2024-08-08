@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../../layout/Logo';
 import Sidebar from '../../components/Vertical-nav/vertical-nav';
-import Modal from './Modal'; // Import the Modal component
-import BarGraph from './BarGraph'; // Import the BarGraph component
-import AreaChart from './AreaChart';
+import Modal from './Modal';
+import BarGraph from './BarGraph';
 import HistogramGraph from './HistogramGraph';
 import PieChart from './PieChart';
-import DashedLineChart from './DashedLineGraph'; // Import the DashedLineChart component
+import DashedLineChart from './DashedLineGraph';
 import axios from 'axios';
 
 const generateUniqueColors = (numColors) => {
@@ -22,17 +21,18 @@ const generateUniqueColors = (numColors) => {
 
 function Graphs() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalContent, setModalContent] = useState(null); 
-    const [modalGraphType, setModalGraphType] = useState(''); // New state to keep track of graph type
+    const [modalContent, setModalContent] = useState(null);
+    const [modalGraphType, setModalGraphType] = useState('');
     const [data, setData] = useState({ labels: [], datasets: [], colors: [], keywords: [] });
+    const [barGraphData, setBarGraphData] = useState({ labels: [], datasets: [] });
 
     useEffect(() => {
-        // Function to fetch data from the API
+        // Fetch and set data for the DashedLineChart
         const fetchData = async () => {
             try {
-                const startDate = '2024-01-01';
-                const endDate = new Date().toISOString().split('T')[0];
-                const keywords = ['international', 'airports', 'islamabad', 'national', 'karachi'];
+                const startDate = '2024-03-01';
+                const endDate = '2024-06-30';
+                const keywords = ['international', 'airports', 'islamabad'];
 
                 const dateString = JSON.stringify({
                     startDate,
@@ -40,7 +40,7 @@ function Graphs() {
                 });
 
                 const response = await axios.post(
-                    'http://54.81.234.19:5000/plotSentiment',
+                    'https://4rcj8ztc-8080.inc1.devtunnels.ms/plotSentiment',
                     JSON.stringify({
                         keywords,
                         date: dateString,
@@ -55,8 +55,9 @@ function Graphs() {
 
                 const plotData = response.data.plotData;
 
-                // Extract unique dates from all data points
-                const allDates = plotData.flatMap(series => series.x);
+                // Extract plot data for line charts
+                const lineChartData = plotData.filter(item => item.type === 'scatter');
+                const allDates = lineChartData.flatMap(series => series.x);
                 const uniqueDates = Array.from(new Set(allDates)).sort();
                 const uniqueDates2 = uniqueDates.map(dateString => {
                     const date = new Date(dateString);
@@ -65,19 +66,17 @@ function Graphs() {
                     return `${day} ${month}`;
                 });
 
-                // Generate unique colors
-                const colors = generateUniqueColors(plotData.length);
+                const colors = generateUniqueColors(lineChartData.length);
 
-                // Build datasets
-                const newDatasets = plotData.map((series, index) => ({
-                    id: series.name, // Unique identifier for each dataset
+                const newDatasets = lineChartData.map((series, index) => ({
+                    id: series.name,
                     label: series.name,
                     data: uniqueDates.map(date => {
                         const dataIndex = series.x.indexOf(date);
                         return dataIndex !== -1 ? series.y[dataIndex] : null;
                     }),
-                    borderColor: colors[index], // Assign unique color to each dataset
-                    backgroundColor: colors[index], // Optional background color with opacity
+                    borderColor: colors[index],
+                    backgroundColor: colors[index],
                     borderDash: [5, 5],
                     fill: false,
                 }));
@@ -91,6 +90,69 @@ function Graphs() {
         fetchData();
     }, []);
 
+    const fetchBarGraphData = async () => {
+        try {
+            // Fetch data for the Bar Chart
+            const response = await axios.post(
+                'https://4rcj8ztc-8080.inc1.devtunnels.ms/plotSentiment',
+                JSON.stringify({
+                    keywords: data.keywords, // Use existing keywords
+                    date: JSON.stringify({
+                        startDate: '2024-03-01',
+                        endDate: '2024-06-30',
+                    }),
+                }),
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                }
+            );
+    
+            const plotData = response.data.plotData;
+    
+            // Find bar chart data
+            const barData = plotData.find(item => item.type === 'bar');
+    
+            if (barData && barData.x && barData.y) {
+                // Aggregate counts if there are duplicate keywords
+                const aggregatedData = aggregateCounts(barData.x, barData.y);
+                const labels = Object.keys(aggregatedData);
+                const counts = Object.values(aggregatedData);
+    
+                const datasets = [{
+                    label: 'Article Count',
+                    data: counts,
+                    backgroundColor: generateUniqueColors(labels.length),
+                }];
+    
+                setBarGraphData({ labels, datasets });
+            } else {
+                console.error('Bar data not found or invalid format:', barData);
+            }
+        } catch (error) {
+            console.error('Error fetching bar graph data:', error);
+        }
+    };
+    
+    // Function to aggregate counts for each keyword
+    const aggregateCounts = (keywords, counts) => {
+        if (!Array.isArray(keywords) || !Array.isArray(counts) || keywords.length !== counts.length) {
+            console.error('Invalid keywords or counts format:', { keywords, counts });
+            return {};
+        }
+    
+        return keywords.reduce((acc, keyword, index) => {
+            if (keyword && typeof counts[index] === 'number') {
+                acc[keyword] = (acc[keyword] || 0) + counts[index];
+            }
+            return acc;
+        }, {});
+    };
+    
+   
+    
     const handleRemoveDataset = (datasetId) => {
         setData((prevData) => ({
             ...prevData,
@@ -112,7 +174,8 @@ function Graphs() {
                             <button
                                 className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'
                                 onClick={() => {
-                                    setModalContent(<BarGraph chartData={data} />);
+                                    fetchBarGraphData(); // Fetch new data for the BarGraph
+                                    setModalContent(<BarGraph chartData={barGraphData} />);
                                     setModalGraphType('bar'); // Set graph type
                                     setIsModalOpen(true);
                                 }}
@@ -141,12 +204,9 @@ function Graphs() {
                             </button>
                         </div>
                     </div>
-                    
                 </div>
-                
             </div>
 
-            {/* Modal Component */}
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} graphType={modalGraphType}>
                 {modalContent}
             </Modal>

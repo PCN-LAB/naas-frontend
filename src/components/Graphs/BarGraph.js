@@ -39,7 +39,7 @@ function BarGraph({ chartData }) {
     return (
         <div className='flex flex-col h-full'>
             <div className='mb-4'>
-                <h3 className='text-xl font-bold'>BAR STACKED BY SIGN</h3>
+                <h3 className='text-xl font-bold'>BAR CHART</h3>
             </div>
             <div className='mb-4'>
                 <h2 className='text-zinc-400'>Statistics</h2>
