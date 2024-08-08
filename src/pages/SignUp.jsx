@@ -42,7 +42,7 @@ const SignUp = () => {
                     lastname:formData.lastname,
                     email: formData.email,
                     password: formData.password,
-                    occupation:"null"
+                    occupation:formData.occupation
 
                 })
             });
@@ -90,11 +90,21 @@ const SignUp = () => {
 
                     <form className="space-y-4" onSubmit={handleSubmit}>
                         <div>
-                            <div className="text-stone-500 text-lg font-normal font-Poppins">Full name</div>
+                            <div className="text-stone-500 text-lg font-normal font-Poppins">First Name</div>
                             <input
                                 type="text"
-                                name="name"
-                                value={formData.name}
+                                name="firstname"
+                                value={formData.firstname}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 px-3 py-2 rounded-lg"
+                            />
+                        </div>
+                        <div>
+                            <div className="text-stone-500 text-lg font-normal font-Poppins">Last Name</div>
+                            <input
+                                type="text"
+                                name="lastname"
+                                value={formData.lastname}
                                 onChange={handleChange}
                                 className="w-full border border-gray-300 px-3 py-2 rounded-lg"
                             />
@@ -105,6 +115,16 @@ const SignUp = () => {
                                 type="email"
                                 name="email"
                                 value={formData.email}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                            />
+                        </div>
+                        <div>
+                            <div className="text-stone-500 text-lg font-normal font-Poppins">Occupation</div>
+                            <input
+                                type="occupation"
+                                name="occupation"
+                                value={formData.occupation}
                                 onChange={handleChange}
                                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
                             />
