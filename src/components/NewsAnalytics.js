@@ -44,7 +44,7 @@ function NewsAnalytics() {
     useEffect(() => {
         // Update local news state when Redux news data changes
         setLocalNews(news);
-        
+       
         // Filter and display unique focusLocations with locationType 'tehsil'
         const tehsilLocations = news
             .filter(item => item.locationType === 'Tehsil'||item.locationType === 'District')

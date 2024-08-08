@@ -39,7 +39,7 @@ const mapSlice = createSlice({
         },
         setNewsRedux(state, action) {
             state.news = action.payload;
-             console.log(state.news);
+             console.log("Reducer" + state.news);
         }
     }
 });

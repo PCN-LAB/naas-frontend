@@ -18,15 +18,12 @@ const defaultMarker = new L.Icon({
 });
 
 function capitalizeFirstLetterOnly(str) {
-    if (str.length === 0) return '';
+    if (typeof str !== 'string' || str.length === 0) return '';
     return str.charAt(0).toLowerCase() + str.slice(1).toLowerCase();
 }
 
 const MapComponent = () => {
     const news = useSelector(state => state.map.news);
-    useEffect(() => {
-       console.log(news)
-    }, [news]);
     const regionSelected = useSelector(state => state.map.regionSelected);
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
@@ -36,12 +33,17 @@ const MapComponent = () => {
         const coordinates = feature.geometry.coordinates;
         return coordinates && coordinates.length > 0 && coordinates[0].length > 0 && coordinates[0][0].length === 2;
     });
- 
+
     const getRandomColor = () => {
         return '#' + Math.floor(Math.random() * 16777215).toString(16);
     };
 
     const handleSubSubRegionSelect = (selectedName) => {
+        if (!selectedName) {
+            setErrorMessage('Selected name is not valid.');
+            return;
+        }
+        
         selectedName = capitalizeFirstLetterOnly(selectedName);
         const selectedFeature = validFeatures.find(
             (feature) => capitalizeFirstLetterOnly(feature.properties.NAME_3) === selectedName
@@ -54,13 +56,17 @@ const MapComponent = () => {
                     feature: selectedFeature,
                     color: getRandomColor(),
                 };
-                setSelectedRegions((prevRegions) => [...prevRegions, newRegion]);
+                setSelectedRegions(prevRegions => {
+                    // Remove existing region if present
+                    const filteredRegions = prevRegions.filter(region => region.feature.properties.NAME_3 !== selectedName);
+                    return [...filteredRegions, newRegion];
+                });
                 setErrorMessage('');
             } else {
                 setErrorMessage('Coordinates not found or invalid format for the selected region.');
             }
         } else {
-            setErrorMessage('Selected region not found.');
+            setErrorMessage('');
         }
     };
 
@@ -84,9 +90,16 @@ const MapComponent = () => {
     }, [regionSelected]);
 
     useEffect(() => {
+        
+        if(news.length===0)
+        {
+            console.log("empty");
+        }
         if (news.length > 0) {
             news.forEach(item => {
-                handleSubSubRegionSelect(item.focusLocation);
+                if (item.focusLocation) {
+                    handleSubSubRegionSelect(item.focusLocation);
+                }
             });
         }
     }, [news]);
