@@ -266,11 +266,6 @@ function NewsSourceInput() {
             textOverflow: 'ellipsis', // Add ellipsis if text overflows
             whiteSpace: 'nowrap', // Prevent wrapping of text
         }),
-        menu: (provided) => ({
-            ...provided,
-            maxHeight: '200px', // Optional: Set a max height for the dropdown menu
-            overflowY: 'auto', // Enable vertical scrolling if content overflows
-        }),
     };
 
 
