@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import NavbarLandingPage from '../components/navbarLandingPage';
 import background from '../assets/background.png';
+import Sidebar from '../components/Vertical-nav/vertical-nav';
 
 function UserProfile() {
     const [showDetails, setShowDetails] = useState(false);
     const [fullName, setFullName] = useState('Amanda');
     const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
+    const [occupation, setoccupation] = useState('');
     const [email, setEmail] = useState('alexarawles@gmail.com');
     const [image, setImage] = useState('https://via.placeholder.com/150');
     
@@ -17,10 +18,11 @@ function UserProfile() {
 
     return (
         <div>
-            <NavbarLandingPage isColored={true}/>
+
+            <Sidebar/>
             <div >
                 <div className="min-h-screen bg-gray-50 flex flex-col items-center w-full p-4 md:p-16 bg-cover" style={{ backgroundImage: `url(${background})` }}>
-                    <div className="w-full max-w-6xl mt-20" >
+                    <div className="w-full max-w-6xl mt-20" style={{marginTop:"0%"}} >
                         <div className="flex flex-col items-center md:flex-row md:justify-between" style={{marginLeft:"-10%"}}>
                             <div className="flex flex-col items-center md:items-start">
                                 <h1 className="text-3xl font-semibold text-blue-700">Welcome, {fullName}</h1>
@@ -62,10 +64,10 @@ function UserProfile() {
                                     <div className="relative mt-4">
                                         <input
                                             type="text"
-                                            value={username}
-                                            onChange={(e) => setUsername(e.target.value)}
+                                            value={occupation}
+                                            onChange={(e) => setoccupation(e.target.value)}
                                             className="bg-transparent mt-1 block w-full border-0 border-b-2 border-gray-500 focus:border-black focus:ring-0 outline-none"
-                                            placeholder='Username'
+                                            placeholder='occupation'
                                         />
                                     </div>
                                 </div>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useNavigate } from "react-router-dom"; 
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import GIcon from '../assets/GIcon.png';
-import logo from '../assets/NAaas-logo.png'; 
+import logo from '../assets/NAaas-logo.png';
 import polygon from '../assets/polygonSignUp.png';
 import facebook from '../assets/facebook.png';
 import insta from '../assets/instagram.png';
@@ -10,18 +10,63 @@ import twitter from '../assets/twitter.png';
 const SignUp = () => {
 
     const navigate = useNavigate();
-    const gotoSignIn = (e) => {
-        e.preventDefault();
-        navigate("/SignIn"); 
+
+    const [formData, setFormData] = useState({
+        firstname: '',
+        lastname:'',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        occupation: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === 'checkbox' ? checked : value,
+        });
     };
 
-    const VerifyAccount = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate("/VerifyEmail");
-    }
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+        try {
+            const response = await fetch('https://1fea-58-65-135-186.ngrok-free.app/signup', {
+                method: 'POST',
+                body: JSON.stringify({
+                    fisrtname:formData.firstname,
+                    lastname:formData.lastname,
+                    email: formData.email,
+                    password: formData.password,
+                    occupation:"null"
+
+                })
+            });
+            if (response.ok) {
+                const data = response;
+                localStorage.setItem('userEmail', formData.email);
+                localStorage.setItem('token', data.token);
+                navigate('/VerifyEmail');
+            } else {
+                const errorData = await response.json();
+                alert(`Sign up failed: ${errorData.error}`);
+            }
+        } catch (error) {
+            console.error("Error signing up:", error);
+        }
+    };
+    
+    const gotoSignIn = (e) => {
+        e.preventDefault();
+        navigate("/SignIn");
+    };
 
     const gotoLandingPage = () => {
-        navigate("/LandingPage"); 
+        navigate("/LandingPage");
     };
 
     return (
@@ -43,11 +88,14 @@ const SignUp = () => {
                 <div className="flex-1 p-6 lg:p-12">
                     <h2 className="font-bold mb-6 text-zinc-800 text-2xl lg:text-3xl">Create an account</h2>
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit}>
                         <div>
                             <div className="text-stone-500 text-lg font-normal font-Poppins">Full name</div>
                             <input
                                 type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
                                 className="w-full border border-gray-300 px-3 py-2 rounded-lg"
                             />
                         </div>
@@ -55,6 +103,9 @@ const SignUp = () => {
                             <div className="text-stone-500 text-lg font-normal font-Poppins">Email</div>
                             <input
                                 type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
                                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
                             />
                         </div>
@@ -62,6 +113,9 @@ const SignUp = () => {
                             <div className="text-stone-500 text-lg font-normal font-Poppins">Password</div>
                             <input
                                 type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
                                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
                             />
                         </div>
@@ -69,18 +123,23 @@ const SignUp = () => {
                             <div className="text-stone-500 text-lg font-normal font-Poppins">Confirm Password</div>
                             <input
                                 type="password"
+                                name="confirmPassword"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
                                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
                             />
                         </div>
                         <div className="flex items-center space-x-2">
-                            <input type="checkbox" className="form-checkbox" />
+                            <input
+                                type="checkbox"
+                                name="terms"
+                                className="form-checkbox"
+                            />
                             <p className="text-lg">
                                 By creating an account, I agree to the <a href="#" className="text-black underline">Terms of Use</a> and <a href="#" className="text-black underline">Privacy Policy</a>.
                             </p>
                         </div>
-                        <button className="w-full bg-gray-400 hover:bg-gray-500 text-white py-2 rounded-3xl text-lg mt-5"
-                         onClick={VerifyAccount}
-                        >
+                        <button className="w-full bg-gray-400 hover:bg-gray-500 text-white py-2 rounded-3xl text-lg mt-5">
                             Create an account
                         </button>
                     </form>
@@ -124,46 +183,22 @@ const SignUp = () => {
                         <div className="text-zinc-800 text-base font-normal font-Poppins cursor-pointer">Help and support</div>
                         <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Help center</div>
                         <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Contact us</div>
-                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Privacy & Terms</div>
-                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Safety information</div>
-                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Sitemap</div>
+                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Security</div>
+                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">FAQs</div>
+                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Status</div>
                     </div>
                     <div className="flex flex-col gap-2 items-center lg:items-start">
-                        <div className="text-zinc-800 text-base font-normal font-Poppins">Community</div>
-                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Agencies</div>
-                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Freelancers</div>
-                        <div className="text-stone-500 text-sm font-normal font-Poppins hover:text-custom-blue cursor-pointer">Engineers</div>
+                        <div className="text-zinc-800 text-base font-normal font-Poppins cursor-pointer">Social</div>
+                        <div className="flex gap-4">
+                            <img src={facebook} className="w-8 h-8 cursor-pointer" alt="Facebook" />
+                            <img src={insta} className="w-8 h-8 cursor-pointer" alt="Instagram" />
+                            <img src={twitter} className="w-8 h-8 cursor-pointer" alt="Twitter" />
+                        </div>
                     </div>
                 </div>
                 <div className="w-full h-px bg-stone-500 opacity-25"></div>
-                <div className="w-full flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-10 px-8 mb-10">
-                    <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-14">
-                        <div className="text-zinc-800 text-sm font-normal font-Poppins">&copy; 2024</div>
-                        <div className="flex items-center gap-6">
-                            <div className="text-zinc-800 text-sm font-normal font-Poppins">Help</div>
-                            <div className="text-zinc-800 text-sm font-normal font-Poppins">Privacy</div>
-                            <div className="text-zinc-800 text-sm font-normal font-Poppins">Terms</div>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-6 lg:gap-10">
-                        <div className="flex items-center gap-4">
-                            <div className="w-6 h-6 relative opacity-80">
-                                <img src={facebook} alt="facebook" className="w-full h-full object-contain"/>
-                            </div>
-                            <div className="w-6 h-6 relative opacity-80">
-                                <img src={insta} alt="instagram" className="w-full h-full object-contain"/>
-                            </div>
-                            <div className="w-5 h-4 relative opacity-80">
-                                <img src={twitter} alt="twitter" className="w-full h-full object-contain"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div className="text-stone-500 text-xs font-normal font-Poppins">© 2024 Narabik, Inc. All rights reserved.</div>
             </div>
-
-
-
-
         </div>
     );
 };

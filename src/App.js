@@ -15,6 +15,7 @@ import Error404 from './pages/error404'
 import Feedback from './pages/Feedback'
 import ContactUs from './pages/ContactUs'
 import UserProfile from './pages/UserProfile';
+import HelpAndSupport from './pages/HelpandSupport'
 
 import Graph from './components/Graph'
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path='/ContactUs' element={<ContactUs />} />
             <Route path='/UserProfile' element={<UserProfile />} />
             <Route path='/Graphs' element={<Graph />}/>
+            <Route path='/HelpAndSupport' element={<HelpAndSupport />}/>
         </Routes>
         </BrowserRouter>
       </Provider>
