@@ -60,6 +60,7 @@ const Chatbot = () => {
 
     return (
         <>
+            {/* Chatbot button */}
             {(!showChatbot) && (
                 <button
                     onClick={toggleChatbot}
@@ -69,19 +70,23 @@ const Chatbot = () => {
                 </button>
             )}
 
+            {/* Chatbot window */}
             {showChatbot && (
-                <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-white border border-gray-300 rounded-lg shadow-lg max-h-[500px] flex flex-col bg-chat-bot-gradient">
-                    <div className="text-white p-3 rounded-t-lg flex gap-44 justify-between items-center border-b border-blue-200">
-                        <img src={ChatBot} alt='chat-bot' className='h-12'></img>
-                        <span className='text-4xl font-bold'>NAaaS AI</span>
+                <div className="fixed bottom-0 right-0 ml-16 md:mb-4 md:mr-4 md:ml-0 bg-white border border-gray-300 rounded-lg shadow-lg min-h-[600px] md:min-h-[0px] max-h-[500px] flex flex-col bg-chat-bot-gradient">
+                    {/* Chatbot header */}
+                    <div className="text-white p-3 rounded-t-lg flex md:gap-44 justify-between items-center border-b border-blue-200">
+                        <img src={ChatBot} alt='chat-bot' className='h-6 md:h-12'></img>
+                        <span className='text-md text-center md:text-4xl font-bold'>NAaaS AI</span>
                         <button onClick={toggleChatbot} className="text-white font-bold">
-                            <img src={cross} alt='close' className='h-5'></img>
+                            <img src={cross} alt='close' className='h-3 md:h-5'></img>
                         </button>
                     </div>
-                    <div className="flex-1 p-3 overflow-y-auto">
+
+                    {/* Chatbot messages */}
+                    <div className="flex-1 p-3 overflow-y-auto md:custom-scrollbar">
                         {messages.map((message, index) => (
                             <div key={index} className={`my-2 ${message.sender === 'user' ? 'text-right' : 'text-left'}`}>
-                                <span className={`inline-block max-w-40 px-3 py-2 rounded-lg ${message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}>
+                                <span className={`text-sm md:text-lg inline-block md:max-w-40 px-3 py-2 rounded-lg ${message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}>
                                     {message.text}
                                 </span>
                             </div>
@@ -92,7 +97,9 @@ const Chatbot = () => {
                             </div>
                         )}
                     </div>
-                    <div className="bg-colorInputChatbot flex gap-2 px-6 py-2 mx-2 rounded-full">
+
+                    {/* Chatbot input */}
+                    <div className="bg-colorInputChatbot flex gap-2 px-3 md:px-6 py-2 mx-2 rounded-full">
                         <textarea
                             ref={textareaRef}
                             value={input}
@@ -104,16 +111,16 @@ const Chatbot = () => {
                                 }
                             }}
                             placeholder="Message NAaas AI"
-                            className="flex-1 bg-transparent focus:outline-none text-white text-lg placeholder:text-gray-200 chat-scrollbar"
+                            className="flex-1 bg-transparent focus:outline-none text-white text-sm pt-1 md:pt-0 md:text-lg placeholder:text-gray-200 chat-scrollbar"
                             style={{ resize: 'none', overflow: 'hidden', maxHeight: '8em' }} // Adjust maxHeight as needed
                             rows={1}
                         />
 
                         <button onClick={sendMessage}>
-                            <img src={send} alt='send' className='h-8' />
+                            <img src={send} alt='send' className='h-4 md:h-8' />
                         </button>
                     </div>
-                    <div className='text-gray-400 text-sm text-center'>
+                    <div className='text-gray-400 text-xs md:text-sm text-center'>
                         NAaas AI can make mistakes. Please double check responses.
                     </div>
                 </div>
