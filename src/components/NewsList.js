@@ -22,7 +22,7 @@ function NewsList() {
     let useEffectCalled = false;
     const [isLoading, setIsLoading] = useState(false);
 
-    // const [news, setNews] = useState([]);
+    const [news, setNews] = useState([]);
 
     // const [news, setNews] = useState([
     //     {
