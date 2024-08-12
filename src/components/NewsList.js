@@ -22,7 +22,49 @@ function NewsList() {
     let useEffectCalled = false;
     const [isLoading, setIsLoading] = useState(false);
 
-    const [news, setNews] = useState([]);
+    // const [news, setNews] = useState([]);
+
+    // const [news, setNews] = useState([
+    //     {
+    //         title: 'Govt formally authorises ISI to ‘trace, intercept’ calls and messages in ‘interest of national security’',
+    //         summary: `The Ministry of Information Technology and Telecommunication has authorised the 
+    //         Inter-Services Intelligence (ISI) to intercept and trace calls in the “interest of national security”,
+    //         a notification issued in this regard said.`,
+    //         focusTime: '2021-07-01T00:00:00Z',
+    //         publicationTime: '2024-07-01T00:00:00Z',
+    //         topics: ['National Security', 'ISI', 'Telecommunication'],
+    //         location: 'Islamabad',
+    //         isBiased: true
+    //     },
+    //     {
+    //         title: 'PM Shehbaz urges collective responsibility, int’l recognition of Pakistan’s Afghan refugee ‘burden’',
+    //         summary: `Prime Minister Imran Khan on Thursday urged the international community to`,
+    //         focusTime: '2021-07-01T00:00:00Z',
+    //         publicationTime: '2021-07-02T00:00:00Z',
+    //         topics: ['Afghan Refugees', 'Imran Khan', 'International Community'],
+    //         location: 'Lahore',
+    //         isBiased: true
+    //     },
+    //     {
+    //         title: 'Pakistan’s Covid-19 positivity rate drops to 1.5%',
+    //         summary: `Pakistan’s Covid-19 positivity rate dropped to 1.5% on Thursday, the lowest 
+    //         in the country since the pandemic began.`,
+    //         focusTime: '2021-07-04T00:00:00Z',
+    //         publicationTime: '2021-07-03T00:00:00Z',
+    //         topics: ['Covid-19', 'Positivity Rate', 'Pandemic'],
+    //         location: 'Karachi',
+    //         isBiased: false
+    //     },
+    //     {
+    //         title: 'Editorial: Altering the original budget sans parliamentary nod to supplementary statements is not new',
+    //         summary: `The government’s decision to present a supplementary budget without parliamentary approval is not new.`,
+    //         focusTime: '2021-08-01T00:00:00Z',
+    //         publicationTime: '2021-07-04T00:00:00Z',
+    //         topics: ['Budget', 'Parliamentary Approval', 'Supplementary Statements'],
+    //         location: 'Peshawar',
+    //         isBiased: true
+    //     }
+    // ]);
 
     const customSelectStyles = {
         control: (provided) => ({
@@ -168,8 +210,8 @@ function NewsList() {
     return (
         <div className='flex flex-col gap-5'>
             {/* Sort by container */}
-            <div className='flex gap-10 items-center'>
-                <span className='text-xl font-semibold'>
+            <div className='flex flex-col md:flex-row md:gap-10 gap-5 md:items-center'>
+                <span className='md:text-xl text-lg font-semibold'>
                     Sort by:
                 </span>
                 <Select
