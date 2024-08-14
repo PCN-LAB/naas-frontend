@@ -33,7 +33,7 @@ const Sidebar = ({ children }) => {
             icon: <LuMapPin className="icon-bold  w-7 h-7" />
         },
         {
-            path: "/analytics",
+            path: "/KnowledgeGraph",
             name: "Knowledge Graph",
             icon: <img src={link} alt="link" className="icon-bold w-7 h-10" />
         },

@@ -1,0 +1,16 @@
+/* styles.css */
+
+.link {
+    stroke: black;
+    stroke-width: 2px;
+  }
+  
+  .node {
+    stroke: #333; 
+    stroke-width: 2px;
+    fill: rgb(96, 152, 236); 
+  }
+  
+  .node.other {
+    fill: rgb(96, 152, 236); 
+  }

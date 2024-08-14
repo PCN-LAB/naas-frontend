@@ -21,7 +21,7 @@ function UserProfile() {
 
             <Sidebar/>
             <div >
-                <div className="min-h-screen bg-gray-50 flex flex-col items-center w-full p-4 md:p-16 bg-cover" style={{ backgroundImage: `url(${background})` }}>
+                <div className="min-h-screen bg-gray-50 flex flex-col items-center w-full p-4 md:p-16 bg-cover " style={{ backgroundImage: `url(${background})` }}>
                     <div className="w-full max-w-6xl mt-20" style={{marginTop:"0%"}} >
                         <div className="flex flex-col items-center md:flex-row md:justify-between" style={{marginLeft:"-10%"}}>
                             <div className="flex flex-col items-center md:items-start">

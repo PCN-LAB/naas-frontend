@@ -16,6 +16,7 @@ import Feedback from './pages/Feedback'
 import ContactUs from './pages/ContactUs'
 import UserProfile from './pages/UserProfile';
 import History from './components/History';import HelpAndSupport from './pages/HelpandSupport'
+import KnowledgeGraph from './pages/KnowledgeGraph';
 
 import Graph from './components/Graphs/Graph'
 function App() {
@@ -39,6 +40,7 @@ function App() {
             <Route path='/Graphs' element={<Graph />}/>
             <Route path='/History' element={<History />}/>
             <Route path='/HelpAndSupport' element={<HelpAndSupport />}/>
+            <Route path='/KnowledgeGraph' element={<KnowledgeGraph />}/>
         </Routes>
         </BrowserRouter>
       </Provider>
