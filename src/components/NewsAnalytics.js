@@ -58,8 +58,8 @@ function NewsAnalytics() {
             <img src={background} alt='background' className='absolute -z-50 opacity-20 object-cover w-full h-full' />
             <Sidebar />
             <Logo />
-            <div className='flex w-11/12 mx-auto gap-4'>
-                <div className='w-3/5'>
+            <div className='flex flex-col pl-14 md:pl-0 md:flex-row w-11/12 mx-auto gap-4'>
+                <div className='md:w-3/5 w-full'>
                     <div className='mb-4'>
                         <label className='text-2xl font-semibold'>
                             Source
@@ -102,7 +102,7 @@ function NewsAnalytics() {
                     </div>
                     <div><MapComponent news={localNews} /></div>
                 </div>
-                <div className='w-2/5 flex flex-col gap-5'>
+                <div className='md:w-2/5 w-full flex flex-col gap-5'>
                     <CurrentSearch />
                     <NewsList />
                 </div>

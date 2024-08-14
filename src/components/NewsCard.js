@@ -20,7 +20,7 @@ function NewsCard({ index, title, summary, focusTime, publicationTime, topics, i
       {/* Index container */}
 
       <div>
-        <span className='text-2xl font-semibold'>{index}</span>
+        <span className='md:text-2xl text-md font-semibold'>{index}</span>
       </div>
 
       {/* News Information container */}
@@ -29,11 +29,11 @@ function NewsCard({ index, title, summary, focusTime, publicationTime, topics, i
         {/* Title and summary container */}
         <div className='p-2 bg-white rounded-xl flex flex-col gap-2'>
           {/* Title */}
-          <p className='text-xl font-semibold'>
+          <p className='md:text-xl text-md font-semibold'>
             {title}
           </p>
           {/* Summary, if it goes beyond 250 characters do ...*/}
-          <p className='text-gray-600 text-lg'>
+          <p className='text-gray-600 md:text-lg text-md'>
             {truncateSummary(summary, 250)}
           </p>
         </div>
@@ -41,19 +41,19 @@ function NewsCard({ index, title, summary, focusTime, publicationTime, topics, i
         {/* remaining fields container */}
         <div className='flex flex-col gap-2'>
           {/* Times and bias container */}
-          <div className='flex justify-between'>
+          <div className='flex flex-col md:flex-row justify-between'>
             {/*Focus Time and publication time container */}
             <div className='flex flex-col gap-2'>
               {/* Focus Time */}
               <div className='flex items-center gap-2'>
-                <span className='text-xl font-semibold'>Focus Time</span>
-                <span className='text-gray-600 text-lg'>{formatDate(focusTime)}</span>
+                <span className='md:text-xl text-md font-semibold'>Focus Time</span>
+                <span className='text-gray-600 md:text-lg md:text-left text-right text-md'>{formatDate(focusTime)}</span>
               </div>
 
               {/* Publication Time */}
               <div className='flex items-center gap-2'>
-                <span className='text-xl  font-semibold'>Publication Time</span>
-                <span className='text-gray-600 text-lg'>{formatDate(publicationTime)}</span>
+                <span className='md:text-xl text-md font-semibold'>Publication Time</span>
+                <span className='text-gray-600 md:text-lg md:text-left text-right text-md'>{formatDate(publicationTime)}</span>
               </div>
             </div>
 
@@ -66,8 +66,8 @@ function NewsCard({ index, title, summary, focusTime, publicationTime, topics, i
 
           {/* Topics */}
           <div className='flex items-center gap-2'>
-            <span className='text-xl font-semibold'>Topics</span>
-            <span className='text-lg text-colorSearchButton'>{topics.join(', ')}</span>
+            <span className='md:text-xl text-md font-semibold'>Topics</span>
+            <span className='md:text-lg text-md text-right md:text-left text-colorSearchButton'>{topics.join(', ')}</span>
           </div>
 
 
