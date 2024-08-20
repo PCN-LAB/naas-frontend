@@ -55,11 +55,13 @@ const options = {
         },
     },
 };
-
 const DashedLineChart = ({ data, setData, handleRemoveDataset }) => {
     const legend = () => {
         return (
-            <div className='flex flex-row gap-8 ml-8'>
+            <div
+                className='flex flex-row gap-8 ml-8 overflow-y-auto'
+                style={{ maxHeight: '150px' }} // Adjust the height as needed
+            >
                 {data.datasets.map((dataset, index) => (
                     <div
                         key={index}
@@ -98,13 +100,11 @@ const DashedLineChart = ({ data, setData, handleRemoveDataset }) => {
             </div>
             <div className='flex flex-row justify-between mt-8 mr-10'>
                 <p className='text-zinc-400'>Statistics</p>
-                <p className="text-zinc-500 ">Note: You can zoom in and zoom out on the graph</p>
+                <p className="text-zinc-500">Note: You can zoom in and zoom out on the graph</p>
             </div>
             <div className='w-full mx-auto mt-4'>
                 <Line data={data} options={options} />
             </div>
-           
-
         </div>
     );
 };

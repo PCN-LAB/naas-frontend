@@ -25,14 +25,16 @@ function Graphs() {
     const [modalGraphType, setModalGraphType] = useState('');
     const [data, setData] = useState({ labels: [], datasets: [], colors: [], keywords: [] });
     const [barGraphData, setBarGraphData] = useState({ labels: [], datasets: [] });
+    const [loading, setLoading] = useState(false);  // Loading state
 
     useEffect(() => {
         // Fetch and set data for the DashedLineChart
+        
         const fetchData = async () => {
             try {
                 const startDate = '2024-03-01';
                 const endDate = '2024-06-30';
-                const keywords = ['international', 'airports', 'islamabad'];
+                const keywords = ['international', 'airports', 'islamabad','police','murder','kidnapped', 'party', 'icci'];
 
                 const dateString = JSON.stringify({
                     startDate,
@@ -92,6 +94,7 @@ function Graphs() {
 
     const fetchBarGraphData = async () => {
         try {
+            setLoading(true); // Start loading
             // Fetch data for the Bar Chart
             const response = await axios.post(
                 'https://4rcj8ztc-8080.inc1.devtunnels.ms/plotSentiment',
@@ -120,15 +123,11 @@ function Graphs() {
                 const aggregatedData = aggregateCounts(barData.x, barData.y);
                 const labels = Object.keys(aggregatedData);
                 const counts = Object.values(aggregatedData);
-
-                // Map colors from the DashedLineChart
-                const colorMap = new Map(data.keywords.map((keyword, index) => [keyword, data.colors[index]]));
-                const backgroundColors = labels.map(label => colorMap.get(label) || generateUniqueColors(1)[0]);
-
+    
                 const datasets = [{
                     label: 'Article Count',
                     data: counts,
-                    backgroundColor: backgroundColors,
+                    backgroundColor: generateUniqueColors(labels.length),
                 }];
     
                 setBarGraphData({ labels, datasets });
@@ -137,6 +136,8 @@ function Graphs() {
             }
         } catch (error) {
             console.error('Error fetching bar graph data:', error);
+        } finally {
+            setLoading(false); // End loading
         }
     };
     
@@ -154,6 +155,8 @@ function Graphs() {
             return acc;
         }, {});
     };
+    
+   
     
     const handleRemoveDataset = (datasetId) => {
         setData((prevData) => ({
@@ -177,7 +180,7 @@ function Graphs() {
                                 className='border-2 border-white shadow-bottom-left-right bg-white-200 p-4 text-left text-xl rounded-lg mb-5'
                                 onClick={() => {
                                     fetchBarGraphData(); // Fetch new data for the BarGraph
-                                    setModalContent(<BarGraph chartData={barGraphData} />);
+                                    setModalContent(<BarGraph chartData={barGraphData} loading={loading} />); // Pass loading state
                                     setModalGraphType('bar'); // Set graph type
                                     setIsModalOpen(true);
                                 }}
